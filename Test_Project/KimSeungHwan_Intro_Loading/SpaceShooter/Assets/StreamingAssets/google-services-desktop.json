@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "104859580896",
+    "firebase_url": "https://invaderspolaris.firebaseio.com",
+    "project_id": "invaderspolaris",
+    "storage_bucket": "invaderspolaris.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104859580896:android:bbbb9e2d152c45de",
+        "android_client_info": {
+          "package_name": "com.polaris.InvaderNorth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104859580896-8d2pruaruksqughq1ps94an7a6feh79a.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "104859580896-8d2pruaruksqughq1ps94an7a6feh79a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoGmTXTe4OtX4wuePeBFALfV_EiRWR9eU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
