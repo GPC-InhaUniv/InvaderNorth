@@ -23,9 +23,15 @@ public class DataManager : MonoBehaviour
         gameDataLoader.LoadGameDataFromDB(id, password);
     }
 
-    public void DataCallback(GameData gameData)
+    public void CreateNewAccount(string id, string password)
     {
-        if(gameData != null)
+        gameDataLoader.createAccountCallBack = CreateAccountCallBack;
+        gameDataLoader.MakeNewAccountInDB(id, password);
+    }
+
+    public void DataCallback(GameData gameData, LoginProcessType loginProcessType)
+    {
+        if(gameData != null && loginProcessType == LoginProcessType.Success)
         {
             this.gameData = gameData;
             gameModel.LoginSuccessed();
@@ -33,14 +39,12 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            gameModel.LoginFailed();
+            gameModel.LoginFailed(loginProcessType);
         }
     }
 
-    public void MakeNewAccount(string id, string password)
+    public void CreateAccountCallBack()
     {
-
+        gameModel.CreateSuccessed();
     }
-
-    
 }

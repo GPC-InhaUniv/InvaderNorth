@@ -30,6 +30,7 @@ public class InputManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 	}
 
+    /*
     public void Register(InputButtonCallBack inputCallBack)
     {
         inputInstance.inputCallBack = inputCallBack; 
@@ -39,4 +40,5 @@ public class InputManager : MonoBehaviour {
     {
         StageManager.stageInstance.ChangeStage();
     }
+    */
 }

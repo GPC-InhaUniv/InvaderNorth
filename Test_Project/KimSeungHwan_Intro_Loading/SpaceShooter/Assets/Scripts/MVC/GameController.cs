@@ -10,30 +10,42 @@ public class GameController : MonoBehaviour {
 
     public void Start()
     {
-        InputManager.inputInstance.Register(new InputButtonCallBack(CreateLoginAccount));
+        //InputManager.inputInstance.Register(new InputButtonCallBack(CreateLoginAccount));
     }
 
     public void VerifyLoginData(string id, string password)
     {
-        gameModel.LoadSuccessCallBack = IsDataLoaded;
+        gameModel.LoadSuccessCallBack = DataLoaded;
+        gameModel.LoadFailCallBack = DataNotLoaded;
         gameModel.IsLoginDataExist(id, password);
     }
 
-    public void IsDataLoaded(bool check)
+    public void DataLoaded()
     {
-        if(check == true)
+        Debug.Log("로그인 성공");
+        StageManager.stageInstance.ChangeStage();
+    }
+
+    public void DataNotLoaded(LoginProcessType loginProcessType)
+    {
+        if(loginProcessType == LoginProcessType.NoAccount)
         {
-            Debug.Log("로그인 성공");
-            StageManager.stageInstance.ChangeStage();
+            gameView.ShowPopUp("계정이 존재하지 않습니다");
         }
-        else
+        if (loginProcessType == LoginProcessType.WrongPassword)
         {
-            Debug.Log("로그인 실패");
+            gameView.ShowPopUp("비밀번호가 틀렸습니다");
         }
     }
 
-    public void CreateLoginAccount(string id, string password, InputType inputType)
+    public void CreateLoginAccount(string id, string password)
     {
+        gameModel.createSuccessCallBack = IsAccountCreadted;
         gameModel.MakeNewAccount(id, password);
+    }
+
+    public void IsAccountCreadted()
+    {
+        Debug.Log("계정 생성");
     }
 }

@@ -8,12 +8,15 @@ public class ButtonActionAdder : MonoBehaviour {
     public Button signInButton;
     public Button signUpButton;
     public GameController gameController;
-    public Text idText;
-    public Text passwordText;
+    public InputField signInIdInputField;
+    public InputField signInPasswordInputField;
+    public InputField signUpIdInputField;
+    public InputField signUpPasswordInputField;
 
-	// Use this for initialization
-	void Start () {
-        signInButton.onClick.AddListener(() => gameController.VerifyLoginData(idText.text, passwordText.text));
+    // Use this for initialization
+    void Start () {
+        signInButton.onClick.AddListener(() => gameController.VerifyLoginData(signInIdInputField.text, signInPasswordInputField.text));
+        signUpButton.onClick.AddListener(() => gameController.CreateLoginAccount(signUpIdInputField.text, signUpPasswordInputField.text));
 	}
 	
 	// Update is called once per frame

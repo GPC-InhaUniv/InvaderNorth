@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -6,8 +7,14 @@ using UnityEngine;
 
 public class GameModel : MonoBehaviour {
 
-    public delegate void LoadSuccess(bool isLoaded);
+    public delegate void LoadSuccess();
     public LoadSuccess LoadSuccessCallBack;
+
+    public delegate void LoadFail(LoginProcessType loginProcessType);
+    public LoadFail LoadFailCallBack;
+
+    public delegate void CreateSuccess();
+    public CreateSuccess createSuccessCallBack;
 
 	public void IsLoginDataExist(string id, string password)
     {
@@ -16,16 +23,21 @@ public class GameModel : MonoBehaviour {
 
     public void LoginSuccessed()
     {
-        LoadSuccessCallBack(true);
+        LoadSuccessCallBack();
     }
 
-    public void LoginFailed()
+    public void LoginFailed(LoginProcessType loginProcessType)
     {
-        LoadSuccessCallBack(false);
+        LoadFailCallBack(loginProcessType);
     }
 
     public void MakeNewAccount(string id, string password)
     {
-        DataManager.Datainstance.MakeNewAccount(id, password);
+        DataManager.Datainstance.CreateNewAccount(id, password);
+    }
+
+    public void CreateSuccessed()
+    {
+        createSuccessCallBack();
     }
 }
