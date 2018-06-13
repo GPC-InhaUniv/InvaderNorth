@@ -24,7 +24,7 @@ public class IntroScene : MonoBehaviour {
 
         int frameCount = 0;
 
-        while (frameCount < 360)
+        while (frameCount < MaxFrame * 3)
         {
             Color color = panel.GetComponent<Image>().color;
 

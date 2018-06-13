@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
     public void DataLoaded()
     {
         Debug.Log("로그인 성공");
-        StageManager.stageInstance.ChangeStage();
+        StageManager.stageInstance.ChangeStageIntroToLobby();
     }
 
     public void DataNotLoaded(LoginProcessType loginProcessType)
@@ -40,8 +40,15 @@ public class GameController : MonoBehaviour {
 
     public void CreateLoginAccount(string id, string password)
     {
-        gameModel.createSuccessCallBack = IsAccountCreadted;
-        gameModel.MakeNewAccount(id, password);
+        if(id != null && id != "")
+        {
+            gameModel.createSuccessCallBack = IsAccountCreadted;
+            gameModel.MakeNewAccount(id, password);
+        }
+        else
+        {
+            Debug.Log("아이디를 입력해주세요");
+        }
     }
 
     public void IsAccountCreadted()

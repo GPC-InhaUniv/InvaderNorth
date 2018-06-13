@@ -35,7 +35,12 @@ public class DataManager : MonoBehaviour
         {
             this.gameData = gameData;
             gameModel.LoginSuccessed();
-
+            Debug.Log(gameData.id);
+            Debug.Log(gameData.password);
+            Debug.Log(gameData.credit);
+            Debug.Log(gameData.hpLevel);
+            Debug.Log(gameData.critLevel);
+            Debug.Log(gameData.bulletLevel);
         }
         else
         {

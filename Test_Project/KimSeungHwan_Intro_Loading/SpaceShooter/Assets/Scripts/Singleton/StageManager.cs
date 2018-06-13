@@ -14,7 +14,7 @@ public class StageManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 	}
 
-    public void ChangeStage()
+    public void ChangeStageIntroToLobby()
     {
         StartCoroutine(ChangeStageCoroutine());
     }

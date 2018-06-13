@@ -12,7 +12,6 @@ public class GameData {
     [Header("UserData")]
     public string id;
     public string password;
-    public int totalLevel;
     public int credit;
     public int hpLevel;
     public int bulletLevel;

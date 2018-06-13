@@ -6,6 +6,7 @@ using Firebase.Database;
 using Firebase.Unity.Editor;
 using Firebase;
 using System;
+using System.Linq;
 
 public enum LoginProcessType
 {
@@ -36,7 +37,7 @@ public class GameDataLoader : MonoBehaviour {
 
     public void LoadGameDataFromDB(string id, string password)
     {
-        Task firebasetask = FirebaseDatabase.DefaultInstance.GetReference("users").GetValueAsync().ContinueWith(
+        FirebaseDatabase.DefaultInstance.GetReference("users").GetValueAsync().ContinueWith(
         task =>
         {
             if (task.IsFaulted)
@@ -50,13 +51,20 @@ public class GameDataLoader : MonoBehaviour {
                 {
                     if (id.Equals(datasnapshot.Key))
                     {
-                        if (password.Equals(datasnapshot.Value.ToString()))
+                        Dictionary<string, object> userDataDictionary = (Dictionary<string, object>)datasnapshot.Value;
+                        if (password.Equals(userDataDictionary.FirstOrDefault(x => x.Value.ToString() == password).Value))
                         {
                             Debug.Log("로그인 데이터 확인 완료");
+
                             userGameData = new GameData
                             {
                                 id = id,
-                                password = password
+                                password = password,
+                                credit = Convert.ToInt32(userDataDictionary["credit"]),
+                                hpLevel = Convert.ToInt32(userDataDictionary["hpLevel"]),
+                                bulletLevel = Convert.ToInt32(userDataDictionary["bulletLevel"]),
+                                critLevel = Convert.ToInt32(userDataDictionary["critLevel"])
+
                             };
                             loadDataCallback(userGameData, LoginProcessType.Success);
                             return;
@@ -77,19 +85,55 @@ public class GameDataLoader : MonoBehaviour {
     }
     public void MakeNewAccountInDB(string id, string password)
     {
-        reference.Child("users").Child(id).Child("Password").SetValueAsync(password).ContinueWith(
-        task =>
+        Dictionary<string, object> userDataDictionary = new Dictionary<string, object>
         {
-            if (task.IsFaulted)
+            { "password", password },
+            { "credit", 0 },
+            { "hpLevel", 0 },
+            { "bulletLevel", 0 },
+            { "critLevel", 0 }
+        };
+        userDataDictionary.OrderByDescending(num => num.Key);
+
+
+        FirebaseDatabase.DefaultInstance.GetReference("users").GetValueAsync().ContinueWith(
+        searchtask =>
+        {
+            if (searchtask.IsFaulted)
             {
                 Debug.Log("데이터베이스에 접근할 수 없습니다");
+                return;
             }
-            else if (task.IsCompleted)
+            else if (searchtask.IsCompleted)
             {
-                Debug.Log("회원가입 성공");
-                createAccountCallBack();
+                DataSnapshot snapshot = searchtask.Result;
+                foreach (DataSnapshot datasnapshot in snapshot.Children)
+                {
+                    if (id.Equals(datasnapshot.Key))
+                    {
+                        Debug.Log("이미 계정이 존재합니다");
+                        return;
+                    }
+                }
+                reference.Child("users").Child(id).SetValueAsync(userDataDictionary).ContinueWith(
+                signUpTask =>
+                {
+                    if (signUpTask.IsFaulted)
+                    {
+                        Debug.Log("데이터베이스에 접근할 수 없습니다");
+                        return;
+                    }
+                    else if (signUpTask.IsCompleted)
+                    {
+                        Debug.Log("회원가입 성공");
+                        createAccountCallBack();
+                        return;
+                    }
+                });
+                return;
             }
         });
+        
     }
 }
 
