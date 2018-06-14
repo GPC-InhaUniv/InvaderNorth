@@ -12,9 +12,9 @@ public class PlayerLevelController : MonoBehaviour
     public Text shotLevel;
     public Text criticalLevel;
 
-    public int heartnum;
-    public int shotnum;
-    public int criticalnum;
+    private int heartnum;
+    private int shotnum;
+    private int criticalnum;
 
     private void Start()
     {

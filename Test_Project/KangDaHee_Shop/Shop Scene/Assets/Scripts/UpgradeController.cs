@@ -3,27 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System;
 
 public class UpgradeController : MonoBehaviour
 {
     private int gearLevel;
-    public int upgradeMaxLevel;
+    private int playerResource;
 
-    public int levelResourceNum;
+    public int GearUpgradeMaxLevel;
+    public int LevelResourceNum;
 
-    private int changedNum01;
+    private int changedNum01; //배열
     private int changedNum02;
     private int changedNum03;
 
-    public Image upgradeButton;
+    public Image UpgradeButton;
 
-    public Text levelText;
-    public Text levelResourceText;
+    public Text LevelText;
+    public Text LevelResourceText;
+    public Text PlayerResourceText;
 
-    public GameObject changedImage01;
-    public GameObject changedImage02;
-    public GameObject changedImage03;
-    public GameObject changedImage04;
+    public GameObject ChangedImage01;
+    public GameObject ChangedImage02;
+    public GameObject ChangedImage03;
+    public GameObject ChangedImage04;
 
     private void Start()
     {
@@ -38,36 +41,54 @@ public class UpgradeController : MonoBehaviour
 
     public void ChangeGear()
     {
-        if (gearLevel < upgradeMaxLevel)
-        {
-            gearLevel++;
-            levelResourceNum = levelResourceNum + 500;
+        playerResource = Int32.Parse(PlayerResourceText.text);
 
-            levelText.text = gearLevel.ToString();
-            levelResourceText.text = levelResourceNum.ToString();
-        }
+        if (playerResource >= LevelResourceNum)
+        {
+            if (gearLevel < GearUpgradeMaxLevel)
+            {
+                LevelResourceText.text = "<color=#ffffff>" + LevelResourceNum + "</color>";
 
-        if (gearLevel == changedNum01)
-        {
-            changedImage02.SetActive(true);
-            changedImage01.SetActive(false);
-        }
+                playerResource = playerResource - LevelResourceNum;
+                gearLevel++;
+                LevelResourceNum = LevelResourceNum + 500;
 
-        if (gearLevel == changedNum02)
-        {
-            changedImage03.SetActive(true);
-            changedImage02.SetActive(false);
-        }
-        if (gearLevel == changedNum03)
-        {
-            changedImage04.SetActive(true);
-            changedImage03.SetActive(false);
-        }
+                LevelText.text = gearLevel.ToString();
+                LevelResourceText.text = LevelResourceNum.ToString();
+                PlayerResourceText.text = playerResource.ToString();
+            }
 
-        if (gearLevel == upgradeMaxLevel)
+            if (gearLevel < changedNum01)
+            {
+                ChangedImage01.SetActive(true);
+            }
+
+            if (gearLevel == changedNum01)
+            {
+                ChangedImage02.SetActive(true);
+                ChangedImage01.SetActive(false);
+            }
+
+            if (gearLevel == changedNum02)
+            {
+                ChangedImage03.SetActive(true);
+                ChangedImage02.SetActive(false);
+            }
+            if (gearLevel == changedNum03)
+            {
+                ChangedImage04.SetActive(true);
+                ChangedImage03.SetActive(false);
+            }
+
+            if (gearLevel == GearUpgradeMaxLevel)
+            {
+                LevelResourceText.text = "-";
+                UpgradeButton.enabled = false;
+            }
+        }
+        else
         {
-            levelResourceText.text = "-";
-            upgradeButton.enabled = false;
+            LevelResourceText.text = "<color=#ff0000>" + LevelResourceNum + "</color>";
         }
     }
 }
