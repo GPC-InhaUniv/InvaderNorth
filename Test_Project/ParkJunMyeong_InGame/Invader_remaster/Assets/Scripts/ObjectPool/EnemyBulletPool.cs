@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class EnemyBulletPool : MonoBehaviour {
 
-    public GameObject Bullet;
-    public int MaxSize;
+    public int NumberOfNormalBulletCreation;
     private Queue<GameObject> BulletPool;
-
-    
 
     void Start()
     {
         BulletPool = new Queue<GameObject>();
-        for (int i = 0; i < MaxSize; i++)
+        for (int i = 0; i < NumberOfNormalBulletCreation; i++)
         {
-            GameObject bullet = Instantiate(Bullet);
-            bullet.name = "EnemyBolt";
+            GameObject bullet = Instantiate(Resources.Load("Prefabs/EnemyBullet") as GameObject);
+            bullet.name = "EnemyBullet";
             BulletPool.Enqueue(bullet);
             DontDestroyOnLoad(bullet);
         }
@@ -28,10 +25,11 @@ public class EnemyBulletPool : MonoBehaviour {
         return BulletPool.Dequeue();
     }
 
-    public void PushToPool(GameObject gameObject)
+    public void PushToPool(GameObject bullet)
     {
-        gameObject.SetActive(false);
-        BulletPool.Enqueue(gameObject);
+        bullet.SetActive(false);
+        bullet.transform.rotation = Quaternion.Euler(Vector3.zero);      
+        BulletPool.Enqueue(bullet);
     }
 
 }

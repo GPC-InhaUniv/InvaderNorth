@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ObjectPoolManager : MonoBehaviour {
     public static ObjectPoolManager PoolManager;
-    public PlayerBulletPool PlayerBullets;
-    public EnemyBulletPool EnemyBullets;
+    public PlayerBulletPool PlayerBulletPool;
+    public EnemyBulletPool EnemyBulletPool;
     public EnemyPool EnemyPool;
 
     private void Awake()
@@ -16,19 +16,14 @@ public class ObjectPoolManager : MonoBehaviour {
         else
             Destroy(gameObject);
 
-        if (PlayerBullets == null)
-            PlayerBullets = GetComponent<PlayerBulletPool>();
+        if (PlayerBulletPool == null)
+            PlayerBulletPool = GetComponent<PlayerBulletPool>();
 
-
-        if (EnemyBullets == null)
-            EnemyBullets = GetComponent<EnemyBulletPool>();
+        if (EnemyBulletPool == null)
+            EnemyBulletPool = GetComponent<EnemyBulletPool>();
 
         if (EnemyPool == null)
             EnemyPool = GetComponent<EnemyPool>();
     }
-
-    
-    
-
     
 }
