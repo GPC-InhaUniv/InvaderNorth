@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    void ToNextScene()
+    void ChangeToNextScene()
     {
         SceneManager.LoadScene("대기화면");
     }

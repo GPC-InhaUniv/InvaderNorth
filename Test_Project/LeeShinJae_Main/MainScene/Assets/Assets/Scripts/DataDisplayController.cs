@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class DataDisplayController : MonoBehaviour
 {
-    public _GameData gamedata;
-    public Text valueNumberText;
+    //public _GameData gamedata; 임시데이터였음
+    public Text ValueNumberText;
    
     
-    private void Start()
+    void Start()
     {
-        valueNumberText = GetComponent<Text>();
+        ValueNumberText = GetComponent<Text>();
     }
     //바뀌는지 확인하기 위해 \Update에 임시 작성
     void Update()
@@ -45,26 +45,27 @@ public class DataDisplayController : MonoBehaviour
 
     void UpdateFuelData()
     {
-        valueNumberText.text = gamedata.fuelAmount.ToString();
+       
+       // ValueNumberText.text = gamedata.fuelAmount.ToString();
     }
 
     void UpdateResourceData()
     {
-        valueNumberText.text = gamedata.resourceAmount.ToString();
+       // ValueNumberText.text = gamedata.resourceAmount.ToString();
     }
     
     void UpdateHighestScoreData()
     {
-        valueNumberText.text = gamedata.highestScore.ToString();
+       // ValueNumberText.text = gamedata.highestScore.ToString();
     }
 
     void UpdateTotalScoreData()
     {
-        valueNumberText.text = gamedata.totalScore.ToString();
+       // ValueNumberText.text = gamedata.totalScore.ToString();
     }
 
     void UpdateArchievement()
     {
-        valueNumberText.text = gamedata.Archievement.ToString();
+       // ValueNumberText.text = gamedata.Archievement.ToString();
     }
 }
