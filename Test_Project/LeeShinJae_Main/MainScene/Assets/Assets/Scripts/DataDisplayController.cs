@@ -14,7 +14,7 @@ public class DataDisplayController : MonoBehaviour
     {
         valueNumberText = GetComponent<Text>();
     }
-
+    //바뀌는지 확인하기 위해 \Update에 임시 작성
     void Update()
     {
         if (gameObject.name == "HaveFuelAmountText")
@@ -35,6 +35,11 @@ public class DataDisplayController : MonoBehaviour
         if (gameObject.name == "TotalScoreTextNumber")
         {
             UpdateTotalScoreData();
+        }
+
+        if(gameObject.name == "ArchievementText")
+        {
+            UpdateArchievement();
         }
     }
 
@@ -58,5 +63,8 @@ public class DataDisplayController : MonoBehaviour
         valueNumberText.text = gamedata.totalScore.ToString();
     }
 
-   
+    void UpdateArchievement()
+    {
+        valueNumberText.text = gamedata.Archievement.ToString();
+    }
 }

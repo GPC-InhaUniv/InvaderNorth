@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class PopupController : MonoBehaviour {
 
-    public Canvas popup;
+    public Canvas popUpWindow;
     
     private void Start()
     {
-        popup.enabled = false;
+        popUpWindow.enabled = false;
     }
 
-    private void ImplementPopup()
+    public void PopUp()
     {
-        popup.enabled = true;
+        popUpWindow.enabled = true;
     }
 
-    private void ExitPopup()
+    public void Exit()
     {
-        popup.enabled = false;
+        popUpWindow.enabled = false;
     }
 
 

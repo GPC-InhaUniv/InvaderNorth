@@ -7,8 +7,9 @@ public abstract class CollisionForm : MonoBehaviour {
 
     protected void OnTriggerExit(Collider other)
     {
-        //오브젝트 풀로 반환한다.
+        if (other.CompareTag("Boundary"))
+            Destroy(gameObject);
     }
-
+    
     protected abstract void OnTriggerEnter(Collider other);
 }
