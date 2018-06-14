@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 using System;
 
 public class UpgradeController : MonoBehaviour
@@ -13,7 +10,7 @@ public class UpgradeController : MonoBehaviour
     public int GearUpgradeMaxLevel;
     public int LevelResourceNum;
 
-    private int changedNum01; //배열
+    private int changedNum01; //배열로 만들면 어떨까.
     private int changedNum02;
     private int changedNum03;
 
@@ -33,10 +30,6 @@ public class UpgradeController : MonoBehaviour
         changedNum01 = 5;
         changedNum02 = 10;
         changedNum03 = 15;
-    }
-
-    private void Update()
-    {
     }
 
     public void ChangeGear()

@@ -1,35 +1,25 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerLevelController : MonoBehaviour
 {
-    public Text playerLevelText;
+    public Text PlayerLevelText;
 
-    public Text heartLevel;
-    public Text shotLevel;
-    public Text criticalLevel;
+    public Text HeartLevel;
+    public Text ShotLevel;
+    public Text CriticalLevel;
 
     private int heartnum;
     private int shotnum;
     private int criticalnum;
 
-    private void Start()
-    {
-    }
-
-    private void Update()
-    {
-    }
-
     public void ChangePlayerLevel()
     {
-        heartnum = Int32.Parse(heartLevel.text);
-        shotnum = Int32.Parse(shotLevel.text);
-        criticalnum = Int32.Parse(criticalLevel.text);
+        heartnum = Int32.Parse(HeartLevel.text);
+        shotnum = Int32.Parse(ShotLevel.text);
+        criticalnum = Int32.Parse(CriticalLevel.text);
 
-        playerLevelText.text = (heartnum + shotnum + criticalnum).ToString();
+        PlayerLevelText.text = (heartnum + shotnum + criticalnum).ToString();
     }
 }

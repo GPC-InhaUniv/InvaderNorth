@@ -1,19 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class InfomationController : MonoBehaviour
 {
     public GameObject informationBox;
-
-    private void Start()
-    {
-    }
-
-    private void Update()
-    {
-    }
 
     public void PopInformation()
     {
