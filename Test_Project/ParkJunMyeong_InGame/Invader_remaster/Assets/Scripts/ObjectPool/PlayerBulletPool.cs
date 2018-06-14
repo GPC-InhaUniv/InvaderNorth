@@ -25,11 +25,11 @@ public class PlayerBulletPool : MonoBehaviour
         return BulletPool.Dequeue();
     }
 
-    public void PushToPool(GameObject bullet)
+    public void PushToPool(GameObject gameObject)
     {
-        bullet.SetActive(false);
-        bullet.transform.Rotate(0,0,0);
-        BulletPool.Enqueue(bullet);
+        gameObject.SetActive(false);
+        gameObject.transform.Rotate(0,0,0);
+        BulletPool.Enqueue(gameObject);
     }
 
 

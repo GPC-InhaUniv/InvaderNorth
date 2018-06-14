@@ -9,13 +9,11 @@ public struct Boundary
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public float tilt;
-    public Boundary boundary;
-
-    public GameObject shot;
-    public Transform shotSpawn;
-    public float fireRate;
+    public float Speed;
+    public float Tilt;
+    public Boundary Boundary;
+    public Transform ShotSpawn;
+    public float FireRate;
     float nextFire;
     AudioSource shotAudio;
     GameObject bullet;
@@ -53,9 +51,9 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButton("Fire1") && Time.time > nextFire)
             {
-                nextFire = Time.time + fireRate;
+                nextFire = Time.time + FireRate;
                 bullet = ObjectPoolManager.PoolManager.PlayerBulletPool.PopFromPool();
-                bullet.transform.position = shotSpawn.position;
+                bullet.transform.position = ShotSpawn.position;
                 bullet.SetActive(true);
                 shotAudio.Play();
 
@@ -72,15 +70,15 @@ public class PlayerController : MonoBehaviour
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
             Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-            rigidbody.velocity = movement * speed;
+            rigidbody.velocity = movement * Speed;
 
             rigidbody.position = new Vector3
             (
-                Mathf.Clamp(rigidbody.position.x, boundary.xMin, boundary.xMax),
+                Mathf.Clamp(rigidbody.position.x, Boundary.xMin, Boundary.xMax),
                 0.0f,
-                Mathf.Clamp(rigidbody.position.z, boundary.zMin, boundary.zMax)
+                Mathf.Clamp(rigidbody.position.z, Boundary.zMin, Boundary.zMax)
             );
-            rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -tilt);
+            rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -Tilt);
             yield return null;
         }
     }

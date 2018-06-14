@@ -52,7 +52,8 @@ public class RoundShot : MonoBehaviour, ISkillEnable
             CanNextMultiShot = false;
             
         }
-        //Debug.Log("RoundShot");
+
+        //Debug.Log("MultiShot");
     }
 }
 

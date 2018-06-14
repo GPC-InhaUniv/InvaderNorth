@@ -73,7 +73,7 @@ public class TutorialController : MonoBehaviour
         Destroy(TutorialSprite);
         while(true)
         {
-            if (scoreTotal == 0 && hasBoss == false)
+            if (scoreTotal >= 300 && hasBoss == false)
             {
                 enemy = ObjectPoolManager.PoolManager.EnemyPool.PopFromPool("TutorialBoss");
                 enemy.SetActive(true);
