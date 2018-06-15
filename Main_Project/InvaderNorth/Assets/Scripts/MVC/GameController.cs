@@ -49,12 +49,12 @@ public class GameController : MonoBehaviour {
         }
         else
         {
-            Debug.Log("아이디를 입력해주세요");
+            gameView.ShowSignUpErrorMessage();
         }
     }
 
     public void IsAccountCreadted()
     {
-        Debug.Log("계정 생성");
+        gameView.ShowSignUpSuccessMessage();
     }
 }
