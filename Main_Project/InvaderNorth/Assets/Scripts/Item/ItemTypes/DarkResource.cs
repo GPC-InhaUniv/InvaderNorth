@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DarkResource : MonoBehaviour {
+public class DarkResource : Item
+{
+    private void Awake()
+    {
+        itemName = ItemType.darkResource;
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public override void ApplyTheEffect()
+    {
+       
+    }
 }

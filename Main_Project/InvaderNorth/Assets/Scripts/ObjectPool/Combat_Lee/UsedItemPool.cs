@@ -13,14 +13,18 @@ public enum ItemType
 public class UsedItemPool : MonoBehaviour
 {
     public GameObject item;
-    public int pooledAmount;
+    public int PooledAmount;
    
-    private int PopedIndexNumber;
-    
+    public int PopIndexNumber;
+   
     Dictionary<string, GameObject> items;
-    //종류별로 리스트를 생성?
-    //따로 선언?
-    //그럼 키 활용은?
+
+
+    private void Start()
+    {
+        items = new Dictionary<string, GameObject>();
+        GetObjectPool();
+    }
 
     private void Update()
     {
@@ -35,16 +39,10 @@ public class UsedItemPool : MonoBehaviour
            PushItemToPool();
         }
     }
-
-    private void Start()
-    {
-        items = new Dictionary<string , GameObject>();
-        GetObjectPool();
-    }
-
+    
     void GetObjectPool()
     {
-        for (int i = 0; i < pooledAmount; i++)
+        for (int i = 0; i < PooledAmount; i++)
         {
             GameObject itemObject = Instantiate(item);
 
@@ -62,7 +60,7 @@ public class UsedItemPool : MonoBehaviour
             {
                 items["itemObject" + i].transform.position = transform.position;
                 items["itemObject" + i].SetActive(true);
-                PopedIndexNumber = i;
+                PopIndexNumber = i;
                 break;
             }
         }
@@ -72,16 +70,15 @@ public class UsedItemPool : MonoBehaviour
     {
         //****************************************
         //리턴아이템 시킬 때 딕셔너리 키값을 못찾는다는 에러 원인 확인 및 딕셔너리 완성
-        for (int i = PopedIndexNumber ; i >= 0; i--)  //이쪽으로 pooledAmount값이 안들어감 // 정확한 값을 찾아서 반환하기 위한 조건.....
+        for (int i = PopIndexNumber; i >= 0; i--)  //이쪽으로 pooledAmount값이 안들어감 // 정확한 값을 찾아서 반환하기 위한 조건.....
         {
             if(items["itemObject" + i].activeInHierarchy)
             { 
                 items["itemObject"+ i].SetActive(false);
-                PopedIndexNumber = i ;
-                Debug.Log("다시 들어간 오브젝트 번호: " + PopedIndexNumber);
+                Debug.Log("다시 들어간 오브젝트 번호: " + PopIndexNumber);
+                PopIndexNumber--;
                 break;
             }
         }
     }
-
 }
