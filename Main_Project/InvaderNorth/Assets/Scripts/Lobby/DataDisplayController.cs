@@ -8,39 +8,45 @@ public class DataDisplayController : MonoBehaviour
 {
     //public _GameData gamedata; 임시데이터였음
     public Text ValueNumberText;
-   
-    
-    void Start()
+    private void Awake()
     {
         ValueNumberText = GetComponent<Text>();
+    }
+
+    void Start()
+    {
+        
     }
     //바뀌는지 확인하기 위해 \Update에 임시 작성
     void Update()
     {
-        if (gameObject.name == "HaveFuelAmountText")
+        switch(gameObject.name)
         {
-            UpdateFuelData();
-        }
+            case "HaveFuelAmountText":
+                UpdateFuelData();
+                break;
 
-        if(gameObject.name == "ResourceAmountText")
-        {
-            UpdateResourceData();
-        }
+            case "ResourceAmountText":
+                UpdateResourceData();
+                break;
 
-        if (gameObject.name == "HighestScoreTextNumber")
-        {
-            UpdateHighestScoreData();
-        }
+            case "HighestScoreTextNumber":
+                UpdateHighestScoreData();
+                break;
 
-        if (gameObject.name == "TotalScoreTextNumber")
-        {
-            UpdateTotalScoreData();
-        }
+            case "TotalScoreTextNumber":
+                UpdateTotalScoreData();
+                break;
 
-        if(gameObject.name == "ArchievementText")
-        {
-            UpdateArchievement();
+            case "ArchievementText":
+                UpdateArchievement();
+                break;
+
+            default:
+                Debug.Log("해당 값이 들어오지 않았습니다.");
+                break;
         }
+       
     }
 
     void UpdateFuelData()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionPlayerBolt : CollisionForm
+public class CollisionPlayerBullet : CollisionForm
 {
     protected override void OnTriggerEnter(Collider other)
     {

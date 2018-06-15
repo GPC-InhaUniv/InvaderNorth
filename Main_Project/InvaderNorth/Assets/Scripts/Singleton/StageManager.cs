@@ -4,6 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum StageType
+{
+    IntroStage,
+    SignStage,
+    LobbyStage,
+    ShopStage,
+    CombatStage
+}
+
 public class StageManager : MonoBehaviour
 {
     public static StageManager stageInstance;

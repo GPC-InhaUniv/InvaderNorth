@@ -4,17 +4,21 @@ using UnityEngine;
 //폭발효과
 public class ItemExplosion: ItemEffectType
 {
+    private float itemDamage;
+
+    private void Awake()
+    {
+        itemDamage = 10;
+    }
+
     protected ItemExplosion(Item item)
         :base(item)
     { }
+
     public override void ApplyTheEffect()
     {
-        Explosion();   
-    }
-
-    public override void BeUsed()
-    {
-        //사용자의 입력을 받아 사용된다.
+        base.ApplyTheEffect();
+        Explosion();
     }
 
     public void Explosion()

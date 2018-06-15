@@ -5,12 +5,33 @@ using UnityEngine.UI;
 
 public class GameView : MonoBehaviour {
 
-    public GameObject PopUpPanel;
-    public Text PopUpPanelText;
+    [SerializeField]
+    private GameObject MessagePopUpPanel;
+    [SerializeField]
+    private Text MessagePopUpPanelText;
+    [SerializeField]
+    private Text SignUpErrorMessageText;
+    [SerializeField]
+    private Text SignUpSuccessMessageText;
 
     public void ShowPopUp(string message)
     {
-        PopUpPanel.SetActive(true);
-        PopUpPanelText.text = message;
+        MessagePopUpPanel.SetActive(true);
+        MessagePopUpPanelText.text = message;
+    }
+
+    public void ShowSignUpSuccessMessage()
+    {
+        SignUpSuccessMessageText.gameObject.SetActive(true);
+    }
+
+    public void ShowSignUpErrorMessage()
+    {
+        SignUpErrorMessageText.gameObject.SetActive(true);
+    }
+
+    public void HideSignUpErrorMessage()
+    {
+        SignUpErrorMessageText.gameObject.SetActive(false);
     }
 }

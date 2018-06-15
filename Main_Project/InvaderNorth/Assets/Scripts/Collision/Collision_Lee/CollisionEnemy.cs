@@ -20,7 +20,7 @@ public class CollisionEnemy : CollisionForm
             //}
         }
 
-        if (other.CompareTag("PlayerBolt"))
+        else if (other.CompareTag("PlayerBullet"))
         {
             Destroy(gameObject);
             //_CharacterStatus.instance.EnemyHP -= 1;
