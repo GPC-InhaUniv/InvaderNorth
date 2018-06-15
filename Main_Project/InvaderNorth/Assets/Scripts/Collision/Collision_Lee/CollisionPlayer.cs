@@ -25,7 +25,7 @@ public class CollisionPlayer : CollisionForm
             //    }
         }
 
-        if(other.CompareTag("EnemyBolt"))
+        if(other.CompareTag("EnemyBullet"))
         {
             Debug.Log("EnemyBullet과 Player 충돌");
             //if (_CharacterStatus.instance.PlayerHP > 1)

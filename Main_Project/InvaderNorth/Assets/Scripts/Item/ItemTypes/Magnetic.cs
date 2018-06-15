@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Magnetic : MonoBehaviour {
+public class Magnetic : Item
+{
+    private void Awake()
+    {
+        itemName = ItemType.magnetic;
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public override void ApplyTheEffect()
+    {
+        
+    }
 }

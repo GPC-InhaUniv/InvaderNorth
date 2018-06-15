@@ -9,19 +9,19 @@ public class Bomb : Item
     
     private void Awake()
     {
-        itemName = "Bomb";
-        itemDamage = 10;
-        resourceCount = 0;
-        effectCountiuanceTime = 5f;
+        itemName = ItemType.bomb;
+        //itemDamage = 10;
+        //resourceCount = 0;
+        //effectCountiuanceTime = 5f;
 
-        ExplosionRange.GetComponent<GameObject>();
-        gameObject.AddComponent<ItemExplosion>();
-        gameObject.AddComponent<ItemInvincibility>();
+        //ExplosionRange.GetComponent<GameObject>();
+        //gameObject.AddComponent<ItemExplosion>();
+        //gameObject.AddComponent<ItemInvincibility>();
     }
 
     private void Start()
     {
-        ExplosionRange.SetActive(false);
+        //ExplosionRange.SetActive(false);
     }
 
     public override void ApplyTheEffect()
@@ -29,12 +29,12 @@ public class Bomb : Item
         
     }
 
-    public override void BeUsed()
+    public void BeUsed()
     {
-        ExplosionRange.SetActive(true);
+        //ExplosionRange.SetActive(true);
     }
 
-    public override void BeProducedIn()
+    public void BeProducedIn()
     {
         //적에따라 다른 아이템 드랍
     }

@@ -7,7 +7,7 @@ public class PopupController : MonoBehaviour {
 
     public Canvas PopUpWindow;
     
-    private void Start()
+    public void Start()
     {
         PopUpWindow.enabled = false;
     }
@@ -21,6 +21,4 @@ public class PopupController : MonoBehaviour {
     {
         PopUpWindow.enabled = false;
     }
-
-
 }
