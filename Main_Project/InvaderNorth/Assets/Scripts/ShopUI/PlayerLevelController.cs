@@ -6,9 +6,9 @@ public class PlayerLevelController : MonoBehaviour
 {
     public Text PlayerLevelText;
 
-    public Text HeartLevel;
-    public Text ShotLevel;
-    public Text CriticalLevel;
+    public Text HeartLevelText;
+    public Text ShotLevelText;
+    public Text CriticalLevelText;
 
     private int heartnum;
     private int shotnum;
@@ -16,9 +16,9 @@ public class PlayerLevelController : MonoBehaviour
 
     public void ChangePlayerLevel()
     {
-        heartnum = Int32.Parse(HeartLevel.text);
-        shotnum = Int32.Parse(ShotLevel.text);
-        criticalnum = Int32.Parse(CriticalLevel.text);
+        heartnum = Int32.Parse(HeartLevelText.text);
+        shotnum = Int32.Parse(ShotLevelText.text);
+        criticalnum = Int32.Parse(CriticalLevelText.text);
 
         PlayerLevelText.text = (heartnum + shotnum + criticalnum).ToString();
     }

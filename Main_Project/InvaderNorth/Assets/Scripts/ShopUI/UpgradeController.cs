@@ -5,14 +5,11 @@ using System;
 public class UpgradeController : MonoBehaviour
 {
     private int gearLevel;
+    private int playerGearLevel;
     private int playerResource;
 
     public int GearUpgradeMaxLevel;
-    public int LevelResourceNum;
-
-    private int changedNum01; //배열로 만들면 어떨까.
-    private int changedNum02;
-    private int changedNum03;
+    public int LevelResourcePrice;
 
     public Image UpgradeButton;
 
@@ -20,60 +17,99 @@ public class UpgradeController : MonoBehaviour
     public Text LevelResourceText;
     public Text PlayerResourceText;
 
-    public GameObject ChangedImage01;
-    public GameObject ChangedImage02;
-    public GameObject ChangedImage03;
-    public GameObject ChangedImage04;
+    public GameObject ChangedImage1;
+    public GameObject ChangedImage2;
+    public GameObject ChangedImage3;
+    public GameObject ChangedImage4;
+
+    private int[] changedConst = new int[2];
+
+    [SerializeField]
+    private struct UserInfo //user의 hp, shot, critical 레벨을 가져온다.
+    {
+        public int hpLevel;
+        public int shotLevel;
+        public int criticalLevel;
+
+        public void UserLevelValue()
+        {
+            this.hpLevel = 5;
+            this.shotLevel = 3;
+            this.criticalLevel = 1;
+        }
+    }
+
+    //받아온걸로 연산을 하고, 유아이에 던지고, 계산된 데이터가 아웃풋으로 나오게...??
 
     private void Start()
     {
-        changedNum01 = 5;
-        changedNum02 = 10;
-        changedNum03 = 15;
+        changedConst[0] = 5;
+        changedConst[1] = 10;
+        changedConst[2] = 15;
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.UserLevelValue();
+
+        gearLevel = Int32.Parse(LevelText.text); //UI상의 LevelText(*Heart,Shot,Critical)을 gearLevel에 넣어준다.
+
+        if (gearLevel == userInfo.hpLevel) //UI상의 Text와 hpLevel 정보가 같을 경우 gearLevel에 hpLevel을 넣어준다.
+        {
+            playerGearLevel = userInfo.hpLevel;
+        }
+
+        if (gearLevel == userInfo.shotLevel) ///UI상의 Text와 shotLevel 정보가 같을 경우 gearLevel에 shotLevel을 넣어준다.
+        {
+            playerGearLevel = userInfo.shotLevel;
+        }
+
+        if (gearLevel == userInfo.criticalLevel) ///UI상의 Text와 criticalLevel에 정보가 같을 경우 gearLevel에 criticalLevel에 넣어준다.
+        {
+            playerGearLevel = userInfo.criticalLevel;
+        }
     }
 
     public void ChangeGear()
     {
         playerResource = Int32.Parse(PlayerResourceText.text);
 
-        if (playerResource >= LevelResourceNum)
+        if (playerResource >= LevelResourcePrice)
         {
-            if (gearLevel < GearUpgradeMaxLevel)
+            if (playerGearLevel < GearUpgradeMaxLevel)
             {
-                LevelResourceText.text = "<color=#ffffff>" + LevelResourceNum + "</color>";
+                LevelResourceText.text = "<color=#ffffff>" + LevelResourcePrice + "</color>";
 
-                playerResource = playerResource - LevelResourceNum;
+                playerResource = playerResource - LevelResourcePrice;
                 gearLevel++;
-                LevelResourceNum = LevelResourceNum + 500;
+                LevelResourcePrice = LevelResourcePrice + 500;
 
                 LevelText.text = gearLevel.ToString();
-                LevelResourceText.text = LevelResourceNum.ToString();
+                LevelResourceText.text = LevelResourcePrice.ToString();
                 PlayerResourceText.text = playerResource.ToString();
             }
 
-            if (gearLevel < changedNum01)
+            if (playerGearLevel < changedConst[0])
             {
-                ChangedImage01.SetActive(true);
+                ChangedImage1.SetActive(true);
             }
 
-            if (gearLevel == changedNum01)
+            if (playerGearLevel == changedConst[0])
             {
-                ChangedImage02.SetActive(true);
-                ChangedImage01.SetActive(false);
+                ChangedImage2.SetActive(true);
+                ChangedImage1.SetActive(false);
             }
 
-            if (gearLevel == changedNum02)
+            if (playerGearLevel == changedConst[1])
             {
-                ChangedImage03.SetActive(true);
-                ChangedImage02.SetActive(false);
+                ChangedImage3.SetActive(true);
+                ChangedImage2.SetActive(false);
             }
-            if (gearLevel == changedNum03)
+            if (playerGearLevel == changedConst[2])
             {
-                ChangedImage04.SetActive(true);
-                ChangedImage03.SetActive(false);
+                ChangedImage4.SetActive(true);
+                ChangedImage3.SetActive(false);
             }
 
-            if (gearLevel == GearUpgradeMaxLevel)
+            if (playerGearLevel == GearUpgradeMaxLevel)
             {
                 LevelResourceText.text = "-";
                 UpgradeButton.enabled = false;
@@ -81,7 +117,7 @@ public class UpgradeController : MonoBehaviour
         }
         else
         {
-            LevelResourceText.text = "<color=#ff0000>" + LevelResourceNum + "</color>";
+            LevelResourceText.text = "<color=#ff0000>" + LevelResourcePrice + "</color>";
         }
     }
 }

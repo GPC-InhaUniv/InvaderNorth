@@ -6,11 +6,11 @@ public class InfomationController : MonoBehaviour
 
     public void PopInformation()
     {
-        if (informationBox.gameObject.active == false)
+        if (informationBox.activeSelf == false)
         {
             informationBox.SetActive(true);
         }
-        else if (informationBox.gameObject.active == true)
+        else if (informationBox.activeSelf == true)
         {
             informationBox.SetActive(false);
         }
