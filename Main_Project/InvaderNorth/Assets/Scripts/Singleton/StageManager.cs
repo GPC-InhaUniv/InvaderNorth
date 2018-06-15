@@ -21,7 +21,7 @@ public class StageManager : MonoBehaviour
 
     IEnumerator ChangeStageCoroutine()
     {
-        AsyncOperation loadoperation = SceneManager.LoadSceneAsync(2);
+        AsyncOperation loadoperation = SceneManager.LoadSceneAsync(3);
         
         while(!loadoperation.isDone)
         {

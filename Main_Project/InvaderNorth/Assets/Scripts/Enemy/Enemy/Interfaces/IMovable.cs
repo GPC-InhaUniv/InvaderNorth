@@ -8,7 +8,7 @@ public interface IMovable
 }
 
 
-public class Fixing : MonoBehaviour, IMovable
+public class Fixing : IMovable
 {
 
     public void Move(GameObject enemy)
@@ -17,7 +17,7 @@ public class Fixing : MonoBehaviour, IMovable
     }
 }
 
-public class BaseMoving : MonoBehaviour, IMovable
+public class BaseMoving : IMovable
 {
     bool isFrist = true;
     float speed;
@@ -42,7 +42,7 @@ public class BaseMoving : MonoBehaviour, IMovable
     
 }
 
-public class NamedMoving : MonoBehaviour, IMovable
+public class NamedMoving : IMovable
 {
     bool isFrist = true;
     float speed;

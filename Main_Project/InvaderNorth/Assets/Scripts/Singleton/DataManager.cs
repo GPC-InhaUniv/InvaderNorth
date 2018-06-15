@@ -8,8 +8,8 @@ public class DataManager : MonoBehaviour
     public GameModel gameModel;
     public GameDataLoader gameDataLoader;
     
-    [SerializeField]
-    private GameData gameData;
+    //[SerializeField]
+    public GameData gameData;
 
 	void Awake ()
     {

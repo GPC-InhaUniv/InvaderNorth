@@ -8,7 +8,7 @@ public interface IBaseAttackable
 
 }
 
-public class BaseAttack : MonoBehaviour, IBaseAttackable
+public class BaseAttack : IBaseAttackable
 {
     GameObject bullet;
 
@@ -22,7 +22,7 @@ public class BaseAttack : MonoBehaviour, IBaseAttackable
     }
 }
 
-public class MultiAttack : MonoBehaviour, IBaseAttackable
+public class MultiAttack : IBaseAttackable
 {
     GameObject[] bullets = new GameObject[3];
 
@@ -53,7 +53,7 @@ public class MultiAttack : MonoBehaviour, IBaseAttackable
     }
 }
 
-    public class NoBaseAttack : MonoBehaviour, IBaseAttackable
+    public class NoBaseAttack : IBaseAttackable
 {
     public void Attack(GameObject enemy)
     {

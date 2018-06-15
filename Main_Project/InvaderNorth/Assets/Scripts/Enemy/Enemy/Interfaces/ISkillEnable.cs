@@ -9,7 +9,7 @@ public interface ISkillEnable
 }
 
 
-public class NoSkill : MonoBehaviour, ISkillEnable
+public class NoSkill : ISkillEnable
 {
     public void SkillUse(GameObject gameObject)
     {
@@ -18,7 +18,7 @@ public class NoSkill : MonoBehaviour, ISkillEnable
 }
 
 
-public class RoundShot : MonoBehaviour, ISkillEnable
+public class RoundShot : ISkillEnable
 {
     bool CanNextMultiShot;
     GameObject bullet;

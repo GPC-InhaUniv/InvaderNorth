@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     {
         if (rigidbody != null)           //처음에는 실행 안되게
         {
-            StartCoroutine(FirstMove());
             StartCoroutine(GetShotInput());
             StartCoroutine(GetTransferInput());
         }
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour
         collider = GetComponent<MeshCollider>();
         rigidbody = GetComponent<Rigidbody>();
         shotAudio = GetComponent<AudioSource>();
-        StartCoroutine(FirstMove());
         StartCoroutine(GetShotInput());
         StartCoroutine(GetTransferInput());
     }
@@ -82,28 +80,6 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
     }
-
-    IEnumerator FirstMove()
-    {
-        collider.enabled = false;
-        while (true)
-        { 
-            gameObject.transform.Translate(Vector3.forward * 3f * Time.deltaTime);
-            if (gameObject.transform.position.z >= -2)
-                break;
-            yield return null;
-
-        }
-        yield return new WaitForSeconds(2);
-        collider.enabled = true;
-        StopCoroutine(FirstMove());
-    }
-
-   
-
-
-
-
 
 
 }

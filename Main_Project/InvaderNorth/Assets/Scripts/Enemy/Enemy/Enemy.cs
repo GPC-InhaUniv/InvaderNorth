@@ -8,7 +8,7 @@ public class Enemy {
     protected IBaseAttackable baseAttackable;
     protected IMovable movable;
     protected float speed;
-
+    
     public void Attack(GameObject enemy)
     {
         baseAttackable.Attack(enemy);

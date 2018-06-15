@@ -17,9 +17,8 @@ public class TutorialController : MonoBehaviour
     public delegate void Decrease(GameObject player);
     public static Decrease DecreaseDelegate;
 
-    public int PlayerLifePoint;
     public PlayerSpawnPosition PlayerSpawnPosition;
-    [Header ("GaneObjcet")]
+    [Header ("GameObjcet")]
     public GameObject TutorialSprite;
     public GameObject PlayerLife;
     public GameObject GameClearPopup;
@@ -35,16 +34,18 @@ public class TutorialController : MonoBehaviour
     GameObject enemy;
     List<GameObject> playerLifeList;
     int scoreTotal;
+    int playerLifePoint;
     bool isGameOver;
     bool isGameClear;
 
     void Start()
     {
+        playerLifePoint = DataManager.Datainstance.gameData.hpLevel;
         SendScoreDelegate = AddScore;
         DecreaseDelegate = HeartDecrease;
         Vector3 heartPosition = PlayerLife.transform.position;
         playerLifeList = new List<GameObject>();
-        for(int i = 0; i < PlayerLifePoint; i ++)
+        for(int i = 0; i < playerLifePoint; i ++)
         {
             if (i <= 5)
             {
@@ -73,7 +74,7 @@ public class TutorialController : MonoBehaviour
         Destroy(TutorialSprite);
         while(true)
         {
-            if (scoreTotal >= 300 && hasBoss == false)
+            if (scoreTotal >= 0 && hasBoss == false)
             {
                 enemy = ObjectPoolManager.PoolManager.EnemyPool.PopFromPool("TutorialBoss");
                 enemy.SetActive(true);
@@ -107,9 +108,9 @@ public class TutorialController : MonoBehaviour
 
     void HeartDecrease(GameObject player)
     {
-        playerLifeList[PlayerLifePoint - 1].SetActive(false);
-        PlayerLifePoint--;
-        if (PlayerLifePoint > 0)
+        playerLifeList[playerLifePoint - 1].SetActive(false);
+        playerLifePoint--;
+        if (playerLifePoint > 0)
         {
             PlayerRespawn(player);
         }
