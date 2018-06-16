@@ -40,7 +40,7 @@ public class TutorialController : MonoBehaviour
 
     void Start()
     {
-        playerLifePoint = DataManager.Datainstance.gameData.hpLevel;
+        playerLifePoint = 3;//DataManager.Datainstance.gameData.hpLevel;
         SendScoreDelegate = AddScore;
         DecreaseDelegate = HeartDecrease;
         Vector3 heartPosition = PlayerLife.transform.position;
@@ -74,7 +74,7 @@ public class TutorialController : MonoBehaviour
         Destroy(TutorialSprite);
         while(true)
         {
-            if (scoreTotal >= 0 && hasBoss == false)
+            if (scoreTotal >= 300 && hasBoss == false)
             {
                 enemy = ObjectPoolManager.PoolManager.EnemyPool.PopFromPool("TutorialBoss");
                 enemy.SetActive(true);
@@ -123,6 +123,7 @@ public class TutorialController : MonoBehaviour
     {      
         player.transform.position = new Vector3(PlayerSpawnPosition.x, 0, PlayerSpawnPosition.z);
         player.SetActive(true);
+        
     }
 
     void GameOver()
