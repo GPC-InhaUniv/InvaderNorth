@@ -22,7 +22,7 @@ public class UpgradeController : MonoBehaviour
     public GameObject ChangedImage3;
     public GameObject ChangedImage4;
 
-    private int[] changedConst = new int[2];
+    private int[] changedConst = new int[3];
 
     [SerializeField]
     private struct UserInfo //user의 hp, shot, critical 레벨을 가져온다.
@@ -30,6 +30,7 @@ public class UpgradeController : MonoBehaviour
         public int hpLevel;
         public int shotLevel;
         public int criticalLevel;
+        public int PlayerResource;
 
         public void UserLevelValue()
         {
@@ -38,8 +39,6 @@ public class UpgradeController : MonoBehaviour
             this.criticalLevel = 1;
         }
     }
-
-    //받아온걸로 연산을 하고, 유아이에 던지고, 계산된 데이터가 아웃풋으로 나오게...??
 
     private void Start()
     {
@@ -50,22 +49,23 @@ public class UpgradeController : MonoBehaviour
         UserInfo userInfo = new UserInfo();
         userInfo.UserLevelValue();
 
-        gearLevel = Int32.Parse(LevelText.text); //UI상의 LevelText(*Heart,Shot,Critical)을 gearLevel에 넣어준다.
+        gearLevel = Int32.Parse(LevelText.text);
 
-        if (gearLevel == userInfo.hpLevel) //UI상의 Text와 hpLevel 정보가 같을 경우 gearLevel에 hpLevel을 넣어준다.
+        if (gearLevel == 0)
         {
             playerGearLevel = userInfo.hpLevel;
         }
 
-        if (gearLevel == userInfo.shotLevel) ///UI상의 Text와 shotLevel 정보가 같을 경우 gearLevel에 shotLevel을 넣어준다.
+        if (gearLevel == 1)
         {
             playerGearLevel = userInfo.shotLevel;
         }
 
-        if (gearLevel == userInfo.criticalLevel) ///UI상의 Text와 criticalLevel에 정보가 같을 경우 gearLevel에 criticalLevel에 넣어준다.
+        if (gearLevel == 2)
         {
             playerGearLevel = userInfo.criticalLevel;
         }
+        LevelText.text = playerGearLevel.ToString();
     }
 
     public void ChangeGear()
@@ -91,19 +91,17 @@ public class UpgradeController : MonoBehaviour
             {
                 ChangedImage1.SetActive(true);
             }
-
-            if (playerGearLevel == changedConst[0])
+            else if (playerGearLevel == changedConst[0])
             {
                 ChangedImage2.SetActive(true);
                 ChangedImage1.SetActive(false);
             }
-
-            if (playerGearLevel == changedConst[1])
+            else if (playerGearLevel == changedConst[1])
             {
                 ChangedImage3.SetActive(true);
                 ChangedImage2.SetActive(false);
             }
-            if (playerGearLevel == changedConst[2])
+            else if (playerGearLevel == changedConst[2])
             {
                 ChangedImage4.SetActive(true);
                 ChangedImage3.SetActive(false);
