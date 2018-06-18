@@ -32,7 +32,7 @@ public class RoundShot : ISkillEnable
         {
             for (int i = 0; i < oneShoting; i++)
             { 
-                bullet = ObjectPoolManager.PoolManager.EnemyBulletPool.PopFromPool();
+                bullet = ObjectPool.ObjectPools.EnemyBulletPool.PopFromPool();
                 bullet.transform.position = spawnPosition;
                 bullet.transform.Rotate(new Vector3(0f, 360 * i / oneShoting - 90, 0f));
                 bullet.SetActive(true);        
@@ -43,7 +43,7 @@ public class RoundShot : ISkillEnable
         {
             for (int i = 0; i < oneShoting; i++)
             {
-                bullet = ObjectPoolManager.PoolManager.EnemyBulletPool.PopFromPool();
+                bullet = ObjectPool.ObjectPools.EnemyBulletPool.PopFromPool();
                 bullet.transform.position = spawnPosition;
                 bullet.transform.Rotate(new Vector3(0f, 360 * i / oneShoting - 45, 0f));
                 bullet.SetActive(true);

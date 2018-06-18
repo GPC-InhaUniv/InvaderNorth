@@ -24,12 +24,11 @@ public class NormalEnemyCollision : MonoBehaviour {
             other.gameObject.SetActive(false);
             TutorialController.DecreaseDelegate(player);
         }
-
-        if (other.name == "PlayerBullet")
-            ObjectPoolManager.PoolManager.PlayerBulletPool.PushToPool(other.gameObject);
+        else if (other.name == "PlayerBullet")
+            ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
 
         TutorialController.SendScoreDelegate(ScoreValue, false);
-        ObjectPoolManager.PoolManager.EnemyPool.PushToPool(gameObject);
+        ObjectPool.ObjectPools.EnemyPool.PushToPool(gameObject);
         Instantiate(Explosion, transform.position, transform.rotation);
     }
 }

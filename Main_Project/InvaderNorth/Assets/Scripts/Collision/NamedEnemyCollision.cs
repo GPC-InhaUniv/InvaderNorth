@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NamedEnemyCollision : MonoBehaviour {
+
+public class NamedEnemyCollision : MonoBehaviour
+{
 
     public GameObject Explosion;
     public GameObject PlayerExplosion;
     public int ScoreValue;
     public int Hp;
-    public bool isBoss;
+    public bool IsBoss;
     int maxHp;
 
     void Awake()
@@ -18,6 +20,7 @@ public class NamedEnemyCollision : MonoBehaviour {
 
     void OnEnable()
     {
+        Debug.Log("OnEnable");
         Hp = maxHp;
     }
 
@@ -27,6 +30,7 @@ public class NamedEnemyCollision : MonoBehaviour {
         {
             return;
         }
+
         if (other.tag == "Player")
         {
             Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
@@ -36,16 +40,17 @@ public class NamedEnemyCollision : MonoBehaviour {
             other.gameObject.SetActive(false);
             TutorialController.DecreaseDelegate(player);
         }
-        if (other.name == "PlayerBullet")
+        else if(other.name == "PlayerBullet")
         {
-            ObjectPoolManager.PoolManager.PlayerBulletPool.PushToPool(other.gameObject);
+            ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
             Hp--;
-        }       
+        }
+
         if (Hp <= 0)
         {
-            TutorialController.SendScoreDelegate(ScoreValue, isBoss);
-            ObjectPoolManager.PoolManager.EnemyPool.PushToPool(gameObject);
-            Instantiate(Explosion, transform.position, transform.rotation);
+        TutorialController.SendScoreDelegate(ScoreValue, IsBoss);
+        ObjectPool.ObjectPools.EnemyPool.PushToPool(gameObject);
+        Instantiate(Explosion, transform.position, transform.rotation);
         }
     }
 }

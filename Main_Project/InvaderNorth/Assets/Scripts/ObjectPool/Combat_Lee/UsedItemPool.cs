@@ -23,7 +23,7 @@ public class UsedItemPool : MonoBehaviour
     private void Start()
     {
         items = new Dictionary<string, GameObject>();
-        GetObjectPool();
+        GetObjectPools();
     }
 
     private void Update()
@@ -40,7 +40,7 @@ public class UsedItemPool : MonoBehaviour
         }
     }
     
-    void GetObjectPool()
+    void GetObjectPools()
     {
         for (int i = 0; i < PooledAmount; i++)
         {

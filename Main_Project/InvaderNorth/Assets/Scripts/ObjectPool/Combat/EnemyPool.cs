@@ -7,6 +7,7 @@ public class EnemyPool : MonoBehaviour {
     public int NumberOfNormalEnemyCreation;
     public int NumberOfNamedEnemyCreation;
     public int NumberOfBossCreation;
+    public GameObject Parent;
     GameObject tempEnemy;                     // 객체 잠시 담아두기용.
     int stage;                           //스테이지 구분(임시)
     int maxIndex;
@@ -31,16 +32,17 @@ public class EnemyPool : MonoBehaviour {
                     enemyPool.Add("NormalEnemy" + i, Instantiate(normalEnemy));
                     tempEnemy = enemyPool["NormalEnemy" + i];
                     tempEnemy.name = "NormalEnemy" + i;
-                    DontDestroyOnLoad(tempEnemy);
+                    tempEnemy.transform.parent = Parent.transform;
                 }
                 for (int i = 1; i <= NumberOfBossCreation; i++)
                 {
                     enemyPool.Add("TutorialBoss" + i, Instantiate(bossEnemy));
                     tempEnemy = enemyPool["TutorialBoss" + i];
                     tempEnemy.name = "TutorialBoss" + i;
-                    DontDestroyOnLoad(tempEnemy);
-                    
+                    tempEnemy.transform.parent = Parent.transform;
+
                 }
+                DontDestroyOnLoad(Parent);
                 break;
 
             case 1:           // 첫번째 스테이지
@@ -51,7 +53,7 @@ public class EnemyPool : MonoBehaviour {
                     enemyPool.Add("NormalEnemy" + i, Instantiate(normalEnemy));
                     tempEnemy = enemyPool["NormalEnemy" + i];
                     tempEnemy.name = "NormalEnemy" + i;
-                    DontDestroyOnLoad(tempEnemy);
+                    tempEnemy.transform.parent = Parent.transform;
                 }
 
                 for (int i = 1; i <= NumberOfNamedEnemyCreation; i++)
@@ -59,8 +61,9 @@ public class EnemyPool : MonoBehaviour {
                     enemyPool.Add("MultiShotEnemy" + i, Instantiate(namedEnemy));
                     tempEnemy = enemyPool["MultiShotEnemy" + i];
                     tempEnemy.name = "MultiShotEnemy" + i;
-                    DontDestroyOnLoad(tempEnemy);
+                    tempEnemy.transform.parent = Parent.transform;
                 }
+                DontDestroyOnLoad(Parent);
                 break;
         }
     }

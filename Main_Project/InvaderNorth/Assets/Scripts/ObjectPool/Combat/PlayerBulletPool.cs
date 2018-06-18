@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBulletPool : MonoBehaviour 
 {
     public int NumberOfNormalBulletCreation;
+    public GameObject Parent;
     private Queue<GameObject> BulletPool;
 
     void Start()
@@ -15,8 +16,9 @@ public class PlayerBulletPool : MonoBehaviour
             GameObject bullet = Instantiate(Resources.Load("Prefabs/PlayerBullet") as GameObject);
             bullet.name = "PlayerBullet";
             BulletPool.Enqueue(bullet);
-            DontDestroyOnLoad(bullet);
+            bullet.transform.parent = Parent.transform;
         }
+        DontDestroyOnLoad(Parent);
     }
 
 

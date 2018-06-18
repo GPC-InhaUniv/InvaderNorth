@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolManager : MonoBehaviour {
-    public static ObjectPoolManager PoolManager;
+public class ObjectPool : MonoBehaviour {
+    public static ObjectPool ObjectPools;
     public PlayerBulletPool PlayerBulletPool;
     public EnemyBulletPool EnemyBulletPool;
     public EnemyPool EnemyPool;
@@ -11,8 +11,8 @@ public class ObjectPoolManager : MonoBehaviour {
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        if (PoolManager == null)
-            PoolManager = this;
+        if (ObjectPools == null)
+            ObjectPools = this;
         else
             Destroy(gameObject);
 

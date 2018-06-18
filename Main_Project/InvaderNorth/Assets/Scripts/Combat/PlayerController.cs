@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public struct Boundary
@@ -42,48 +43,73 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(GetTransferInput());
     }
 
-
-
     IEnumerator GetShotInput()
     {
         yield return new WaitForSeconds(2);
         while (true)
         {
-            if (Input.GetButton("Fire1") && Time.time > nextFire)
+            if (StageController.IsGameClear)
+                break;
+            else
             {
-                nextFire = Time.time + FireRate;
-                bullet = ObjectPoolManager.PoolManager.PlayerBulletPool.PopFromPool();
-                bullet.transform.position = ShotSpawn.position;
-                bullet.SetActive(true);
-                shotAudio.Play();
-
+                if (Input.GetButton("Fire1") && Time.time > nextFire)
+                {
+                    nextFire = Time.time + FireRate;
+                    bullet = ObjectPool.ObjectPools.PlayerBulletPool.PopFromPool();
+                    bullet.transform.position = ShotSpawn.position;
+                    bullet.SetActive(true);
+                    shotAudio.Play();
+                }
+                yield return null;
             }
-            yield return null;
         }
+        yield return null;
     }
 
     IEnumerator GetTransferInput()
     {
+        float moveHorizontal = 0;
+        float moveVertical = 0;
         yield return new WaitForSeconds(2);
         while (true)
         {
-            float moveHorizontal = Input.GetAxis("Horizontal");
-            float moveVertical = Input.GetAxis("Vertical");
-            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-            rigidbody.velocity = movement * Speed;
+            if (StageController.IsGameClear)
+            {
+                rigidbody.velocity = Vector3.zero;
+                rigidbody.rotation = Quaternion.Euler(Vector3.zero);
+                break;
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.LeftArrow))
+                    moveHorizontal = -1;
+                else if (Input.GetKey(KeyCode.RightArrow))
+                    moveHorizontal = 1;
+                else
+                    moveHorizontal = 0;
+                if (Input.GetKey(KeyCode.UpArrow))
+                    moveVertical = 1;
+                else if (Input.GetKey(KeyCode.DownArrow))
+                    moveVertical = -1;
+                else
+                    moveVertical = 0;
+                Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+                rigidbody.velocity = movement * Speed;
 
-            rigidbody.position = new Vector3
-            (
-                Mathf.Clamp(rigidbody.position.x, Boundary.xMin, Boundary.xMax),
-                0.0f,
-                Mathf.Clamp(rigidbody.position.z, Boundary.zMin, Boundary.zMax)
-            );
-            rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -Tilt);
-            yield return null;
+                rigidbody.position = new Vector3
+                (
+                    Mathf.Clamp(rigidbody.position.x, Boundary.xMin, Boundary.xMax),
+                    0.0f,
+                    Mathf.Clamp(rigidbody.position.z, Boundary.zMin, Boundary.zMax)
+                );
+                rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -Tilt);
+                yield return null;
+            }
         }
+        yield return null;
     }
 
-    public IEnumerator FirstMove()
+    IEnumerator FirstMove()
     {
         collider.enabled = false;
         while (true)
@@ -95,9 +121,44 @@ public class PlayerController : MonoBehaviour
 
         }
         yield return new WaitForSeconds(2);
-        collider.enabled = true;
+        if (StageController.IsGameClear == false)
+            collider.enabled = true;
         StopCoroutine(FirstMove());
+
     }
 
+    public IEnumerator LastMove()    // 마지막 플레이어 이동 및 씬 전환.
+    {
+        Vector3 limitBackPosition = transform.position;
+        bool canForword = false;
+        if (limitBackPosition.z - 2 >= Boundary.zMin)
+            limitBackPosition.z -= 2;
+        while (true)
+        {
+            if (canForword == false)
+            {
+                rigidbody.velocity += Vector3.back * 0.5f;
+                if (limitBackPosition.z >= transform.position.z)
+                    canForword = true;
+            }
+            else
+                rigidbody.velocity += Vector3.forward * 1;
+
+            if (transform.position.z > 18)
+            {
+                Destroy(GameObject.Find("Enemys"));
+                Destroy(GameObject.Find("PlayerBullets"));
+                Destroy(GameObject.Find("EnemyBullets"));
+                Destroy(GameObject.Find("ObjectPool"));
+                SceneManager.LoadScene("LobbyScene");
+            }
+            yield return null;
+        }
+    }
+
+    public void OnClickedGameClearLobbyButton() //게임클리어 로비버튼 클릭 시.
+    {
+        StartCoroutine(LastMove());
+    }
 
 }
