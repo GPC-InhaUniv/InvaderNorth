@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 public enum StageType
 {
-    IntroStage,
-    SignStage,
-    LobbyStage,
-    ShopStage,
-    CombatStage
+    IntroStage = 0,
+    SignStage = 1,
+    LobbyStage = 2,
+    ShopStage = 3,
+    TutorialStage = 4,
+    CombatStage = 5,
+    LoadingStage = 6
 }
 
 public class StageManager : MonoBehaviour
@@ -23,21 +25,26 @@ public class StageManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 	}
 
-    public void ChangeStageIntroToLobby()
+    public void ChangeStageIntroToLobby(StageType stageType)
     {
-        StartCoroutine(ChangeStageCoroutine());
+        StartCoroutine(ChangeStageCoroutine(stageType));
     }
 
-    IEnumerator ChangeStageCoroutine()
+    IEnumerator ChangeStageCoroutine(StageType stageType)
     {
-        AsyncOperation loadoperation = SceneManager.LoadSceneAsync(3);
-        
-        while(!loadoperation.isDone)
+        AsyncOperation loadoperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)stageType);
+
+        asyncOperation.allowSceneActivation = false;
+
+        int frameCount = 30;
+
+        while(!asyncOperation.isDone && frameCount > 0)
         {
-            yield return null;
+            frameCount--;
+            yield return new WaitForSeconds(0.03f);
         }
 
-        //loadoperation = SceneManager.LoadSceneAsync(2);
-
+        asyncOperation.allowSceneActivation = true;
     }
 }

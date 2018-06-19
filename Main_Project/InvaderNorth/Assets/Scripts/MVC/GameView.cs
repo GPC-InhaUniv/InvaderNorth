@@ -5,33 +5,71 @@ using UnityEngine.UI;
 
 public class GameView : MonoBehaviour {
 
+    [Header("SignSceneAttribute")]
     [SerializeField]
-    private GameObject MessagePopUpPanel;
+    private GameObject messagePopUpPanel;
     [SerializeField]
-    private Text MessagePopUpPanelText;
+    private Text messagePopUpPanelText;
     [SerializeField]
-    private Text SignUpErrorMessageText;
+    private Text signUpErrorMessageText;
     [SerializeField]
-    private Text SignUpSuccessMessageText;
+    private Text signUpSuccessMessageText;
+    [SerializeField]
+    private GameObject signUpErrorPopUp;
 
+    [Header("LoadingSceneAttribute")]
+    [SerializeField]
+    private Text loadingSceneText;
+    [SerializeField]
+    private Slider loadingSceneSlider;
+
+    [Header("LobbySceneAttribute")]
+
+
+    [Header("CombatSceneAttribute")]
+
+
+    [Header("GameViewPrivateAttribute")]
+    private StageType currentStageType;
+    public bool isLoadingFinished;
+    
+    //Sign Scene 메소드 영역
     public void ShowPopUp(string message)
     {
-        MessagePopUpPanel.SetActive(true);
-        MessagePopUpPanelText.text = message;
+        messagePopUpPanel.SetActive(true);
+        messagePopUpPanelText.text = message;
     }
 
     public void ShowSignUpSuccessMessage()
     {
-        SignUpSuccessMessageText.gameObject.SetActive(true);
+        signUpSuccessMessageText.gameObject.SetActive(true);
     }
 
     public void ShowSignUpErrorMessage()
     {
-        SignUpErrorMessageText.gameObject.SetActive(true);
+        signUpErrorMessageText.gameObject.SetActive(true);
     }
 
     public void HideSignUpErrorMessage()
     {
-        SignUpErrorMessageText.gameObject.SetActive(false);
+        signUpErrorMessageText.gameObject.SetActive(false);
+    }
+
+
+    //Loading Scene 메소드 영역
+
+
+    //Lobby Scene 메소드 영역
+
+
+    //Stage 전환 시 애니메이션 효과
+    private IEnumerator ChangeLoadingTextColor()
+    {
+        Color textColorPerFrame = loadingSceneText.color;
+
+        while(isLoadingFinished)
+        {
+            yield return null;
+        }
     }
 }

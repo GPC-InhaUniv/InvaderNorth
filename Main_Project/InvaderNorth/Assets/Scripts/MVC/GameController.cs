@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour {
     public void DataLoaded()
     {
         Debug.Log("로그인 성공");
-        StageManager.stageInstance.ChangeStageIntroToLobby();
+        StageManager.stageInstance.ChangeStageIntroToLobby(StageType.LobbyStage);
     }
 
     public void DataNotLoaded(LoginProcessType loginProcessType)
