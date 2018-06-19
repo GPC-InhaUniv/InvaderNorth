@@ -6,7 +6,7 @@ public class Magnetic : Item
 {
     private void Awake()
     {
-        itemName = ItemType.magnetic;
+
     }
 
     public override void ApplyTheEffect()

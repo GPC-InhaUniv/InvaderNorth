@@ -6,7 +6,12 @@ using UnityEngine.UI;
 
 public class DataDisplayController : MonoBehaviour
 {
-    //public _GameData gamedata; 임시데이터였음
+    private int FuelAmount;
+    private int ResourceAmount;
+    private int HighestScore;
+    private int TotalScore;
+    private string Archievement;
+
     public Text ValueNumberText;
     private void Awake()
     {
@@ -15,7 +20,11 @@ public class DataDisplayController : MonoBehaviour
 
     void Start()
     {
-        
+        FuelAmount = 1;
+        ResourceAmount = 2;
+        HighestScore = 3;
+        TotalScore = 4;
+        Archievement = "setArc";
     }
     //바뀌는지 확인하기 위해 \Update에 임시 작성
     void Update()
@@ -52,26 +61,26 @@ public class DataDisplayController : MonoBehaviour
     void UpdateFuelData()
     {
        
-       // ValueNumberText.text = gamedata.fuelAmount.ToString();
+       ValueNumberText.text = FuelAmount.ToString();
     }
 
     void UpdateResourceData()
     {
-       // ValueNumberText.text = gamedata.resourceAmount.ToString();
+       ValueNumberText.text = ResourceAmount.ToString();
     }
     
     void UpdateHighestScoreData()
     {
-       // ValueNumberText.text = gamedata.highestScore.ToString();
+       ValueNumberText.text = HighestScore.ToString();
     }
 
     void UpdateTotalScoreData()
     {
-       // ValueNumberText.text = gamedata.totalScore.ToString();
+       ValueNumberText.text = TotalScore.ToString();
     }
 
     void UpdateArchievement()
     {
-       // ValueNumberText.text = gamedata.Archievement.ToString();
+       ValueNumberText.text = Archievement.ToString();
     }
 }

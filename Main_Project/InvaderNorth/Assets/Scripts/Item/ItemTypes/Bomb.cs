@@ -5,11 +5,10 @@ using UnityEngine;
 public class Bomb : Item
 {
     //trigger 구체 설정
-    public GameObject ExplosionRange;
     
     private void Awake()
     {
-        itemName = ItemType.bomb;
+       
         //itemDamage = 10;
         //resourceCount = 0;
         //effectCountiuanceTime = 5f;
