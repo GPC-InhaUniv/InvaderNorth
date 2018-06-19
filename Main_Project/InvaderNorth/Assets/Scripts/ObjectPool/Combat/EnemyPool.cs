@@ -21,7 +21,6 @@ public class EnemyPool : MonoBehaviour {
         GameObject namedEnemy;                // 네임드 적 프리팹
         GameObject bossEnemy;                 // 보스 적 프리팹
         enemyPool = new Dictionary<string, GameObject>();
-
         switch (stage)
         {
             case 0 :          //튜토리얼

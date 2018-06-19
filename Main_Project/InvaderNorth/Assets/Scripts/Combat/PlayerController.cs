@@ -146,10 +146,9 @@ public class PlayerController : MonoBehaviour
 
             if (transform.position.z > 18)
             {
-                Destroy(GameObject.Find("Enemys"));
-                Destroy(GameObject.Find("PlayerBullets"));
-                Destroy(GameObject.Find("EnemyBullets"));
-                Destroy(GameObject.Find("ObjectPool"));
+                GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("ObjectPool");
+                for (int i = 0; i < 4; i++)
+                    Destroy(gameObjects[i]);
                 SceneManager.LoadScene("LobbyScene");
             }
             yield return null;

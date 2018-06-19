@@ -20,7 +20,6 @@ public class NamedEnemyCollision : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("OnEnable");
         Hp = maxHp;
     }
 
@@ -38,7 +37,7 @@ public class NamedEnemyCollision : MonoBehaviour
             player.GetComponent<Rigidbody>().velocity = Vector3.zero;
             player.transform.rotation = Quaternion.Euler(Vector3.zero);
             other.gameObject.SetActive(false);
-            TutorialController.DecreaseDelegate(player);
+            StageController.DecreaseDelegate(player);
         }
         else if(other.name == "PlayerBullet")
         {
@@ -48,7 +47,7 @@ public class NamedEnemyCollision : MonoBehaviour
 
         if (Hp <= 0)
         {
-        TutorialController.SendScoreDelegate(ScoreValue, IsBoss);
+        StageController.SendScoreDelegate(ScoreValue, IsBoss);
         ObjectPool.ObjectPools.EnemyPool.PushToPool(gameObject);
         Instantiate(Explosion, transform.position, transform.rotation);
         }

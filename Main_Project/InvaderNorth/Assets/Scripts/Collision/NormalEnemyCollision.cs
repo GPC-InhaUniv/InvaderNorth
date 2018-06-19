@@ -22,12 +22,12 @@ public class NormalEnemyCollision : MonoBehaviour {
             player.GetComponent<Rigidbody>().velocity = Vector3.zero;
             player.transform.rotation = Quaternion.Euler(Vector3.zero);
             other.gameObject.SetActive(false);
-            TutorialController.DecreaseDelegate(player);
+            StageController.DecreaseDelegate(player);
         }
         else if (other.name == "PlayerBullet")
             ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
 
-        TutorialController.SendScoreDelegate(ScoreValue, false);
+        StageController.SendScoreDelegate(ScoreValue, false);
         ObjectPool.ObjectPools.EnemyPool.PushToPool(gameObject);
         Instantiate(Explosion, transform.position, transform.rotation);
     }

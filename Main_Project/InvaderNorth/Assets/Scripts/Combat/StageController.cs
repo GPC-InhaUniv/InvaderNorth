@@ -38,7 +38,7 @@ public abstract class StageController : MonoBehaviour {
 
     void Start()
     {
-        playerLifePoint = 3;// DataManager.Datainstance.gameData.hpLevel;
+        playerLifePoint = 1;// DataManager.Datainstance.gameData.hpLevel;
         SendScoreDelegate = AddScore;
         DecreaseDelegate = HeartDecrease;
         Vector3 PlayerLifePosition = PlayerLife.transform.position;
@@ -125,17 +125,23 @@ public abstract class StageController : MonoBehaviour {
     
     public void OnClickedReStartButton()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        IsGameOver = false;
+        IsGameClear = false;
+        DestroyObjects();
+        SceneManager.LoadScene("CombatLoadingScene");
     }
 
     public void OnClickedGameOverLobbyButton()     //게임오버 로비버튼클릭 시 씬 전환.
     {
-        Destroy(GameObject.Find("Enemys"));
-        Destroy(GameObject.Find("PlayerBullets"));
-        Destroy(GameObject.Find("EnemyBullets"));
-        Destroy(GameObject.Find("ObjectPool"));
+        DestroyObjects();
         SceneManager.LoadScene("LobbyScene");
     }
 
+    void DestroyObjects()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("ObjectPool");
+        for (int i = 0; i < 4; i++)
+            Destroy(gameObjects[i]);
+    }
 
 }
