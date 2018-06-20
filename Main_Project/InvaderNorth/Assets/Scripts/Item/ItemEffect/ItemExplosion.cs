@@ -4,11 +4,18 @@ using UnityEngine;
 //폭발효과
 public class ItemExplosion : ItemEffectType
 {
-    public Collider ExplosionRange;
+    [Header("BombExplosionObjects")]
+    public GameObject ExplosionRange;
+    public GameObject BombExplosion;
+    public GameObject Parent;
+
+    [Header("EnemyExplosionObjects")]
     public GameObject NormalEnemy;
     public GameObject NamedEnemy;
+    public GameObject EnemyExplosion;
     
     public bool isUsedItem;
+    //인벤토리(1칸) 구축 후 그곳에 InputManager이용
 
     
     private float itemDamage;
@@ -17,8 +24,9 @@ public class ItemExplosion : ItemEffectType
     private void Awake()
     {
         itemDamage = 10;
-        ExplosionRange = GetComponent<Collider>();
-        ExplosionRange.enabled = false;
+        ExplosionRange = GetComponent<GameObject>();
+        ExplosionRange.SetActive(false);
+  
     }
 
     protected ItemExplosion(Item item)
@@ -35,17 +43,23 @@ public class ItemExplosion : ItemEffectType
     {
         if (isUsedItem == true)
         {
-            ExplosionRange.enabled = true;
-           
+            ExplosionRange.SetActive(true);
+            Instantiate(BombExplosion, Parent.transform.position, Parent.transform.rotation);
+            
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player"))
+        if (other.CompareTag("Enemy"))
         {
-
+            ObjectPool.ObjectPools.EnemyPool.PushToPool(other.gameObject);
+            ObjectPool.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
+            Instantiate(EnemyExplosion,other.transform.position, other.transform.rotation);
+            other.gameObject.SetActive(false);
         }
+        else
+            return;
     }
 
 
