@@ -36,9 +36,17 @@ public class ItemExplosion : ItemEffectType
         if (isUsedItem == true)
         {
             ExplosionRange.enabled = true;
-            
+           
         }
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+        {
+
+        }
+    }
+
+
 }
