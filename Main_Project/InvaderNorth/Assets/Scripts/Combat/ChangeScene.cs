@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour {
     [SerializeField]
-    private bool HasFirstStart;
+    private bool hasFirstStart;
     AsyncOperation ao;
 
     // Use this for initialization
@@ -21,7 +21,7 @@ public class ChangeScene : MonoBehaviour {
     IEnumerator LoadMain()
     {
 
-        if (HasFirstStart == true)
+        if (hasFirstStart == true)
         {
              ao = SceneManager.LoadSceneAsync(4);
         }else

@@ -5,11 +5,11 @@ using UnityEngine;
 public class NormalEnemyCollision : MonoBehaviour {
 
     [SerializeField]
-    private GameObject Explosion;
+    private GameObject explosion;
     [SerializeField]
-    private GameObject PlayerExplosion;
+    private GameObject playerExplosion;
     [SerializeField]
-    private int ScoreValue;
+    private int scoreValue;
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,7 +20,7 @@ public class NormalEnemyCollision : MonoBehaviour {
 
         if (other.tag == "Player")
         {
-            Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
+            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
             GameObject player = other.gameObject;
             player.GetComponent<Rigidbody>().velocity = Vector3.zero;
             player.transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -30,9 +30,9 @@ public class NormalEnemyCollision : MonoBehaviour {
         else if (other.name == "PlayerBullet")
             ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
 
-        StageController.SendScoreDelegate(ScoreValue, false);
+        StageController.SendScoreDelegate(scoreValue, false);
         ObjectPool.ObjectPools.EnemyPool.PushToPool(gameObject);
-        Instantiate(Explosion, transform.position, transform.rotation);
+        Instantiate(explosion, transform.position, transform.rotation);
     }
 }
 

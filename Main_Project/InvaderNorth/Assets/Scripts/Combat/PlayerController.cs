@@ -11,15 +11,15 @@ public struct Boundary
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float Speed;
+    private float speed;
     [SerializeField]
-    private float Tilt;
+    private float tilt;
     [SerializeField]
-    private Boundary Boundary;
+    private Boundary boundary;
     [SerializeField]
-    private Transform ShotSpawn;
+    private Transform shotSpawn;
     [SerializeField]
-    private float FireRate;
+    private float fireRate;
     private float nextFire;
     private AudioSource shotAudio;
     private GameObject bullet;
@@ -59,9 +59,9 @@ public class PlayerController : MonoBehaviour
             {
                 if (Input.GetButton("Fire1") && Time.time > nextFire)
                 {
-                    nextFire = Time.time + FireRate;
+                    nextFire = Time.time + fireRate;
                     bullet = ObjectPool.ObjectPools.PlayerBulletPool.PopFromPool();
-                    bullet.transform.position = ShotSpawn.position;
+                    bullet.transform.position = shotSpawn.position;
                     bullet.SetActive(true);
                     shotAudio.Play();
                 }
@@ -99,15 +99,15 @@ public class PlayerController : MonoBehaviour
                 else
                     moveVertical = 0;
                 Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-                rigidbody.velocity = movement * Speed;
+                rigidbody.velocity = movement * speed;
 
                 rigidbody.position = new Vector3
                 (
-                    Mathf.Clamp(rigidbody.position.x, Boundary.xMin, Boundary.xMax),
+                    Mathf.Clamp(rigidbody.position.x, boundary.xMin, boundary.xMax),
                     0.0f,
-                    Mathf.Clamp(rigidbody.position.z, Boundary.zMin, Boundary.zMax)
+                    Mathf.Clamp(rigidbody.position.z, boundary.zMin, boundary.zMax)
                 );
-                rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -Tilt);
+                rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -tilt);
                 yield return null;
             }
         }
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 limitBackPosition = transform.position;
         bool canForword = false;
-        if (limitBackPosition.z - 2 >= Boundary.zMin)
+        if (limitBackPosition.z - 2 >= boundary.zMin)
             limitBackPosition.z -= 2;
         while (true)
         {

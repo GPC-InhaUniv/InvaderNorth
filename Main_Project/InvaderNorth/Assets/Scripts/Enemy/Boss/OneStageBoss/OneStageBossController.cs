@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class OneStageBossController : MonoBehaviour {
     [SerializeField]
-    private GameObject NormalBullet;
+    private GameObject normalBullet;
     [SerializeField]
-    private GameObject SkillBullet;
+    private GameObject skillBullet;
     private OneStageBoss boss;
 
 	void Start ()
     {
-        boss = new OneStageBoss(new NormalState(NormalBullet, SkillBullet),NormalBullet,SkillBullet);
+        boss = new OneStageBoss(new NormalState(normalBullet, skillBullet), normalBullet, skillBullet);
         boss.Move();
         boss.Attack(gameObject);
         StartCoroutine(BossState());

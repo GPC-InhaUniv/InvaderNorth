@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour {
 
     [SerializeField]
-    private int NumberOfCommonEnemyCreation;
+    private int numberOfCommonEnemyCreation;
     [SerializeField]
-    private GameObject Parent;
+    private GameObject parent;
     private int stage;                           //스테이지 구분(임시)
     private List<Queue<GameObject>> enemyPoolList;
     private GameObject temp;                   //임시 담기용
@@ -21,23 +21,23 @@ public class EnemyPool : MonoBehaviour {
             case 0 :          //튜토리얼               
                 enemyPoolList.Add(new Queue<GameObject>());
                 commonEnemy = Resources.Load("Prefabs/NormalEnemy") as GameObject;            
-                for (int i = 0; i < NumberOfCommonEnemyCreation; i++)
+                for (int i = 0; i < numberOfCommonEnemyCreation; i++)
                 {
                     temp = Instantiate(commonEnemy);
-                    temp.transform.parent = Parent.transform;
+                    temp.transform.parent = parent.transform;
                     enemyPoolList[0].Enqueue(temp);                    
                 }
 
-                DontDestroyOnLoad(Parent);
+                DontDestroyOnLoad(parent);
                 break;
 
             case 1:           // 첫번째 스테이지
                 enemyPoolList.Add(new Queue<GameObject>());
                 commonEnemy = Resources.Load("Prefabs/NormalEnemy") as GameObject;
-                for (int i = 0; i < NumberOfCommonEnemyCreation; i++)
+                for (int i = 0; i < numberOfCommonEnemyCreation; i++)
                 {
                     temp = Instantiate(commonEnemy);
-                    temp.transform.parent = Parent.transform;
+                    temp.transform.parent = parent.transform;
                     enemyPoolList[0].Enqueue(temp);
                 }
                 /* 여기다가 다른 몬스터 추가 
@@ -50,7 +50,7 @@ public class EnemyPool : MonoBehaviour {
                 }
                  */
 
-                DontDestroyOnLoad(Parent);
+                DontDestroyOnLoad(parent);
                 break;
         }
     }

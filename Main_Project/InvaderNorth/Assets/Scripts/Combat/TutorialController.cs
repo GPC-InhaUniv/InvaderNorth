@@ -9,23 +9,23 @@ public class TutorialController : StageController
 {
     [Header("Tutorial")]
     [SerializeField]
-    private GameObject TutorialSprite;
+    private GameObject tutorialSprite;
 
     protected override IEnumerator StagePrograss()
     {
         yield return new WaitForSeconds(3);
-        Destroy(TutorialSprite);
+        Destroy(tutorialSprite);
         while (true)
         {
             if (IsGameClear)
                 break;
             if (scoreTotal >= 60 && hasBoss == false)
             {
-                BossEnemy.SetActive(true);
+                bossEnemy.SetActive(true);
                 hasBoss = true;
             }
             enemy = ObjectPool.ObjectPools.EnemyPool.PopFromPool(0);
-            enemy.transform.position = new Vector3(Random.Range(-SpawnValues.x, SpawnValues.x), SpawnValues.y, SpawnValues.z);
+            enemy.transform.position = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
             enemy.SetActive(true);
             yield return new WaitForSeconds(2);
         }

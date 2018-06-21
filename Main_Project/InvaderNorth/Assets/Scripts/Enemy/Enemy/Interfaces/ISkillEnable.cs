@@ -20,7 +20,7 @@ public class NoSkill : ISkillEnable
 
 public class RoundShot : ISkillEnable
 {
-    private bool CanNextMultiShot;
+    private bool canNextMultiShot;
     private GameObject bullet;
 
     public void SkillUse(GameObject enemy)
@@ -28,7 +28,7 @@ public class RoundShot : ISkillEnable
         Vector3 spawnPosition = new Vector3(enemy.transform.position.x, 0, enemy.transform.position.z);
         int oneShoting = 25;
 
-        if (CanNextMultiShot == false)
+        if (canNextMultiShot == false)
         {
             for (int i = 0; i < oneShoting; i++)
             { 
@@ -37,7 +37,7 @@ public class RoundShot : ISkillEnable
                 bullet.transform.Rotate(new Vector3(0f, 360 * i / oneShoting - 90, 0f));
                 bullet.SetActive(true);        
             }
-            CanNextMultiShot = true;
+            canNextMultiShot = true;
         }
         else
         {
@@ -49,7 +49,7 @@ public class RoundShot : ISkillEnable
                 bullet.SetActive(true);
                   
             }
-            CanNextMultiShot = false;
+            canNextMultiShot = false;
             
         }
 

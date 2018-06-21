@@ -21,23 +21,23 @@ public abstract class StageController : MonoBehaviour {
     public static Decrease DecreaseDelegate;
     [Header("GameObjcet")]
     [SerializeField]
-    private GameObject PlayerLife;
+    private GameObject playerLife;
     [SerializeField]
-    private GameObject GameClearPopup;
+    private GameObject gameClearPopup;
     [SerializeField]
-    private GameObject GameOverPopup;
+    private GameObject gameOverPopup;
     [SerializeField]
-    protected GameObject BossEnemy;
+    protected GameObject bossEnemy;
     [Header("Text")]
     [SerializeField]
-    private Text ScoreText;
+    private Text scoreText;
     [SerializeField]
-    private Text ResourceText;
+    private Text resourceText;
     [Header("Position")]
     [SerializeField]
-    private PlayerSpawnPosition PlayerSpawnPosition;
+    private PlayerSpawnPosition playerSpawnPosition;
     [SerializeField]
-    protected Vector3 SpawnValues;
+    protected Vector3 spawnValues;
 
     protected GameObject enemy;
     protected List<GameObject> playerLifeList;
@@ -50,24 +50,24 @@ public abstract class StageController : MonoBehaviour {
         playerLifePoint = 1;// DataManager.Datainstance.gameData.hpLevel;
         SendScoreDelegate = AddScore;
         DecreaseDelegate = HeartDecrease;
-        Vector3 PlayerLifePosition = PlayerLife.transform.position;
+        Vector3 PlayerLifePosition = playerLife.transform.position;
         playerLifeList = new List<GameObject>();
         for (int i = 0; i < playerLifePoint; i++)
         {
             if (i <= 5)
             {
-                playerLifeList.Add(Instantiate(PlayerLife, PlayerLifePosition, PlayerLife.transform.rotation));
+                playerLifeList.Add(Instantiate(playerLife, PlayerLifePosition, playerLife.transform.rotation));
                 PlayerLifePosition = new Vector3(PlayerLifePosition.x + 0.55f, 0, 14.45f);
             }
             else if (i == 6)
             {
-                PlayerLifePosition = new Vector3(PlayerLife.transform.position.x, 0, 13.95f);
-                playerLifeList.Add(Instantiate(PlayerLife, PlayerLifePosition, PlayerLife.transform.rotation));
+                PlayerLifePosition = new Vector3(playerLife.transform.position.x, 0, 13.95f);
+                playerLifeList.Add(Instantiate(playerLife, PlayerLifePosition, playerLife.transform.rotation));
                 PlayerLifePosition = new Vector3(PlayerLifePosition.x + 0.55f, 0, 13.95f);
             }
             else
             {
-                playerLifeList.Add(Instantiate(PlayerLife, PlayerLifePosition, PlayerLife.transform.rotation));
+                playerLifeList.Add(Instantiate(playerLife, PlayerLifePosition, playerLife.transform.rotation));
                 PlayerLifePosition = new Vector3(PlayerLifePosition.x + 0.55f, 0, 13.95f);
             }
         }
@@ -92,7 +92,7 @@ public abstract class StageController : MonoBehaviour {
 
     void UpdateScore()
     {
-        ScoreText.text = "Score : " + scoreTotal;
+        scoreText.text = "Score : " + scoreTotal;
     }
 
     void HeartDecrease(GameObject player)
@@ -110,23 +110,23 @@ public abstract class StageController : MonoBehaviour {
 
     void PlayerRespawn(GameObject player)
     {
-        player.transform.position = new Vector3(PlayerSpawnPosition.x, 0, PlayerSpawnPosition.z);
+        player.transform.position = new Vector3(playerSpawnPosition.x, 0, playerSpawnPosition.z);
         player.SetActive(true);
 
     }
 
     void GameOver()
     {
-        GameOverPopup.SetActive(true);
-        GameOverPopup.transform.Find("Score Text").gameObject.GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
+        gameOverPopup.SetActive(true);
+        gameOverPopup.transform.Find("Score Text").gameObject.GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
         IsGameOver = true;
         Debug.Log("GameOver");
     }
 
     void Clear()
     {
-        GameClearPopup.SetActive(true);
-        GameClearPopup.transform.Find("Score Text").gameObject.GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
+        gameClearPopup.SetActive(true);
+        gameClearPopup.transform.Find("Score Text").gameObject.GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
         IsGameClear = true;
         GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
         Debug.Log("GameClear");
@@ -149,7 +149,7 @@ public abstract class StageController : MonoBehaviour {
     void DestroyObjects()
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("ObjectPool");
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
             Destroy(gameObjects[i]);
     }
 

@@ -6,25 +6,25 @@ using UnityEngine;
 public class NamedEnemyCollision : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Explosion;
+    private GameObject explosion;
     [SerializeField]
-    private GameObject PlayerExplosion;
+    private GameObject playerExplosion;
     [SerializeField]
-    private int ScoreValue;
+    private int scoreValue;
     [SerializeField]
-    private int Hp;
+    private int hp;
     [SerializeField]
-    private bool IsBoss;
+    private bool isBoss;
     private int maxHp;
 
     void Awake()
     {
-        maxHp = Hp;
+        maxHp = hp;
     }
 
     void OnEnable()
     {
-        Hp = maxHp;
+        hp = maxHp;
     }
 
     void OnTriggerEnter(Collider other)
@@ -36,7 +36,7 @@ public class NamedEnemyCollision : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
+            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
             GameObject player = other.gameObject;
             player.GetComponent<Rigidbody>().velocity = Vector3.zero;
             player.transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -46,14 +46,14 @@ public class NamedEnemyCollision : MonoBehaviour
         else if(other.name == "PlayerBullet")
         {
             ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
-            Hp--;
+            hp--;
         }
 
-        if (Hp <= 0)
+        if (hp <= 0)
         {
-        StageController.SendScoreDelegate(ScoreValue, IsBoss);
+        StageController.SendScoreDelegate(scoreValue, isBoss);
         gameObject.SetActive(false);
-        Instantiate(Explosion, transform.position, transform.rotation);
+        Instantiate(explosion, transform.position, transform.rotation);
         }
     }
 }

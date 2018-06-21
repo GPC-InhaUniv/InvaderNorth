@@ -5,36 +5,36 @@ using UnityEngine;
 public class PlayerBulletPool : MonoBehaviour 
 {
     [SerializeField]
-    private int NumberOfNormalBulletCreation;
+    private int numberOfNormalBulletCreation;
     [SerializeField]
-    private GameObject Parent;
+    private GameObject parent;
 
-    private Queue<GameObject> BulletPool;
+    private Queue<GameObject> bulletPool;
 
     void Start()
     {
-        BulletPool = new Queue<GameObject>();
-        for (int i = 0; i < NumberOfNormalBulletCreation; i++)
+        bulletPool = new Queue<GameObject>();
+        for (int i = 0; i < numberOfNormalBulletCreation; i++)
         {
             GameObject bullet = Instantiate(Resources.Load("Prefabs/PlayerBullet") as GameObject);
             bullet.name = "PlayerBullet";
-            BulletPool.Enqueue(bullet);
-            bullet.transform.parent = Parent.transform;
+            bulletPool.Enqueue(bullet);
+            bullet.transform.parent = parent.transform;
         }
-        DontDestroyOnLoad(Parent);
+        DontDestroyOnLoad(parent);
     }
 
 
     public GameObject PopFromPool()
     {
-        return BulletPool.Dequeue();
+        return bulletPool.Dequeue();
     }
 
     public void PushToPool(GameObject gameObject)
     {
         gameObject.SetActive(false);
         gameObject.transform.Rotate(0,0,0);
-        BulletPool.Enqueue(gameObject);
+        bulletPool.Enqueue(gameObject);
     }
 
 

@@ -11,17 +11,17 @@ public enum EnemyName     //몬스터를 구별하여 패턴을 지정하기 위
 public class EnemyController : MonoBehaviour {
     public int queueNum;
     [SerializeField]
-    private float SkillCoolTime;       //스킬 사용의 텀을 두기 위해.
+    private float skillCoolTime;       //스킬 사용의 텀을 두기 위해.
     [SerializeField]
-    private EnemyName EnemyName ;
+    private EnemyName enemyName ;
     private Enemy enemy;
-    private AudioSource ShotAudio;
+    private AudioSource shotAudio;
 
     void Start ()
     {
-        ShotAudio = GetComponent<AudioSource>();
+        shotAudio = GetComponent<AudioSource>();
         GetComponent<AudioSource>().Play();
-        switch (EnemyName)             //구별하여 패턴을 지정.
+        switch (enemyName)             //구별하여 패턴을 지정.
         {
             case EnemyName.NormalEnemy:
                 enemy = new NormalEnemy(GetComponent<Rigidbody>());
@@ -51,12 +51,12 @@ public class EnemyController : MonoBehaviour {
         while (true)
         {
             enemy.Attack(gameObject);
-            ShotAudio.Play();
-            yield return new WaitForSeconds(SkillCoolTime);
-            if (SkillCoolTime > 0)
+            shotAudio.Play();
+            yield return new WaitForSeconds(skillCoolTime);
+            if (skillCoolTime > 0)
             {
                 enemy.SkillUse(gameObject);
-                ShotAudio.Play();
+                shotAudio.Play();
             }
             yield return new WaitForSeconds(1);
         }
