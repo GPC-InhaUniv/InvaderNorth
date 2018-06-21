@@ -40,7 +40,7 @@ public class UpgradeController : MonoBehaviour
     [SerializeField]
     private GameObject imageChanged4;
 
-    private int[] changedConst = new int[3]; //이미지가 바뀌는 레벨 수치 정보 배열
+    private int[] changedConst = new int[4];
 
     private struct UserInfo //플레이어의 hp, shot, critical 레벨정보, 재화 정보를 가져옴
     {
@@ -51,18 +51,19 @@ public class UpgradeController : MonoBehaviour
 
         public void UserLevelValue()
         {
-            this.hpLevel = 10;
-            this.shotLevel = 20;
-            this.criticalLevel = 20;
-            this.PlayerCredit = 90000;
+            this.hpLevel = 6;
+            this.shotLevel = 0;
+            this.criticalLevel = 0;
+            this.PlayerCredit = 900000;
         }
     }
 
     private void Start()
     {
-        changedConst[0] = 5;
-        changedConst[1] = 10;
-        changedConst[2] = 15;
+        changedConst[0] = gearUpgradeMaxLevel - (gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5);
+        changedConst[1] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 2;
+        changedConst[2] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5;
+        changedConst[3] = gearUpgradeMaxLevel;
 
         UserInfo userInfo = new UserInfo();
         userInfo.UserLevelValue();
@@ -120,26 +121,25 @@ public class UpgradeController : MonoBehaviour
 
     public void ChangedConstImage()
     {
-        if (playerGearLevel < changedConst[0])
+        if (playerGearLevel <= changedConst[0])
         {
             imageChanged1.SetActive(true);
         }
-        else if (playerGearLevel == changedConst[0])
+        else if (playerGearLevel <= changedConst[1])
         {
             imageChanged2.SetActive(true);
             imageChanged1.SetActive(false);
         }
-        else if (playerGearLevel == changedConst[1])
+        else if (playerGearLevel < changedConst[2])
         {
             imageChanged3.SetActive(true);
             imageChanged2.SetActive(false);
         }
-        else if (playerGearLevel == changedConst[2])
+        else if (playerGearLevel < changedConst[3])
         {
             imageChanged4.SetActive(true);
             imageChanged3.SetActive(false);
         }
-        else { imageChanged4.SetActive(true); }
     }
 
     public void MaxLevel()
