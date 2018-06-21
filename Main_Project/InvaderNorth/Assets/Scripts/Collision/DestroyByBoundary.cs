@@ -16,21 +16,13 @@ public class DestroyByBoundary : MonoBehaviour {
             ObjectPool.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
         }
 
-        else if(other.name == "Shield")
+        else if(other.CompareTag("Item"))
         {
             ItemObjectPool.ItemPoolInstance.shieldPool.PushToPool(other.gameObject);
-        }
-
-        else if (other.name == "Bomb")
-        {
             ItemObjectPool.ItemPoolInstance.bombPool.PushToPool(other.gameObject);
-        }
-
-        else if (other.name =="DarkResource")
-        {
             ItemObjectPool.ItemPoolInstance.darkResourcePool.PushToPool(other.gameObject);
         }
-
+        
         else
         {
             ObjectPool.ObjectPools.EnemyPool.PushToPool(other.gameObject);
