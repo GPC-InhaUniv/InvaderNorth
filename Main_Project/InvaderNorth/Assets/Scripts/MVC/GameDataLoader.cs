@@ -63,8 +63,9 @@ public class GameDataLoader : MonoBehaviour {
                                 credit = Convert.ToInt32(userDataDictionary["credit"]),
                                 hpLevel = Convert.ToInt32(userDataDictionary["hpLevel"]),
                                 bulletLevel = Convert.ToInt32(userDataDictionary["bulletLevel"]),
-                                critLevel = Convert.ToInt32(userDataDictionary["critLevel"])
-
+                                critLevel = Convert.ToInt32(userDataDictionary["critLevel"]),
+                                highestScore = Convert.ToInt32(userDataDictionary["highestScore"]),
+                                totalScore = Convert.ToInt32(userDataDictionary["totalScore"])     
                             };
                             loadDataCallback(userGameData, SignInProcessType.Success);
                             return;
@@ -88,10 +89,12 @@ public class GameDataLoader : MonoBehaviour {
         Dictionary<string, object> userDataDictionary = new Dictionary<string, object>
         {
             { "password", password },
-            { "credit", 0 },
+            { "credit", 1000 },
             { "hpLevel", 0 },
             { "bulletLevel", 0 },
-            { "critLevel", 0 }
+            { "critLevel", 0 },
+            { "highestScore", 0 },
+            { "totalScore", 0 }
         };
         userDataDictionary.OrderByDescending(num => num.Key);
 

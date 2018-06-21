@@ -48,4 +48,9 @@ public class GameModel : MonoBehaviour {
     {
         createFailCallBack();
     }
+
+    public GameData GetGameData()
+    {
+        return DataManager.Datainstance.gameData;
+    }
 }

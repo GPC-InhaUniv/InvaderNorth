@@ -21,9 +21,9 @@ public class StageManager : MonoBehaviour
 
     public static StageManager stageInstance;
 
-    public delegate void SceneChanged(StageType stageType);
-    public SceneChanged sceneChangedCallBack;
-
+    public delegate void SceneChangedDelegate(StageType stageType);
+    public SceneChangedDelegate sceneChangedCallBack;
+    
     void Awake()
     {
         currentStage = StageType.IntroStage;
@@ -53,10 +53,12 @@ public class StageManager : MonoBehaviour
                 frameCount--;
                 yield return new WaitForSeconds(0.03f);
             }
+            
+            asyncOperation.allowSceneActivation = true;
+
+            yield return null;
 
             sceneChangedCallBack(stageType);
-
-            asyncOperation.allowSceneActivation = true;
         }
     }
 }

@@ -11,11 +11,10 @@ public enum PopUpType
     SignUpSuccess,
     SignInWrongPassword,
     SignInNoAccount,
-
-    
 }
 
 public interface IShowable{
 
     void ShowPopUp(PopUpType popUptype);
+    void ShowInformation(GameData gameData);
 }

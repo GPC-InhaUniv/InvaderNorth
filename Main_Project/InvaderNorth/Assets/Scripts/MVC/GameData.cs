@@ -16,6 +16,8 @@ public class GameData {
     public int hpLevel;
     public int bulletLevel;
     public int critLevel;
+    public int highestScore;
+    public int totalScore;
 
     [Header("InGameData")]
     public int creditInGame;

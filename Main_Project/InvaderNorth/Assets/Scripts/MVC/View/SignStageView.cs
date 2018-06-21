@@ -52,4 +52,9 @@ public class SignStageView : MonoBehaviour, IShowable {
             return;
         }
     }
+    public void ShowInformation(GameData gameData)
+    {
+
+    }
+
 }
