@@ -19,7 +19,7 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager stageInstance;
 
-    public delegate void SceneChanged();
+    public delegate void SceneChanged(StageType stageType);
     public SceneChanged sceneChangedCallBack;
 
     void Awake()
@@ -30,7 +30,7 @@ public class StageManager : MonoBehaviour
 
     public IEnumerator ChangeStageCoroutine(StageType stageType)
     {
-        AsyncOperation loadoperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)stageType);
 
         asyncOperation.allowSceneActivation = false;
@@ -43,7 +43,7 @@ public class StageManager : MonoBehaviour
             yield return new WaitForSeconds(0.03f);
         }
 
-        sceneChangedCallBack();
+        sceneChangedCallBack(stageType);
 
         asyncOperation.allowSceneActivation = true;
     }

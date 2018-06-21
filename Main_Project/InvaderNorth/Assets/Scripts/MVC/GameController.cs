@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
         StageManager.stageInstance.sceneChangedCallBack = SetGameView;
     }
     
-    public void SetGameView()
+    public void SetGameView(StageType stageType)
     {
         gameView = GameObject.Find("SignStageView").GetComponent<SignStageView>();
     }
