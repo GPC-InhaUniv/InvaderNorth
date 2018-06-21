@@ -4,11 +4,19 @@ using UnityEngine.UI;
 
 public class PlayerLevelController : MonoBehaviour
 {
-    public Text PlayerLevelText;
+    [Header("PlyaerTotalLevel")]
+    [SerializeField]
+    private Text PlayerLevelText;
 
-    public Text HeartLevelText;
-    public Text ShotLevelText;
-    public Text CriticalLevelText;
+    [Header("Gear Level")]
+    [SerializeField]
+    private Text HeartLevelText;
+
+    [SerializeField]
+    private Text ShotLevelText;
+
+    [SerializeField]
+    private Text CriticalLevelText;
 
     private int heartnum;
     private int shotnum;

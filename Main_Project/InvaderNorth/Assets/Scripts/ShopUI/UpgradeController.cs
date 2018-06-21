@@ -6,21 +6,39 @@ public class UpgradeController : MonoBehaviour
 {
     private int gearType; //Inspector에서 연결된, LevelText의 번호를 가져와 어떤 종류인지 확인하는 Level
     private int playerGearLevel; //매니저에서 가져온 아이템이 어떤 종류인지 확인하고 넣어주는 아이템의 Level
-    private int HadResource; //플레이어가 갖고 있는 재화
+    private int HadCredit; //플레이어가 갖고 있는 재화
 
-    public int GearUpgradeMaxLevel; //아이템의 Max Level 정보
-    public int LevelPrice; // 아이템 레벨별 가격
+    private int gearLevelPrice; // 아이템 레벨별 가격
 
-    public Image UpgradeButton; //Max 레벨 시 업그레이드 버튼 비활성화를 위함
+    [Header("UpgradeButton")]
+    [SerializeField]
+    private Image upgradeButton; //Max 레벨 시 업그레이드 버튼 비활성화를 위함
 
-    public Text LevelText; //화면에서의 각 아이템 Level Text -> 0,1,2로 구별함
-    public Text LevelCreditText; //화면에서의 ,업그레이드 비용 정보
-    public Text PlayerResourceText; //화면에서, 플레이어 레벨 리소스 Text 변경을 위함
+    [Header("Credit Imformation")]
+    [SerializeField]
+    private int gearUpgradeMaxLevel; //아이템의 Max Level 정보
 
-    public GameObject ChangedImage1;
-    public GameObject ChangedImage2;
-    public GameObject ChangedImage3;
-    public GameObject ChangedImage4;
+    [SerializeField]
+    private Text gearLevelText; //화면에서의 각 아이템 Level Text -> 0,1,2로 구별함
+
+    [SerializeField]
+    private Text upgradeCreditText; //화면에서의 ,업그레이드 비용 정보
+
+    [SerializeField]
+    private Text playerCreditText; //화면에서, 플레이어 레벨 리소스 Text 변경을 위함
+
+    [Header("Gear Image")]
+    [SerializeField]
+    private GameObject imageChanged1;
+
+    [SerializeField]
+    private GameObject imageChanged2;
+
+    [SerializeField]
+    private GameObject imageChanged3;
+
+    [SerializeField]
+    private GameObject imageChanged4;
 
     private int[] changedConst = new int[3]; //이미지가 바뀌는 레벨 수치 정보 배열
 
@@ -33,8 +51,8 @@ public class UpgradeController : MonoBehaviour
 
         public void UserLevelValue()
         {
-            this.hpLevel = 0;
-            this.shotLevel = 5;
+            this.hpLevel = 10;
+            this.shotLevel = 20;
             this.criticalLevel = 20;
             this.PlayerCredit = 90000;
         }
@@ -49,8 +67,8 @@ public class UpgradeController : MonoBehaviour
         UserInfo userInfo = new UserInfo();
         userInfo.UserLevelValue();
 
-        gearType = Int32.Parse(LevelText.text);
-        HadResource = userInfo.PlayerCredit;
+        gearType = Int32.Parse(gearLevelText.text);
+        HadCredit = userInfo.PlayerCredit;
 
         if (gearType == 0)
         {
@@ -65,8 +83,8 @@ public class UpgradeController : MonoBehaviour
             playerGearLevel = userInfo.criticalLevel;
         }
 
-        LevelText.text = playerGearLevel.ToString();
-        PlayerResourceText.text = HadResource.ToString();
+        gearLevelText.text = playerGearLevel.ToString();
+        playerCreditText.text = HadCredit.ToString();
 
         upgradeCredit();
         ChangedConstImage();
@@ -75,19 +93,19 @@ public class UpgradeController : MonoBehaviour
 
     public void ChangeGear()
     {
-        HadResource = Int32.Parse(PlayerResourceText.text);
+        HadCredit = Int32.Parse(playerCreditText.text);
 
-        if (HadResource >= LevelPrice)
+        if (HadCredit >= gearLevelPrice)
         {
-            if (playerGearLevel < GearUpgradeMaxLevel)
+            if (playerGearLevel < gearUpgradeMaxLevel)
             {
-                LevelCreditText.text = "<color=#ffffff>" + LevelPrice + "</color>";
+                upgradeCreditText.text = "<color=#ffffff>" + gearLevelPrice + "</color>";
 
-                HadResource = HadResource - LevelPrice;
+                HadCredit = HadCredit - gearLevelPrice;
                 playerGearLevel++;
 
-                LevelText.text = playerGearLevel.ToString();
-                PlayerResourceText.text = HadResource.ToString();
+                gearLevelText.text = playerGearLevel.ToString();
+                playerCreditText.text = HadCredit.ToString();
 
                 ChangedConstImage();
                 upgradeCredit();
@@ -96,7 +114,7 @@ public class UpgradeController : MonoBehaviour
         }
         else
         {
-            LevelCreditText.text = "<color=#ff0000>" + LevelPrice + "</color>";
+            upgradeCreditText.text = "<color=#ff0000>" + gearLevelPrice + "</color>";
         }
     }
 
@@ -104,38 +122,38 @@ public class UpgradeController : MonoBehaviour
     {
         if (playerGearLevel < changedConst[0])
         {
-            ChangedImage1.SetActive(true);
+            imageChanged1.SetActive(true);
         }
         else if (playerGearLevel == changedConst[0])
         {
-            ChangedImage2.SetActive(true);
-            ChangedImage1.SetActive(false);
+            imageChanged2.SetActive(true);
+            imageChanged1.SetActive(false);
         }
         else if (playerGearLevel == changedConst[1])
         {
-            ChangedImage3.SetActive(true);
-            ChangedImage2.SetActive(false);
+            imageChanged3.SetActive(true);
+            imageChanged2.SetActive(false);
         }
         else if (playerGearLevel == changedConst[2])
         {
-            ChangedImage4.SetActive(true);
-            ChangedImage3.SetActive(false);
+            imageChanged4.SetActive(true);
+            imageChanged3.SetActive(false);
         }
-        else { ChangedImage4.SetActive(true); }
+        else { imageChanged4.SetActive(true); }
     }
 
     public void MaxLevel()
     {
-        if (playerGearLevel == GearUpgradeMaxLevel)
+        if (playerGearLevel == gearUpgradeMaxLevel)
         {
-            LevelCreditText.text = "-";
-            UpgradeButton.enabled = false;
+            upgradeCreditText.text = "-";
+            upgradeButton.enabled = false;
         }
     }
 
     public void upgradeCredit()
     {
-        LevelPrice = 100 + (500 * playerGearLevel);
-        LevelCreditText.text = LevelPrice.ToString();
+        gearLevelPrice = 100 + (500 * playerGearLevel);
+        upgradeCreditText.text = gearLevelPrice.ToString();
     }
 }

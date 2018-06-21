@@ -2,7 +2,9 @@
 
 public class InfomationController : MonoBehaviour
 {
-    public GameObject informationBox;
+    [Header("InformationBox")]
+    [SerializeField]
+    private GameObject informationBox;
 
     public void PopInformation()
     {
