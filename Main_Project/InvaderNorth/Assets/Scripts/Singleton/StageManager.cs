@@ -19,18 +19,16 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager stageInstance;
 
-    void Start ()
+    public delegate void SceneChanged();
+    public SceneChanged sceneChangedCallBack;
+
+    void Awake()
     {
         stageInstance = this;
         DontDestroyOnLoad(gameObject);
-	}
-
-    public void ChangeStageIntroToLobby(StageType stageType)
-    {
-        StartCoroutine(ChangeStageCoroutine(stageType));
     }
 
-    IEnumerator ChangeStageCoroutine(StageType stageType)
+    public IEnumerator ChangeStageCoroutine(StageType stageType)
     {
         AsyncOperation loadoperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)stageType);
@@ -44,6 +42,8 @@ public class StageManager : MonoBehaviour
             frameCount--;
             yield return new WaitForSeconds(0.03f);
         }
+
+        sceneChangedCallBack();
 
         asyncOperation.allowSceneActivation = true;
     }

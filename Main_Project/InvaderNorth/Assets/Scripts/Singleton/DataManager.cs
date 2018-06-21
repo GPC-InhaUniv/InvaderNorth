@@ -29,9 +29,9 @@ public class DataManager : MonoBehaviour
         gameDataLoader.MakeNewAccountInDB(id, password);
     }
 
-    public void DataCallback(GameData gameData, LoginProcessType loginProcessType)
+    public void DataCallback(GameData gameData, SignInProcessType loginProcessType)
     {
-        if(gameData != null && loginProcessType == LoginProcessType.Success)
+        if(gameData != null && loginProcessType == SignInProcessType.Success)
         {
             this.gameData = gameData;
             gameModel.LoginSucceeded();
@@ -48,8 +48,15 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public void CreateAccountCallBack()
+    public void CreateAccountCallBack(bool IsCreated)
     {
-        gameModel.CreateSucceeded();
+        if(IsCreated == true)
+        {
+            gameModel.CreateSucceeded();
+        }
+        else
+        {
+            gameModel.CreateFailed();
+        }
     }
 }

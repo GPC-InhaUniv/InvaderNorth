@@ -13,9 +13,11 @@ public class ButtonActionAdder : MonoBehaviour {
     public InputField signUpIdInputField;
     public InputField signUpPasswordInputField;
     
-    void Start () {
-        signInButton.onClick.AddListener(() => gameController.VerifyLoginData(signInIdInputField.text, signInPasswordInputField.text));
-        signUpButton.onClick.AddListener(() => gameController.CreateLoginAccount(signUpIdInputField.text, signUpPasswordInputField.text));
+    private void Start () {
+        signInButton.onClick.AddListener(() => gameController.VerifyAccountData(signInIdInputField.text, signInPasswordInputField.text));
+        signUpButton.onClick.AddListener(() => gameController.CreateAccount(signUpIdInputField.text, signUpPasswordInputField.text));
 	}
+
+    
 	
 }

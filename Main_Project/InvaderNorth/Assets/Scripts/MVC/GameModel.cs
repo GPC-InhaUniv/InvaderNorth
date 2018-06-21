@@ -10,13 +10,16 @@ public class GameModel : MonoBehaviour {
     public delegate void LoadSuccess();
     public LoadSuccess LoadSuccessCallBack;
 
-    public delegate void LoadFail(LoginProcessType loginProcessType);
+    public delegate void LoadFail(SignInProcessType loginProcessType);
     public LoadFail LoadFailCallBack;
 
     public delegate void CreateSuccess();
     public CreateSuccess createSuccessCallBack;
+    
+    public delegate void CreateFail();
+    public CreateSuccess createFailCallBack;
 
-	public void IsLoginDataExist(string id, string password)
+    public void IsLoginDataExist(string id, string password)
     {
         DataManager.Datainstance.GetData(id, password);
     }
@@ -26,7 +29,7 @@ public class GameModel : MonoBehaviour {
         LoadSuccessCallBack();
     }
 
-    public void LoginFailed(LoginProcessType loginProcessType)
+    public void LoginFailed(SignInProcessType loginProcessType)
     {
         LoadFailCallBack(loginProcessType);
     }
@@ -39,5 +42,10 @@ public class GameModel : MonoBehaviour {
     public void CreateSucceeded()
     {
         createSuccessCallBack();
+    }
+
+    public void CreateFailed()
+    {
+        createFailCallBack();
     }
 }

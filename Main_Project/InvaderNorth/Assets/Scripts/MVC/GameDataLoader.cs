@@ -8,7 +8,7 @@ using Firebase;
 using System;
 using System.Linq;
 
-public enum LoginProcessType
+public enum SignInProcessType
 {
     NoAccount,
     WrongPassword,
@@ -20,10 +20,10 @@ public class GameDataLoader : MonoBehaviour {
     private GameData userGameData;
     private DatabaseReference reference;
 
-    public delegate void LoadDataCallback(GameData gameData, LoginProcessType loginProcessType);
+    public delegate void LoadDataCallback(GameData gameData, SignInProcessType loginProcessType);
     public LoadDataCallback loadDataCallback;
 
-    public delegate void CreateAccountCallBack();
+    public delegate void CreateAccountCallBack(bool IsCreated);
     public CreateAccountCallBack createAccountCallBack;
 
     private void Start()
@@ -66,19 +66,19 @@ public class GameDataLoader : MonoBehaviour {
                                 critLevel = Convert.ToInt32(userDataDictionary["critLevel"])
 
                             };
-                            loadDataCallback(userGameData, LoginProcessType.Success);
+                            loadDataCallback(userGameData, SignInProcessType.Success);
                             return;
                         }
                         else
                         {
                             Debug.Log("비밀번호가 틀렸습니다");
-                            loadDataCallback(null, LoginProcessType.WrongPassword);
+                            loadDataCallback(null, SignInProcessType.WrongPassword);
                             return;
                         }
                     }
                 }
                 Debug.Log("회원가입이 되어있지 않습니다");
-                loadDataCallback(null, LoginProcessType.NoAccount);
+                loadDataCallback(null, SignInProcessType.NoAccount);
                 return;
             }
         });
@@ -112,6 +112,7 @@ public class GameDataLoader : MonoBehaviour {
                     if (id.Equals(datasnapshot.Key))
                     {
                         Debug.Log("이미 계정이 존재합니다");
+                        createAccountCallBack(false);
                         return;
                     }
                 }
@@ -126,7 +127,7 @@ public class GameDataLoader : MonoBehaviour {
                     else if (signUpTask.IsCompleted)
                     {
                         Debug.Log("회원가입 성공");
-                        createAccountCallBack();
+                        createAccountCallBack(true);
                         return;
                     }
                 });
