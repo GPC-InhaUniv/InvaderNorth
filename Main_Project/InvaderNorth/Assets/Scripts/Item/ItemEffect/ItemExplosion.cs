@@ -4,64 +4,51 @@ using UnityEngine;
 //폭발효과
 public class ItemExplosion : ItemEffectType
 {
+
     [Header("BombExplosionObjects")]
     [SerializeField]
     private GameObject ExplosionRange;
+    [SerializeField]
     private GameObject BombExplosion;
-    private GameObject Parent;
-
-    [Header("EnemyExplosionObjects")]
-    public GameObject NormalEnemy;
-    public GameObject NamedEnemy;
-    public GameObject EnemyExplosion;
-    
+   
+    [Header("사용여부")]
     public bool isUsedItem;
+    public bool HaveItem;
     //인벤토리(1칸) 구축 후 그곳에 InputManager이용
 
+    public float itemDamage;
     
-    private float itemDamage;
-
-
     private void Awake()
     {
+        isUsedItem = false;
         itemDamage = 10;
+        item = GetComponent<Item>();
         ExplosionRange = GetComponent<GameObject>();
         ExplosionRange.SetActive(false);
-  
     }
-
-    protected ItemExplosion(Item item)
-        : base(item)
-    { }
-
+    
     public override void ApplyTheEffect()
     {
         base.ApplyTheEffect();
-        Explosion();
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (HaveItem == true)
+            {
+                isUsedItem = true;
+                Explode(isUsedItem);
+            }
+        }
     }
-
-    public void Explosion()
+    
+    public void Explode(bool isUsedItem)
     {
         if (isUsedItem == true)
         {
-            ExplosionRange.SetActive(true);
             Instantiate(BombExplosion, Parent.transform.position, Parent.transform.rotation);
-            
+            ExplosionRange.SetActive(true);
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            ObjectPool.ObjectPools.EnemyPool.PushToPool(other.gameObject);
-            ObjectPool.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
-            Instantiate(EnemyExplosion,other.transform.position, other.transform.rotation);
-            other.gameObject.SetActive(false);
-        }
         else
             return;
     }
-
-
 }

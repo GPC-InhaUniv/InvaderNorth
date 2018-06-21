@@ -7,16 +7,8 @@ public class ItemEffectType : Item
 {
     protected Item item;
     
-    protected ItemEffectType(Item item)
-    {
-        this.item = item;
-    }
-
     public override void ApplyTheEffect()
     {
-        if (item != null)
-        {
             item.ApplyTheEffect();
-        }
     }
 }

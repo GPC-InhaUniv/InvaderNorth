@@ -11,21 +11,29 @@ public class ItemObjectPool : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
+        if(ItemPoolInstance == null)
+        {
+            ItemPoolInstance = this;
+        }
+
         if (bombPool == null)
         {
             bombPool = GetComponent<BombPool>();
         }
-        else if (shieldPool == null)
+
+        if (shieldPool == null)
         {
             shieldPool = GetComponent<ShieldPool>();
         }
-        else if (darkResourcePool == null)
+
+        if (darkResourcePool == null)
         {
             darkResourcePool = GetComponent<DarkResourcePool>();
         }
 
         else
-            Debug.Log("아이템 풀 값이 들어오지 않음");
+            return;
     }
 
 }

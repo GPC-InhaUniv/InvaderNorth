@@ -10,14 +10,11 @@ public class ItemAccumulation : ItemEffectType {
     private void Awake()
     {
         resourceCount = 10;
-        //totalResourceCount는 데이터매니저에서 받아온다. 일단 임시로 100으로 해놓음
-        totalResourceCount = 100;
+        totalResourceCount = 0;
+        item = GetComponent<Item>();
+        
     }
-
-    protected ItemAccumulation(Item item)
-        :base(item) 
-    { }
-
+    
     public override void ApplyTheEffect()
     {
         base.ApplyTheEffect();
@@ -26,6 +23,6 @@ public class ItemAccumulation : ItemEffectType {
 
     public void AddResource()
     {
-
+        totalResourceCount = resourceCount + totalResourceCount;
     }
 }

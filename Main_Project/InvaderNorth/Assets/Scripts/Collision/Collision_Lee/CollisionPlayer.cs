@@ -4,53 +4,29 @@ using UnityEngine;
 
 public class CollisionPlayer : CollisionForm
 {
-    protected new void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Boundary"))
-            return;
-    }
+    public GameObject Explosion;
+    public GameObject PlayerExplosion;
+    public int ScoreValue;
+    public int Hp;
+    public bool IsBoss;
+  
 
     protected override void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy와 Player충돌");
-            //   if (_CharacterStatus.instance.PlayerHP > 1)
-            //   {
-            //       _CharacterStatus.instance.PlayerHP -= 1;
-            //    }
-            //    else
-            //    {
-            //플레이어 오브젝트를 파괴한다.
-            //    }
+            Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            gameObject.SetActive(false);
+            StageController.DecreaseDelegate(gameObject);
         }
-
-        if(other.CompareTag("EnemyBullet"))
-        {
-            Debug.Log("EnemyBullet과 Player 충돌");
-            //if (_CharacterStatus.instance.PlayerHP > 1)
-            //{
-            //    _CharacterStatus.instance.PlayerHP -= 1;
-            //}
-            //else
-            //{
-            //    //플레이어 오브젝트를 파괴한다.
-            //}
-        }
-
+        
         if (other.CompareTag("Item"))
         {
-            Debug.Log("Item과 Player 충돌");
-            // if (플레이어 인벤토리에 빈 공간이 있다면)
-            {
-                //해당 아이템을 인벤토리에 넣는다.
-                //해당 아이템 인벤토리 이미지를 활성화시킨다.
-            }
-            //else
-            {
-                //바로 효과가 발현된다.
-            }
+            return;
         }
+
         else
             return;
     }

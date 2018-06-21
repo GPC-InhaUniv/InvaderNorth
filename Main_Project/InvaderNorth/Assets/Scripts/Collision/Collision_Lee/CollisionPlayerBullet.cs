@@ -8,8 +8,7 @@ public class CollisionPlayerBullet : CollisionForm
     {
         if (other.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
-            //오브젝트풀로 반환하기
+            ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
         }
         else
             return;

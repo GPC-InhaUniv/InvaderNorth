@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: bfa6ade49b9fcad4b8c6dccd6404626f
-timeCreated: 1528113068
+timeCreated: 1529560849
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ExplosionRange: {instanceID: 0}
+  - BombExplosion: {instanceID: 0}
+  - Parent: {instanceID: 0}
+  - NormalEnemy: {instanceID: 0}
+  - NamedEnemy: {instanceID: 0}
+  - EnemyExplosion: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

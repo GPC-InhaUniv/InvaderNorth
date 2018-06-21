@@ -7,14 +7,15 @@ public class ItemInvincibility : ItemEffectType
     private bool receiveDamage;
     private float effectCountiuanceTime;
 
-    protected ItemInvincibility(Item item)
-        :base(item)
-    { }
+    public void Awake()
+    {
+        item = GetComponent<Item>();
+        
+    }
     public override void ApplyTheEffect()
     {
         base.ApplyTheEffect();
         DontBeAttacked();
-
     }
     public void DontBeAttacked()
     {

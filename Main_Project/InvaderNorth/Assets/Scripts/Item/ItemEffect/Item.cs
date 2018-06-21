@@ -4,5 +4,6 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
+    protected GameObject Parent;
     public abstract void ApplyTheEffect();
 }

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DarkResourcePool : MonoBehaviour
 {
-    public GameObject itemObject;
-    public GameObject Parent;
+    [SerializeField]
+    private GameObject itemObject;
+    [SerializeField]
+    private GameObject Parent;
 
     Queue<GameObject> itemPool;
     public int MaxNumberOfDarkResource;

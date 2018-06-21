@@ -8,8 +8,9 @@ public class CollisionItem : CollisionForm
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("충돌함");
-            //itemPool.ReturnItem();//??
+            ItemObjectPool.ItemPoolInstance.bombPool.PushToPool(gameObject);
+            ItemObjectPool.ItemPoolInstance.shieldPool.PushToPool(gameObject);
+            ItemObjectPool.ItemPoolInstance.darkResourcePool.PushToPool(gameObject);
         }
 
         else

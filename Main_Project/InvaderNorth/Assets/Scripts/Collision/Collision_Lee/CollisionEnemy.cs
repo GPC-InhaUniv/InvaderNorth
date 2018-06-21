@@ -4,27 +4,33 @@ using UnityEngine;
 
 public class CollisionEnemy : CollisionForm
 {
+
+    public GameObject Explosion;
+    public GameObject PlayerExplosion;
+    public int ScoreValue;
+    public int Hp;
+    public bool IsBoss;
+    int maxHp;
+
     protected override void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            Destroy(gameObject);
-            //if (_CharacterStatus.instance.EnemyHP > 1)
-            //{
-            //    _CharacterStatus.instance.EnemyHP -= 1;
-            //}
-
-            //else
-            //{
-                //enemy object를 풀로 반환한다.
-            //}
+            Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
+            gameObject.SetActive(false);
+            Hp--;
         }
 
         else if (other.CompareTag("PlayerBullet"))
         {
-            Destroy(gameObject);
-            //_CharacterStatus.instance.EnemyHP -= 1;
-            //폭발 이펙트 불러오기
+            Hp--;
+        }
+
+        if (Hp <= 0)
+        {
+            StageController.SendScoreDelegate(ScoreValue, IsBoss);
+            ObjectPool.ObjectPools.EnemyPool.PushToPool(gameObject);
+            Instantiate(Explosion, transform.position, transform.rotation);
         }
 
         else

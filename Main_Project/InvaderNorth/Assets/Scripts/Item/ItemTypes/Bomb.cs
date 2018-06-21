@@ -4,25 +4,16 @@ using UnityEngine;
 
 public class Bomb : Item
 {
-    //trigger 구체 설정
+    [SerializeField]
+    private GameObject ExplosionRange;
     
     private void Awake()
     {
-       
-        //itemDamage = 10;
-        //resourceCount = 0;
-        //effectCountiuanceTime = 5f;
-
-        //ExplosionRange.GetComponent<GameObject>();
-        //gameObject.AddComponent<ItemExplosion>();
-        //gameObject.AddComponent<ItemInvincibility>();
+        ExplosionRange.GetComponent<GameObject>();
+        gameObject.AddComponent<ItemExplosion>();
+        gameObject.AddComponent<ItemInvincibility>();
     }
-
-    private void Start()
-    {
-        //ExplosionRange.SetActive(false);
-    }
-
+    
     public override void ApplyTheEffect()
     {
         
@@ -30,11 +21,11 @@ public class Bomb : Item
 
     public void BeUsed()
     {
-        //ExplosionRange.SetActive(true);
+        
     }
 
     public void BeProducedIn()
     {
-        //적에따라 다른 아이템 드랍
+        
     }
 }
