@@ -18,7 +18,30 @@ public class GameController : MonoBehaviour {
     
     public void SetGameView(StageType stageType)
     {
-        gameView = GameObject.Find("SignStageView").GetComponent<SignStageView>();
+        if(stageType == StageType.LoadingStage)
+        {
+            gameView = GameObject.Find("LoadingStageView").GetComponent<SignStageView>();
+        }
+        else if(stageType == StageType.ShopStage)
+        {
+            gameView = GameObject.Find("ShopStageView").GetComponent<SignStageView>();
+        }
+        else if(stageType == StageType.LobbyStage)
+        {
+            gameView = GameObject.Find("LobbyStageView").GetComponent<SignStageView>();
+        }
+        else if(stageType == StageType.TutorialStage)
+        {
+            gameView = GameObject.Find("TutorialStageView").GetComponent<SignStageView>();
+        }
+        else if(stageType == StageType.CombatStage)
+        {
+            gameView = GameObject.Find("CombatStageView").GetComponent<SignStageView>();
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void VerifyAccountData(string id, string password)

@@ -18,10 +18,6 @@ public class IntroScene : MonoBehaviour {
 	
     IEnumerator IntroFadeOnOff()
     {
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(1);
-
-        asyncOperation.allowSceneActivation = false;
-
         int frameCount = 0;
 
         while (frameCount < MaxFrame * 3)
@@ -56,8 +52,6 @@ public class IntroScene : MonoBehaviour {
             yield return new WaitForSeconds(0.03f);
         }
 
-        asyncOperation.allowSceneActivation = true;
-
-
+        StartCoroutine(StageManager.stageInstance.ChangeStageCoroutine(StageType.SignStage));
     }
 }
