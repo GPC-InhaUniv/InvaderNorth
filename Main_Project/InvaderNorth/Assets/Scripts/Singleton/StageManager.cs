@@ -17,8 +17,6 @@ public enum StageType
 
 public class StageManager : MonoBehaviour
 {
-    private StageType currentStage;
-
     public static StageManager stageInstance;
 
     public delegate void SceneChanged(StageType stageType);
@@ -26,37 +24,27 @@ public class StageManager : MonoBehaviour
 
     void Awake()
     {
-        currentStage = StageType.IntroStage;
         stageInstance = this;
         DontDestroyOnLoad(gameObject);
     }
 
     public IEnumerator ChangeStageCoroutine(StageType stageType)
     {
-        if(currentStage == StageType.IntroStage)
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)stageType);
+
+        asyncOperation.allowSceneActivation = false;
+
+        int frameCount = 30;
+
+        while(!asyncOperation.isDone && frameCount > 0)
         {
-            SceneManager.LoadSceneAsync((int)stageType);
-            currentStage = stageType;
+            frameCount--;
+            yield return new WaitForSeconds(0.03f);
         }
-        else
-        {
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);
-            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)stageType);
 
-            asyncOperation.allowSceneActivation = false;
+        sceneChangedCallBack(stageType);
 
-            int frameCount = 30;
-            currentStage = stageType;
-
-            while (!asyncOperation.isDone && frameCount > 0)
-            {
-                frameCount--;
-                yield return new WaitForSeconds(0.03f);
-            }
-
-            sceneChangedCallBack(stageType);
-
-            asyncOperation.allowSceneActivation = true;
-        }
+        asyncOperation.allowSceneActivation = true;
     }
 }
