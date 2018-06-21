@@ -7,6 +7,7 @@ public enum PopUpType
     [Header("Sign Stage UI")]
     SignUpExistingAccount,
     SignUpIdError,
+    SignUpPasswordError,
     SignUpSuccess,
     SignInWrongPassword,
     SignInNoAccount,
@@ -16,5 +17,5 @@ public enum PopUpType
 
 public interface IShowable{
 
-    void ShowPopUp(string message, PopUpType popUptype);
+    void ShowPopUp(PopUpType popUptype);
 }

@@ -38,35 +38,39 @@ public class GameController : MonoBehaviour {
     {
         if(loginProcessType == SignInProcessType.NoAccount)
         {
-            gameView.ShowPopUp("계정이 존재하지 않습니다", PopUpType.SignInNoAccount);
+            gameView.ShowPopUp(PopUpType.SignInNoAccount);
         }
         if (loginProcessType == SignInProcessType.WrongPassword)
         {
-            gameView.ShowPopUp("비밀번호가 틀렸습니다", PopUpType.SignInWrongPassword);
+            gameView.ShowPopUp(PopUpType.SignInWrongPassword);
         }
     }
 
     public void CreateAccount(string id, string password)
     {
-        if(id != null && id.Length > 6)
+        if(id == null || id.Length < 6)
+        {
+            gameView.ShowPopUp(PopUpType.SignUpIdError);
+        }
+        else if(password.Length < 6)
+        {
+            gameView.ShowPopUp(PopUpType.SignUpPasswordError);
+        }
+        else
         {
             gameModel.createSuccessCallBack = AccountCreated;
             gameModel.createFailCallBack = AccountNotCreadted;
             gameModel.MakeNewAccount(id, password);
         }
-        else
-        {
-            gameView.ShowPopUp("계정 ID는 6자 이상이어야 합니다", PopUpType.SignUpIdError);
-        }
     }
 
     public void AccountCreated()
     {
-        gameView.ShowPopUp("계정이 생성되었습니다.", PopUpType.SignUpSuccess);
+        gameView.ShowPopUp(PopUpType.SignUpSuccess);
     }
 
     public void AccountNotCreadted()
     {
-        gameView.ShowPopUp("이미 존재하는 계정입니다.", PopUpType.SignUpIdError);
+        gameView.ShowPopUp(PopUpType.SignUpExistingAccount);
     }
 }
