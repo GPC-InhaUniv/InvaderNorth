@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class NormalEnemyCollision : MonoBehaviour {
 
-    public GameObject Explosion;
-    public GameObject PlayerExplosion;
-    public int ScoreValue;
+    [SerializeField]
+    private GameObject Explosion;
+    [SerializeField]
+    private GameObject PlayerExplosion;
+    [SerializeField]
+    private int ScoreValue;
 
     void OnTriggerEnter(Collider other)
     {

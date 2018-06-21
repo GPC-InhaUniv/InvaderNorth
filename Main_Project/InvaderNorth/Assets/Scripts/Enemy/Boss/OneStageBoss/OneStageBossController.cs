@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OneStageBossController : MonoBehaviour {
-    public GameObject NormalBullet;
-    public GameObject SkillBullet;
-    OneStageBoss boss;
+    [SerializeField]
+    private GameObject NormalBullet;
+    [SerializeField]
+    private GameObject SkillBullet;
+    private OneStageBoss boss;
 
 	void Start ()
     {

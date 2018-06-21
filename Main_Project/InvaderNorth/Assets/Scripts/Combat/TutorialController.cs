@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class TutorialController : StageController
 {
     [Header("Tutorial")]
-    public GameObject TutorialSprite;
+    [SerializeField]
+    private GameObject TutorialSprite;
 
     protected override IEnumerator StagePrograss()
     {
@@ -20,11 +21,10 @@ public class TutorialController : StageController
                 break;
             if (scoreTotal >= 60 && hasBoss == false)
             {
-                enemy = ObjectPool.ObjectPools.EnemyPool.PopFromPool("TutorialBoss");
-                enemy.SetActive(true);
+                BossEnemy.SetActive(true);
                 hasBoss = true;
             }
-            enemy = ObjectPool.ObjectPools.EnemyPool.PopFromPool("NormalEnemy");
+            enemy = ObjectPool.ObjectPools.EnemyPool.PopFromPool(0);
             enemy.transform.position = new Vector3(Random.Range(-SpawnValues.x, SpawnValues.x), SpawnValues.y, SpawnValues.z);
             enemy.SetActive(true);
             yield return new WaitForSeconds(2);

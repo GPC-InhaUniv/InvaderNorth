@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EnemyBulletPool : MonoBehaviour {
 
-    public int NumberOfNormalBulletCreation;
-    public GameObject Parent;
+    [SerializeField]
+    private int NumberOfNormalBulletCreation;
+    [SerializeField]
+    private GameObject Parent;
+
     private Queue<GameObject> BulletPool;
 
     void Start()

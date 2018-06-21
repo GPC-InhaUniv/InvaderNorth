@@ -20,15 +20,24 @@ public abstract class StageController : MonoBehaviour {
     public delegate void Decrease(GameObject player);
     public static Decrease DecreaseDelegate;
     [Header("GameObjcet")]
-    public GameObject PlayerLife;
-    public GameObject GameClearPopup;
-    public GameObject GameOverPopup;
+    [SerializeField]
+    private GameObject PlayerLife;
+    [SerializeField]
+    private GameObject GameClearPopup;
+    [SerializeField]
+    private GameObject GameOverPopup;
+    [SerializeField]
+    protected GameObject BossEnemy;
     [Header("Text")]
-    public Text ScoreText;
-    public Text ResourceText;
+    [SerializeField]
+    private Text ScoreText;
+    [SerializeField]
+    private Text ResourceText;
     [Header("Position")]
-    public Vector3 SpawnValues;
-    public PlayerSpawnPosition PlayerSpawnPosition;
+    [SerializeField]
+    private PlayerSpawnPosition PlayerSpawnPosition;
+    [SerializeField]
+    protected Vector3 SpawnValues;
 
     protected GameObject enemy;
     protected List<GameObject> playerLifeList;

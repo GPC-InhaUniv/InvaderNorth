@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class OneStageBoss 
 {
-    OneStageBossState bossState;
-    GameObject normalBullet;
-    GameObject skillBullet;
+    private OneStageBossState bossState;
+    private GameObject normalBullet;
+    private GameObject skillBullet;
 
 
     public OneStageBoss(OneStageBossState bossState, GameObject normalBullet, GameObject skillBullet)

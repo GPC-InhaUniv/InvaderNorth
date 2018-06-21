@@ -10,7 +10,7 @@ public interface IBaseAttackable
 
 public class BaseAttack : IBaseAttackable
 {
-    GameObject bullet;
+    private GameObject bullet;
 
     public void Attack(GameObject enemy)
     {
@@ -24,7 +24,7 @@ public class BaseAttack : IBaseAttackable
 
 public class MultiAttack : IBaseAttackable
 {
-    GameObject[] bullets = new GameObject[3];
+    private GameObject[] bullets = new GameObject[3];
 
     public void Attack(GameObject enemy)
     {

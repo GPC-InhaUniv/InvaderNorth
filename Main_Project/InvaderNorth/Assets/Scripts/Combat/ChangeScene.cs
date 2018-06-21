@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour {
-    public bool HasFirstStart;
+    [SerializeField]
+    private bool HasFirstStart;
     AsyncOperation ao;
 
     // Use this for initialization
@@ -22,10 +23,10 @@ public class ChangeScene : MonoBehaviour {
 
         if (HasFirstStart == true)
         {
-             ao = SceneManager.LoadSceneAsync(5);
+             ao = SceneManager.LoadSceneAsync(4);
         }else
         {
-             ao = SceneManager.LoadSceneAsync(4);
+             ao = SceneManager.LoadSceneAsync(5);
         }
         ao.allowSceneActivation = false;
         

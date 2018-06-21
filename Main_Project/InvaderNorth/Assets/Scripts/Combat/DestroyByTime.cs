@@ -3,7 +3,8 @@ using System.Collections;
 
 public class DestroyByTime : MonoBehaviour
 {
-    public float lifetime;
+    [SerializeField]
+    private float lifetime;
 
     void Start()
     {

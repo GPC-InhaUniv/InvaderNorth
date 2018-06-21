@@ -20,8 +20,8 @@ public class NoSkill : ISkillEnable
 
 public class RoundShot : ISkillEnable
 {
-    bool CanNextMultiShot;
-    GameObject bullet;
+    private bool CanNextMultiShot;
+    private GameObject bullet;
 
     public void SkillUse(GameObject enemy)
     {

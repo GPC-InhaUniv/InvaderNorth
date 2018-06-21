@@ -19,8 +19,8 @@ public class Fixing : IMovable
 
 public class BaseMoving : IMovable
 {
-    bool isFrist = true;
-    float speed;
+    private bool isFrist = true;
+    private float speed;
     Rigidbody enemyRigidbody;
     public BaseMoving(float speed, Rigidbody EnemyRigidbody)
     {
@@ -44,8 +44,8 @@ public class BaseMoving : IMovable
 
 public class NamedMoving : IMovable
 {
-    bool isFrist = true;
-    float speed;
+    private bool isFrist = true;
+    private float speed;
     Rigidbody enemyRigidbody;
     public NamedMoving(float speed, Rigidbody EnemyRigidbody)
     {

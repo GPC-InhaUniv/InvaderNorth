@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Mover : MonoBehaviour {
-    public float speed;
+    [SerializeField]
+    private float speed;
 
     void OnEnable()
     {

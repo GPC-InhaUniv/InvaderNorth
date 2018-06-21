@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class NamedEnemyCollision : MonoBehaviour
 {
-
-    public GameObject Explosion;
-    public GameObject PlayerExplosion;
-    public int ScoreValue;
-    public int Hp;
-    public bool IsBoss;
-    int maxHp;
+    [SerializeField]
+    private GameObject Explosion;
+    [SerializeField]
+    private GameObject PlayerExplosion;
+    [SerializeField]
+    private int ScoreValue;
+    [SerializeField]
+    private int Hp;
+    [SerializeField]
+    private bool IsBoss;
+    private int maxHp;
 
     void Awake()
     {
@@ -48,7 +52,7 @@ public class NamedEnemyCollision : MonoBehaviour
         if (Hp <= 0)
         {
         StageController.SendScoreDelegate(ScoreValue, IsBoss);
-        ObjectPool.ObjectPools.EnemyPool.PushToPool(gameObject);
+        gameObject.SetActive(false);
         Instantiate(Explosion, transform.position, transform.rotation);
         }
     }

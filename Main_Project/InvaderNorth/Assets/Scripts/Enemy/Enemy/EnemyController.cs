@@ -9,10 +9,13 @@ public enum EnemyName     //몬스터를 구별하여 패턴을 지정하기 위
 }
 
 public class EnemyController : MonoBehaviour {
-    public float SkillCoolTime;       //스킬 사용의 텀을 두기 위해.
-    public EnemyName EnemyName ;      
-    Enemy enemy;
-    AudioSource ShotAudio;
+    public int queueNum;
+    [SerializeField]
+    private float SkillCoolTime;       //스킬 사용의 텀을 두기 위해.
+    [SerializeField]
+    private EnemyName EnemyName ;
+    private Enemy enemy;
+    private AudioSource ShotAudio;
 
     void Start ()
     {

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyBulletCollision : MonoBehaviour {
 
-    public GameObject PlayerExplosion;
+    [SerializeField]
+    private GameObject PlayerExplosion;
 
     void OnTriggerEnter(Collider other)
     {

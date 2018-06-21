@@ -10,16 +10,21 @@ public struct Boundary
 
 public class PlayerController : MonoBehaviour
 {
-    public float Speed;
-    public float Tilt;
-    public Boundary Boundary;
-    public Transform ShotSpawn;
-    public float FireRate;
-    float nextFire;
-    AudioSource shotAudio;
-    GameObject bullet;
-    Rigidbody rigidbody;
-    Collider collider;
+    [SerializeField]
+    private float Speed;
+    [SerializeField]
+    private float Tilt;
+    [SerializeField]
+    private Boundary Boundary;
+    [SerializeField]
+    private Transform ShotSpawn;
+    [SerializeField]
+    private float FireRate;
+    private float nextFire;
+    private AudioSource shotAudio;
+    private GameObject bullet;
+    private Rigidbody rigidbody;
+    private Collider collider;
 
 
 
