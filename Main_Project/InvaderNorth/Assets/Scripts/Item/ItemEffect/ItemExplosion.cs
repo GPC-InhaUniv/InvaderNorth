@@ -5,9 +5,10 @@ using UnityEngine;
 public class ItemExplosion : ItemEffectType
 {
     [Header("BombExplosionObjects")]
-    public GameObject ExplosionRange;
-    public GameObject BombExplosion;
-    public GameObject Parent;
+    [SerializeField]
+    private GameObject ExplosionRange;
+    private GameObject BombExplosion;
+    private GameObject Parent;
 
     [Header("EnemyExplosionObjects")]
     public GameObject NormalEnemy;
