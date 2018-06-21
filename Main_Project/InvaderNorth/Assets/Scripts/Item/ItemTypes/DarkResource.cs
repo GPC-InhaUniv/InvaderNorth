@@ -2,15 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DarkResource : Item
+public class DarkResource : MonoBehaviour
 {
+    private CollisionItem collisionItem;
+    private int DarkResourceCount;
+    private int DarkResourceAmount;
+
     private void Awake()
     {
-      
+        DarkResourceCount = 10;
+        DarkResourceAmount = 0;
+        collisionItem = GetComponent<CollisionItem>();
     }
 
-    public override void ApplyTheEffect()
+    private void Update()
     {
-       
+        if(collisionItem.isReturnDarkResource == true)
+        {
+            DarkResourceAmount = AddAmount(DarkResourceCount, DarkResourceAmount);
+            collisionItem.isReturnDarkResource = false;
+        }
+    }
+
+    private int AddAmount(int Count, int Amount)
+    {
+        int result = Amount + Count;
+        return result;
     }
 }
