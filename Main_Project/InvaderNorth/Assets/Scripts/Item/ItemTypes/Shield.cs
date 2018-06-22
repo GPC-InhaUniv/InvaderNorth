@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield : Item
+public class Shield : MonoBehaviour, IUseable
 {
     private void Awake()
     {
 
     }
 
-    public override void ApplyTheEffect()
+    public void ApplyTheEffect()
     {
-        
+
     }
 }

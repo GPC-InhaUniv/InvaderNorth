@@ -6,12 +6,7 @@ public class ItemInvincibility : ItemEffectType
 {
     private bool receiveDamage;
     private float effectCountiuanceTime;
-
-    public void Awake()
-    {
-        item = GetComponent<Item>();
-        
-    }
+    
     public override void ApplyTheEffect()
     {
         base.ApplyTheEffect();

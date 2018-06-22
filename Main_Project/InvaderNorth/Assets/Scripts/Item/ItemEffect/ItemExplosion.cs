@@ -6,44 +6,25 @@ public class ItemExplosion : ItemEffectType
 {
     [Header("BombExplosionObjects")]
     [SerializeField]
-    public GameObject ExplosionRange;
+    private GameObject ExplosionRange;
     [SerializeField]
-    public GameObject BombExplosion;
+    private GameObject BombExplosion;
    
-    [Header("사용여부")]
-    public bool isUsedItem;
-    public bool HaveItem;
-    //인벤토리(1칸) 구축 후 그곳에 InputManager이용
-
-    public float itemDamage;
-    
+  
     private void Start()
     {
-        isUsedItem = false;
-        itemDamage = 10;
-        item = GetComponent<Item>();
-        ExplosionRange = GetComponent<GameObject>();
-        //ExplosionRange.SetActive(false);
+        
     }
     
     public override void ApplyTheEffect()
     {
         base.ApplyTheEffect();
-        if (HaveItem == true)
-        {
-            Explode(isUsedItem);
-        }
+        
+        Explode();
     }
     
-    public void Explode(bool isUsedItem)
+    public void Explode()
     {
-        if (isUsedItem == true)
-        {
-            Instantiate(BombExplosion, Parent.transform.position, Parent.transform.rotation);
-            ExplosionRange.SetActive(true);
-        }
-
-        else
-            return;
+       
     }
 }
