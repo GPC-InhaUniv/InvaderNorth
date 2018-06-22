@@ -8,7 +8,7 @@ public class CollisionPlayerBullet : CollisionForm
     {
         if (other.CompareTag("Enemy"))
         {
-            ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
         }
         else
             return;

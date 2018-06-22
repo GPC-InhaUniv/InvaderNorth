@@ -51,7 +51,7 @@ public class CreditMover : MonoBehaviour {
    
             yield return null;
         }
-            yield return null;
+            
     }
 
 }

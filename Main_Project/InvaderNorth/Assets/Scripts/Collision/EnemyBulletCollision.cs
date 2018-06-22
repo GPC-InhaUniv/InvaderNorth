@@ -16,7 +16,7 @@ public class EnemyBulletCollision : MonoBehaviour {
 
             if (other.tag == "Player")
             {
-                ObjectPool.ObjectPools.EnemyBulletPool.PushToPool(gameObject);
+                ObjectPoolManager.ObjectPools.EnemyBulletPool.PushToPool(gameObject);
                 Instantiate(PlayerExplosion, other.transform.position, other.transform.rotation);
                 GameObject player = other.gameObject;
                 player.GetComponent<Rigidbody>().velocity = Vector3.zero;

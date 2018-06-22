@@ -19,7 +19,7 @@ public class CreditPool : MonoBehaviour {
         for (int i = 0; i < numberOfSpaceResourceCreation; i++)
         {
             GameObject temp = Instantiate(spaceResource);
-            temp.name = "SpaceResource";
+            temp.name = "Credit";
             spaceResourcePool.Enqueue(temp);
             temp.transform.parent = parent.transform;
         }

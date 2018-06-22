@@ -45,7 +45,7 @@ public class NamedEnemyCollision : MonoBehaviour
         }
         else if(other.name == "PlayerBullet")
         {
-            ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
             hp--;
         }
 

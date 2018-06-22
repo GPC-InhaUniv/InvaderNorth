@@ -28,10 +28,10 @@ public class NormalEnemyCollision : MonoBehaviour {
             StageController.DecreaseDelegate(player);
         }
         else if (other.name == "PlayerBullet")
-            ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
 
         StageController.SendScoreDelegate(scoreValue, false);
-        ObjectPool.ObjectPools.EnemyPool.PushToPool(gameObject);
+        ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
         Instantiate(explosion, transform.position, transform.rotation);
     }
 }

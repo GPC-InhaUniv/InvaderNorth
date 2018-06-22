@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetButton("Fire1") && Time.time > nextFire)
                 {
                     nextFire = Time.time + fireRate;
-                    bullet = ObjectPool.ObjectPools.PlayerBulletPool.PopFromPool();
+                    bullet = ObjectPoolManager.ObjectPools.PlayerBulletPool.PopFromPool();
                     bullet.transform.position = shotSpawn.position;
                     bullet.SetActive(true);
                     shotAudio.Play();
@@ -123,7 +123,6 @@ public class PlayerController : MonoBehaviour
             if (gameObject.transform.position.z >= -2)
                 break;
             yield return null;
-
         }
         yield return new WaitForSeconds(2);
         if (StageController.IsGameClear == false)
@@ -151,9 +150,7 @@ public class PlayerController : MonoBehaviour
 
             if (transform.position.z > 18)
             {
-                GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("ObjectPool");
-                for (int i = 0; i < 4; i++)
-                    Destroy(gameObjects[i]);
+                Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
                 SceneManager.LoadScene("LobbyScene");
             }
             yield return null;

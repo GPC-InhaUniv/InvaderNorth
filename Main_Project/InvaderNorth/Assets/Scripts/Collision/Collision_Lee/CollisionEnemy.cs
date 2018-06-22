@@ -29,7 +29,7 @@ public class CollisionEnemy : CollisionForm
         if (Hp <= 0)
         {
             StageController.SendScoreDelegate(ScoreValue, IsBoss);
-            ObjectPool.ObjectPools.EnemyPool.PushToPool(gameObject);
+            ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
             Instantiate(Explosion, transform.position, transform.rotation);
         }
 

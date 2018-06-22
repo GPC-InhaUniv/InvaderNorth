@@ -15,7 +15,7 @@ public class BaseAttack : IBaseAttackable
     public void Attack(GameObject enemy)
     {
         
-        bullet = ObjectPool.ObjectPools.EnemyBulletPool.PopFromPool();
+        bullet = ObjectPoolManager.ObjectPools.EnemyBulletPool.PopFromPool();
         bullet.transform.position = enemy.transform.position;
         bullet.SetActive(true);
         //Debug.Log("BaseAttack");
@@ -31,7 +31,7 @@ public class MultiAttack : IBaseAttackable
         Vector3 spawnPosition = new Vector3(enemy.transform.position.x, 0, enemy.transform.position.z);
         for (int i = 0; i < 3; i++)
         {
-            bullets[i] = ObjectPool.ObjectPools.EnemyBulletPool.PopFromPool();
+            bullets[i] = ObjectPoolManager.ObjectPools.EnemyBulletPool.PopFromPool();
 
             if (i == 0)
             {

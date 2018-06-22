@@ -17,6 +17,8 @@ public abstract class StageController : MonoBehaviour {
     public static bool IsGameClear;
     public delegate void SendScore(int Score, bool isBoss);
     public static SendScore SendScoreDelegate;
+    public delegate void SendCredit();
+    public static SendCredit SendCreditDelegate;
     public delegate void Decrease(GameObject player);
     public static Decrease DecreaseDelegate;
     [Header("GameObjcet")]
@@ -32,7 +34,7 @@ public abstract class StageController : MonoBehaviour {
     [SerializeField]
     private Text scoreText;
     [SerializeField]
-    private Text resourceText;
+    private Text creditText;
     [Header("Position")]
     [SerializeField]
     private PlayerSpawnPosition playerSpawnPosition;
@@ -43,12 +45,14 @@ public abstract class StageController : MonoBehaviour {
     protected List<GameObject> playerLifeList;
     protected int scoreTotal;
     protected int playerLifePoint;
+    protected int creditTotal;
     protected bool hasBoss;
 
     void Start()
     {
         playerLifePoint = 1;// DataManager.Datainstance.gameData.hpLevel;
         SendScoreDelegate = AddScore;
+        SendCreditDelegate = AddCredit;
         DecreaseDelegate = HeartDecrease;
         Vector3 PlayerLifePosition = playerLife.transform.position;
         playerLifeList = new List<GameObject>();
@@ -75,10 +79,8 @@ public abstract class StageController : MonoBehaviour {
         StartCoroutine(StagePrograss());
     }
 
-
     protected abstract IEnumerator StagePrograss();
    
-
     void AddScore(int ScoreNumber, bool isBoss)
     {
         if(!IsGameClear && !IsGameOver)
@@ -90,9 +92,20 @@ public abstract class StageController : MonoBehaviour {
         }
     }
 
+    void AddCredit()
+    {
+        creditTotal++;
+        UpdateCredit();
+    }
+
     void UpdateScore()
     {
         scoreText.text = "Score : " + scoreTotal;
+    }
+
+    void UpdateCredit()
+    {
+        creditText.text = creditTotal.ToString();
     }
 
     void HeartDecrease(GameObject player)
@@ -105,7 +118,6 @@ public abstract class StageController : MonoBehaviour {
         }
         else
             GameOver();
-
     }
 
     void PlayerRespawn(GameObject player)
@@ -115,23 +127,30 @@ public abstract class StageController : MonoBehaviour {
 
     }
 
-    void GameOver()
+    void GameOver() //요부분이 게임오버시 팝업 출력.
     {
         gameOverPopup.SetActive(true);
-        gameOverPopup.transform.Find("Score Text").gameObject.GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
+        gameOverPopup.transform.Find("Score Text").GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
+        gameOverPopup.transform.Find("Credit Text").GetComponent<Text>().text = "획득 자원-> " + creditTotal.ToString();
         IsGameOver = true;
         Debug.Log("GameOver");
     }
 
-    void Clear()
+    void Clear() //요부분이 클리어시 팝업 출력
     {
-        gameClearPopup.SetActive(true);
-        gameClearPopup.transform.Find("Score Text").gameObject.GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
+        gameClearPopup.SetActive(true);  
+        gameClearPopup.transform.Find("Score Text").GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
+        gameClearPopup.transform.Find("Credit Text").GetComponent<Text>().text = "획득 자원-> " + creditTotal.ToString();
         IsGameClear = true;
         GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
         Debug.Log("GameClear");
     }
-    
+
+    void DestroyObjects()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
+    }
+
     public void OnClickedReStartButton()
     {
         IsGameOver = false;
@@ -146,9 +165,7 @@ public abstract class StageController : MonoBehaviour {
         SceneManager.LoadScene("LobbyScene");
     }
 
-    void DestroyObjects()
-    {
-            Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
-    }
+
+    
 
 }
