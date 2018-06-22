@@ -23,7 +23,10 @@ public class StageManager : MonoBehaviour
 
     public delegate void SceneChangedDelegate(StageType stageType);
     public SceneChangedDelegate sceneChangedCallBack;
-    
+
+    public delegate void LoadStageDeleagate();
+
+
     void Awake()
     {
         currentStage = StageType.IntroStage;
@@ -42,21 +45,22 @@ public class StageManager : MonoBehaviour
         {
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)stageType);
-
+            
             asyncOperation.allowSceneActivation = false;
 
             int frameCount = 30;
             currentStage = stageType;
 
-            while (!asyncOperation.isDone && frameCount > 0)
+
+            while (frameCount > 0)
             {
                 frameCount--;
                 yield return new WaitForSeconds(0.03f);
             }
-            
+
             asyncOperation.allowSceneActivation = true;
 
-            yield return null;
+            yield return asyncOperation;
 
             sceneChangedCallBack(stageType);
         }

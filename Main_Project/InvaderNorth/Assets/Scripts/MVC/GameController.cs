@@ -7,7 +7,6 @@ public class GameController : MonoBehaviour {
 
     [SerializeField]
     private GameModel gameModel;
-    [SerializeField]
     private IShowable gameView;
 
     private void Start()
@@ -52,7 +51,12 @@ public class GameController : MonoBehaviour {
     public void DataLoaded()
     {
         Debug.Log("로그인 성공");
-        StartCoroutine(StageManager.stageInstance.ChangeStageCoroutine(StageType.LobbyStage));
+        ChangeStage(StageType.LobbyStage);
+    }
+
+    public void ChangeStage(StageType stageType)
+    {
+        StartCoroutine(StageManager.stageInstance.ChangeStageCoroutine(stageType));
     }
 
     public void DataNotLoaded(SignInProcessType loginProcessType)
