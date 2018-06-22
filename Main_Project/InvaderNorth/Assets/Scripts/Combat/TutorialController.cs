@@ -15,12 +15,6 @@ public class TutorialController : StageController
     {
         yield return new WaitForSeconds(3);
         Destroy(tutorialSprite);   // 요부분이 없애는 것.(한번밖에 안써서 아예 지워버리는 식으로 했습니다.)
-        GameObject[] gameObjects = new GameObject[5] ;
-        for(int i = 0; i < 5; i ++)
-        {
-            gameObjects[i] = ObjectPoolManager.ObjectPools.CreditPool.PopFromPool();
-            gameObjects[i].SetActive(true);
-        }
         while (true)
         {
             if (IsGameClear)

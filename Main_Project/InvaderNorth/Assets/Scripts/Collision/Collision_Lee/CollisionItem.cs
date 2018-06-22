@@ -6,19 +6,22 @@ public class CollisionItem : CollisionForm
 {
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        
+        if (other.CompareTag("Item"))
         {
-            if (gameObject.name == "DarkResource")
+            
+            switch (other.name)
             {
-                ObjectPoolManager.ObjectPools.bombPool.PushToPool(gameObject);
-            }
-            else if(gameObject.name == "Shield")
-            {
-                ObjectPoolManager.ObjectPools.shieldPool.PushToPool(gameObject);
-                ObjectPoolManager.ObjectPools.CreditPool.PushToPool(gameObject);
-            }
-        }
+                case "Credit" :
+                    ObjectPoolManager.ObjectPools.CreditPool.PushToPool(other.gameObject);
+                    StageController.SendCreditDelegate();
+                    break;
 
+                case "Shield ":
+                    ObjectPoolManager.ObjectPools.shieldPool.PushToPool(other.gameObject);
+                    break;
+            } 
+        }
         else
             return;
     }

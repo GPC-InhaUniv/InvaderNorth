@@ -10,13 +10,11 @@ public class NormalEnemyCollision : MonoBehaviour {
     private GameObject playerExplosion;
     [SerializeField]
     private int scoreValue;
+    [SerializeField]
+    private int creditAmount;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Boundary" || other.tag == "Enemy" )
-        {
-            return;
-        }
 
         if (other.tag == "Player")
         {
@@ -29,7 +27,16 @@ public class NormalEnemyCollision : MonoBehaviour {
         }
         else if (other.name == "PlayerBullet")
             ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+        else
+            return;
 
+        GameObject temp;
+        for (int i = 0; i < creditAmount; i++)
+        {
+            temp = ObjectPoolManager.ObjectPools.CreditPool.PopFromPool();
+            temp.transform.position = transform.position;
+            temp.SetActive(true);
+        }
         StageController.SendScoreDelegate(scoreValue, false);
         ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
         Instantiate(explosion, transform.position, transform.rotation);

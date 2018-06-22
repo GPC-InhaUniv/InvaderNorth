@@ -59,7 +59,8 @@ public class EnemyPool : MonoBehaviour {
     public void PushToPool(GameObject enemy)
     { 
         enemy.SetActive(false);
-        enemyPoolList[enemy.GetComponent<EnemyController>().queueNum].Enqueue(enemy);
+        if(!StageController.IsGameClear && !StageController.IsGameOver)
+            enemyPoolList[enemy.GetComponent<EnemyController>().queueNum].Enqueue(enemy);
     }
 
 }

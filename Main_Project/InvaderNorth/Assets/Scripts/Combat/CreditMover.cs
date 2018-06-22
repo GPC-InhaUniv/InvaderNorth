@@ -13,8 +13,8 @@ public class CreditMover : MonoBehaviour {
     }
 
     private void OnEnable()
-    {       
-        StartCoroutine(FirstMove());
+    {
+            StartCoroutine(FirstMove());
     }
 
     IEnumerator FirstMove()
@@ -23,13 +23,14 @@ public class CreditMover : MonoBehaviour {
         risingLimitZ += Random.Range(1.5f, 2.5f);
         Vector3 direction = new Vector3(Random.Range(-1.5f, 1.5f), 0, 1);
 
-        Debug.Log(direction);
+
         while (true)
         {
             rigidbody.velocity = direction * 2.5f;
             if (transform.position.z > risingLimitZ)
             {
-                yield return SecondMove();
+                if (!StageController.IsGameOver)
+                    yield return SecondMove();
                 break;
             }
             yield return null;
@@ -41,11 +42,12 @@ public class CreditMover : MonoBehaviour {
 
     IEnumerator SecondMove()
     {
+
         while (true)
         {
-            //rigidbody.velocity += Vector3.back * 0.5f;
-            Vector3 dd = (player.transform.position - transform.position).normalized;
-            rigidbody.velocity = dd * 30;
+            
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            rigidbody.velocity = direction * 30;
    
             yield return null;
         }

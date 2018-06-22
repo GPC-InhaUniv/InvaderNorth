@@ -7,7 +7,32 @@ public class DestroyByBoundary : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.name == "PlayerBullet")
+        switch(other.name)
+        {
+            case "Credit":
+                return;
+
+            case "PlayerBullet" :
+                ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+                break;
+
+            case "EnemyBullet" :
+                ObjectPoolManager.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
+                break;
+
+            case "Shield" :
+                ObjectPoolManager.ObjectPools.shieldPool.PushToPool(other.gameObject);
+                break;
+                
+            case "Bomb":
+                ObjectPoolManager.ObjectPools.bombPool.PushToPool(other.gameObject);
+                break;
+
+            default :
+                ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(other.gameObject);
+                break;
+        }
+        /*if (other.name == "PlayerBullet")
         {
             ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
         }
@@ -29,6 +54,6 @@ public class DestroyByBoundary : MonoBehaviour {
         else
         {
             ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(other.gameObject);
-        }
+        }*/
     }
 }
