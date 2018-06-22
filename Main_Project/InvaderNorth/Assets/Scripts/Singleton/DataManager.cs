@@ -5,10 +5,10 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Datainstance;
+
     public GameModel gameModel;
     public GameDataLoader gameDataLoader;
     
-    //[SerializeField]
     public GameData gameData;
 
 	void Awake ()

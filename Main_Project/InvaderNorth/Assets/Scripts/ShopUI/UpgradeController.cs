@@ -7,7 +7,6 @@ public class UpgradeController : MonoBehaviour
     private int gearType; //Inspector에서 연결된, LevelText의 번호를 가져와 어떤 종류인지 확인하는 Level
     private int playerGearLevel; //매니저에서 가져온 아이템이 어떤 종류인지 확인하고 넣어주는 아이템의 Level
     private int HadCredit; //플레이어가 갖고 있는 재화
-
     private int gearLevelPrice; // 아이템 레벨별 가격
 
     [Header("UpgradeButton")]
@@ -17,44 +16,39 @@ public class UpgradeController : MonoBehaviour
     [Header("Credit Imformation")]
     [SerializeField]
     private int gearUpgradeMaxLevel; //아이템의 Max Level 정보
-
     [SerializeField]
     private Text gearLevelText; //화면에서의 각 아이템 Level Text -> 0,1,2로 구별함
-
     [SerializeField]
     private Text upgradeCreditText; //화면에서의 ,업그레이드 비용 정보
-
     [SerializeField]
     private Text playerCreditText; //화면에서, 플레이어 레벨 리소스 Text 변경을 위함
 
     [Header("Gear Image")]
     [SerializeField]
     private GameObject imageChanged1;
-
     [SerializeField]
     private GameObject imageChanged2;
-
     [SerializeField]
     private GameObject imageChanged3;
-
     [SerializeField]
     private GameObject imageChanged4;
 
     private int[] changedConst = new int[4];
 
-    private struct UserInfo //플레이어의 hp, shot, critical 레벨정보, 재화 정보를 가져옴
+    //DataManager.datainstance 에 접근하면 사용 안함
+    private struct UserInfo
     {
-        public int hpLevel; //DataMaganager.DataInstance.gameData.hpLevel; 형식으로 불러와야 함
+        public int hpLevel;
         public int shotLevel;
         public int criticalLevel;
         public int PlayerCredit;
 
         public void UserLevelValue()
         {
-            this.hpLevel = 6;
-            this.shotLevel = 0;
-            this.criticalLevel = 0;
-            this.PlayerCredit = 900000;
+            hpLevel = 6;
+            shotLevel = 0;
+            criticalLevel = 0;
+            PlayerCredit = 900000;
         }
     }
 
