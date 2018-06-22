@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameData {
-    private const int maxHpLevel = 10;
-    private const int maxBulletLevel = 20;
-    private const int maxCritLevel = 20;
-    private const int maxTotalLevel = 50;
+    public const int maxHpLevel = 10;
+    public const int maxBulletLevel = 20;
+    public const int maxCritLevel = 20;
+    public const int maxTotalLevel = 50;
 
     [SerializeField]
     [Header("UserData")]

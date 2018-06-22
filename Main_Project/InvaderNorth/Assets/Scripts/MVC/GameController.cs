@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour {
         if(stageType == StageType.ShopStage)
         {
             gameView = GameObject.Find("ShopStageView").GetComponent<ShopStageView>();
+            gameView.ShowInformation(gameModel.GetGameData());
         }
         else if(stageType == StageType.LobbyStage)
         {
