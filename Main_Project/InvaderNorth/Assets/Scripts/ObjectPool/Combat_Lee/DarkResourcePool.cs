@@ -23,11 +23,11 @@ public class DarkResourcePool : MonoBehaviour
     {
         for (int i = 1; i <= MaxNumberOfDarkResource; i++)
         {
-            itemObject = Instantiate(itemObject);
-            itemObject.name = "DarkResource";
-            itemObject.SetActive(false);
-            itemPool.Enqueue(itemObject);
-            itemObject.transform.parent = Parent.transform;
+            GameObject item = Instantiate(itemObject);
+            item.name = "DarkResource";
+            item.SetActive(false);
+            itemPool.Enqueue(item);
+            item.transform.parent = Parent.transform;
         }
         DontDestroyOnLoad(Parent);
     }
