@@ -1,27 +1,36 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CollisionItem : CollisionForm
 {
-    public bool isReturnDarkResource;
+    public bool HaveDarkResource;
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (gameObject.name == "DarkResource")
+            switch (gameObject.name)
             {
-                ItemObjectPool.ItemPoolInstance.bombPool.PushToPool(gameObject);
-                isReturnDarkResource = true;
-            }
-            else
-            {
-                ItemObjectPool.ItemPoolInstance.shieldPool.PushToPool(gameObject);
-                ItemObjectPool.ItemPoolInstance.darkResourcePool.PushToPool(gameObject);
+                case "DarkResource":
+                    ItemObjectPool.ItemPoolInstance.darkResourcePool.PushToPool(gameObject);
+                    HaveDarkResource = true;
+                    break;
+
+                case "Shield":
+                    ItemObjectPool.ItemPoolInstance.shieldPool.PushToPool(gameObject);
+
+                break;
+
+                case "Bomb":
+                    ItemObjectPool.ItemPoolInstance.bombPool.PushToPool(gameObject);
+                break;
+
+                default:
+                    Debug.Log("아이템의 이름이 CollisionItem 스크립트에 없습니다.");
+                    break;
+               
+
             }
         }
-
-        else
-            return;
     }
 }

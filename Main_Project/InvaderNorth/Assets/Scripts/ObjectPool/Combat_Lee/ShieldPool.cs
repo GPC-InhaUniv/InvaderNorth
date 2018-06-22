@@ -8,8 +8,9 @@ public class ShieldPool : MonoBehaviour
     private GameObject itemObject;
     [SerializeField]
     private GameObject Parent;
+    [SerializeField]
+    private Queue<GameObject> itemPool;
 
-    Queue<GameObject> itemPool;
     [SerializeField]
     private int MaxNumberOfShield;
 
@@ -26,8 +27,8 @@ public class ShieldPool : MonoBehaviour
         {
             GameObject item = Instantiate(itemObject);
             item.name = "Shield";
-            itemObject.SetActive(false);
-            itemPool.Enqueue(itemObject);
+            item.SetActive(false);
+            itemPool.Enqueue(item);
             item.transform.parent = Parent.transform;
         }
         DontDestroyOnLoad(Parent);

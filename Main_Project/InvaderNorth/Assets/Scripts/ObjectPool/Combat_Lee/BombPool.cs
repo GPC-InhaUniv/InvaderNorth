@@ -8,8 +8,10 @@ public class BombPool : MonoBehaviour
     private GameObject itemObject;
     [SerializeField]
     private GameObject Parent;
+    [SerializeField]
+    private Queue<GameObject> itemPool;
 
-    Queue<GameObject> itemPool;
+    [SerializeField]
     public int MaxNumberOfBomb;
     
     private void Start()
@@ -23,11 +25,11 @@ public class BombPool : MonoBehaviour
     {
         for (int i = 1; i <= MaxNumberOfBomb; i++ )
         {
-            itemObject = Instantiate(itemObject);
-            itemObject.name = "Bomb";
-            itemObject.SetActive(false);
-            itemPool.Enqueue(itemObject);
-            itemObject.transform.parent = Parent.transform;
+            GameObject item = Instantiate(itemObject);
+            item.name = "Bomb";
+            item.SetActive(false);
+            itemPool.Enqueue(item);
+            item.transform.parent = Parent.transform;
         }
         DontDestroyOnLoad(Parent);
     }

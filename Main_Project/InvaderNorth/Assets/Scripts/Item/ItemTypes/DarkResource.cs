@@ -17,10 +17,10 @@ public class DarkResource : MonoBehaviour
 
     private void Update()
     {
-        if(collisionItem.isReturnDarkResource == true)
+        if(collisionItem.HaveDarkResource == true)
         {
             DarkResourceAmount = AddAmount(DarkResourceCount, DarkResourceAmount);
-            collisionItem.isReturnDarkResource = false;
+            collisionItem.HaveDarkResource = false;
         }
     }
 
