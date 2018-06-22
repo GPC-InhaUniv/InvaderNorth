@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 public class UpgradeController : MonoBehaviour
 {
@@ -16,22 +17,19 @@ public class UpgradeController : MonoBehaviour
     [Header("Credit Imformation")]
     [SerializeField]
     private int gearUpgradeMaxLevel; //아이템의 Max Level 정보
+
     [SerializeField]
     private Text gearLevelText; //화면에서의 각 아이템 Level Text -> 0,1,2로 구별함
+
     [SerializeField]
     private Text upgradeCreditText; //화면에서의 ,업그레이드 비용 정보
+
     [SerializeField]
     private Text playerCreditText; //화면에서, 플레이어 레벨 리소스 Text 변경을 위함
 
     [Header("Gear Image")]
     [SerializeField]
-    private GameObject imageChanged1;
-    [SerializeField]
-    private GameObject imageChanged2;
-    [SerializeField]
-    private GameObject imageChanged3;
-    [SerializeField]
-    private GameObject imageChanged4;
+    private GameObject[] levelImages;
 
     private int[] changedConst = new int[4];
 
@@ -117,22 +115,22 @@ public class UpgradeController : MonoBehaviour
     {
         if (playerGearLevel <= changedConst[0])
         {
-            imageChanged1.SetActive(true);
+            levelImages[0].SetActive(true);
         }
         else if (playerGearLevel <= changedConst[1])
         {
-            imageChanged2.SetActive(true);
-            imageChanged1.SetActive(false);
+            levelImages[1].SetActive(true);
+            levelImages[0].SetActive(false);
         }
         else if (playerGearLevel < changedConst[2])
         {
-            imageChanged3.SetActive(true);
-            imageChanged2.SetActive(false);
+            levelImages[1].SetActive(true);
+            levelImages[2].SetActive(false);
         }
         else if (playerGearLevel < changedConst[3])
         {
-            imageChanged4.SetActive(true);
-            imageChanged3.SetActive(false);
+            levelImages[4].SetActive(true);
+            levelImages[2].SetActive(false);
         }
     }
 
