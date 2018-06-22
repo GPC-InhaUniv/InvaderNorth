@@ -1,16 +1,14 @@
 fileFormatVersion: 2
 guid: bfa6ade49b9fcad4b8c6dccd6404626f
-timeCreated: 1529560849
+timeCreated: 1529648705
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - ExplosionRange: {instanceID: 0}
-  - BombExplosion: {instanceID: 0}
-  - Parent: {instanceID: 0}
-  - NormalEnemy: {instanceID: 0}
-  - NamedEnemy: {instanceID: 0}
-  - EnemyExplosion: {instanceID: 0}
+  - ExplosionRange: {fileID: 1265818304102196, guid: 23bc0847277fea64da4ef169d9e3ac74,
+      type: 2}
+  - BombExplosion: {fileID: 1003737388859198, guid: 52844074f907e584c8967fed738d5239,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

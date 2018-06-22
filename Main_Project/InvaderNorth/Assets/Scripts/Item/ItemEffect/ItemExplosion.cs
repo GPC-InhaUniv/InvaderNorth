@@ -4,12 +4,11 @@ using UnityEngine;
 //폭발효과
 public class ItemExplosion : ItemEffectType
 {
-
     [Header("BombExplosionObjects")]
     [SerializeField]
-    private GameObject ExplosionRange;
+    public GameObject ExplosionRange;
     [SerializeField]
-    private GameObject BombExplosion;
+    public GameObject BombExplosion;
    
     [Header("사용여부")]
     public bool isUsedItem;
@@ -18,25 +17,21 @@ public class ItemExplosion : ItemEffectType
 
     public float itemDamage;
     
-    private void Awake()
+    private void Start()
     {
         isUsedItem = false;
         itemDamage = 10;
         item = GetComponent<Item>();
         ExplosionRange = GetComponent<GameObject>();
-        ExplosionRange.SetActive(false);
+        //ExplosionRange.SetActive(false);
     }
     
     public override void ApplyTheEffect()
     {
         base.ApplyTheEffect();
-        if (Input.GetKeyDown(KeyCode.X))
+        if (HaveItem == true)
         {
-            if (HaveItem == true)
-            {
-                isUsedItem = true;
-                Explode(isUsedItem);
-            }
+            Explode(isUsedItem);
         }
     }
     
