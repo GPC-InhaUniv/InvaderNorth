@@ -38,7 +38,7 @@ public class EnemyController : MonoBehaviour {
 
     void OnEnable()                  //활성화 시 호출되는 함수.
     {
-        if(enemy != null)           //처음에는 실행 안되게
+;        if(enemy != null)           //처음에는 실행 안되게
         {
             StartCoroutine(Attack());
             StartCoroutine(Move());

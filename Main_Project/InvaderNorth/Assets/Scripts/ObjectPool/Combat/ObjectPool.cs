@@ -7,6 +7,7 @@ public class ObjectPool : MonoBehaviour {
     public PlayerBulletPool PlayerBulletPool;
     public EnemyBulletPool EnemyBulletPool;
     public EnemyPool EnemyPool;
+    public CreditPool CreditPool;
 
     private void Awake()
     {
@@ -24,6 +25,11 @@ public class ObjectPool : MonoBehaviour {
 
         if (EnemyPool == null)
             EnemyPool = GetComponent<EnemyPool>();
+
+        if (CreditPool == null)
+            CreditPool = GetComponent<CreditPool>();
+
+        DontDestroyOnLoad(gameObject);
     }
     
 }

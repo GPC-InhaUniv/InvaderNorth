@@ -148,9 +148,7 @@ public abstract class StageController : MonoBehaviour {
 
     void DestroyObjects()
     {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("ObjectPool");
-        for (int i = 0; i < 5; i++)
-            Destroy(gameObjects[i]);
+            Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
     }
 
 }

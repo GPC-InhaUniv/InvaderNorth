@@ -27,8 +27,6 @@ public class EnemyPool : MonoBehaviour {
                     temp.transform.parent = parent.transform;
                     enemyPoolList[0].Enqueue(temp);                    
                 }
-
-                DontDestroyOnLoad(parent);
                 break;
 
             case 1:           // 첫번째 스테이지
@@ -49,8 +47,6 @@ public class EnemyPool : MonoBehaviour {
                     enemyPoolList[1].Enqueue(Temp);
                 }
                  */
-
-                DontDestroyOnLoad(parent);
                 break;
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceResourcePool : MonoBehaviour {
+public class CreditPool : MonoBehaviour {
 
     [SerializeField]
     private int numberOfSpaceResourceCreation;
@@ -23,7 +23,6 @@ public class SpaceResourcePool : MonoBehaviour {
             spaceResourcePool.Enqueue(temp);
             temp.transform.parent = parent.transform;
         }
-        DontDestroyOnLoad(parent);
     }
 
 

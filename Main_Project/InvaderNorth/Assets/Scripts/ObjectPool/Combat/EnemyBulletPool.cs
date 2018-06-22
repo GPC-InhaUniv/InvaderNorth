@@ -21,7 +21,6 @@ public class EnemyBulletPool : MonoBehaviour {
             bulletPool.Enqueue(bullet);
             bullet.transform.parent = parent.transform;         
         }
-        DontDestroyOnLoad(parent);
     }
 
 

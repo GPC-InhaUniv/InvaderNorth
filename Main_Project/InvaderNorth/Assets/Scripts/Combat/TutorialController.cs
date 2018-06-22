@@ -15,6 +15,12 @@ public class TutorialController : StageController
     {
         yield return new WaitForSeconds(3);
         Destroy(tutorialSprite);
+        GameObject[] gameObjects = new GameObject[5] ;
+        for(int i = 0; i < 5; i ++)
+        {
+            gameObjects[i] = ObjectPool.ObjectPools.CreditPool.PopFromPool();
+            gameObjects[i].SetActive(true);
+        }
         while (true)
         {
             if (IsGameClear)
