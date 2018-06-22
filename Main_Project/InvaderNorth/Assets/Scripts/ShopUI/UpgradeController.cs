@@ -4,7 +4,7 @@ using System;
 
 public class UpgradeController : MonoBehaviour
 {
-    private int gearType; //Inspector에서 연결된, LevelText의 번호를 가져와 어떤 종류인지 확인하는 Level
+    private int gearSlot; //Inspector에서 연결된, LevelText의 번호를 가져와 어떤 종류인지 확인하는 Level
     private int playerGearLevel; //매니저에서 가져온 아이템이 어떤 종류인지 확인하고 넣어주는 아이템의 Level
     private int HadCredit; //플레이어가 갖고 있는 재화
     private int gearLevelPrice; // 아이템 레벨별 가격
@@ -28,16 +28,7 @@ public class UpgradeController : MonoBehaviour
 
     [Header("Gear Image")]
     [SerializeField]
-    private GameObject imageChanged1;
-
-    [SerializeField]
-    private GameObject imageChanged2;
-
-    [SerializeField]
-    private GameObject imageChanged3;
-
-    [SerializeField]
-    private GameObject imageChanged4;
+    private GameObject[] levelImages;
 
     private int[] changedConst = new int[4];
 
@@ -72,20 +63,20 @@ public class UpgradeController : MonoBehaviour
         UserInfo userInfo = new UserInfo();
         userInfo.UserLevelValue();
 
-        gearType = Int32.Parse(gearLevelText.text);
+        gearSlot = Int32.Parse(gearLevelText.text);
         HadCredit = userInfo.credit;
 
-        if (gearType == 0)
+        if (gearSlot == 0)
         {
             playerGearLevel = userInfo.hpLevel;
             gearUpgradeMaxLevel = UserInfo.maxHpLevel;
         }
-        else if (gearType == 1)
+        else if (gearSlot == 1)
         {
             playerGearLevel = userInfo.bulletLevel;
             gearUpgradeMaxLevel = UserInfo.maxBulletLevel;
         }
-        else if (gearType == 2)
+        else if (gearSlot == 2)
         {
             playerGearLevel = userInfo.critLevel;
             gearUpgradeMaxLevel = UserInfo.maxCritLevel;
@@ -130,22 +121,22 @@ public class UpgradeController : MonoBehaviour
     {
         if (playerGearLevel <= changedConst[0])
         {
-            imageChanged1.SetActive(true);
+            levelImages[0].SetActive(true);
         }
         else if (playerGearLevel <= changedConst[1])
         {
-            imageChanged2.SetActive(true);
-            imageChanged1.SetActive(false);
+            levelImages[1].SetActive(true);
+            levelImages[0].SetActive(false);
         }
         else if (playerGearLevel < changedConst[2])
         {
-            imageChanged3.SetActive(true);
-            imageChanged2.SetActive(false);
+            levelImages[2].SetActive(true);
+            levelImages[1].SetActive(false);
         }
         else if (playerGearLevel < changedConst[3])
         {
-            imageChanged4.SetActive(true);
-            imageChanged3.SetActive(false);
+            levelImages[3].SetActive(true);
+            levelImages[2].SetActive(false);
         }
     }
 
