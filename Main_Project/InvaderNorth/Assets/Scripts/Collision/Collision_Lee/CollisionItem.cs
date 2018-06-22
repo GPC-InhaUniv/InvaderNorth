@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class CollisionItem : CollisionForm
 {
-    public bool isReturnDarkResource;
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             if (gameObject.name == "DarkResource")
             {
-                ItemObjectPool.ItemPoolInstance.bombPool.PushToPool(gameObject);
-                isReturnDarkResource = true;
+                ObjectPool.ObjectPools.bombPool.PushToPool(gameObject);
             }
-            else
+            else if(gameObject.name == "Shield")
             {
-                ItemObjectPool.ItemPoolInstance.shieldPool.PushToPool(gameObject);
-                ItemObjectPool.ItemPoolInstance.darkResourcePool.PushToPool(gameObject);
+                ObjectPool.ObjectPools.shieldPool.PushToPool(gameObject);
+                ObjectPool.ObjectPools.CreditPool.PushToPool(gameObject);
             }
         }
 
