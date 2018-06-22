@@ -29,7 +29,6 @@ public class BombPool : MonoBehaviour
             itemPool.Enqueue(item);
             item.transform.parent = Parent.transform;
         }
-        DontDestroyOnLoad(Parent);
     }
 
     public GameObject PopFromPool()

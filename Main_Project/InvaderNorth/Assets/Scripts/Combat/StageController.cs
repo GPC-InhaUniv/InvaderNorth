@@ -151,7 +151,7 @@ public abstract class StageController : MonoBehaviour {
         Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
     }
 
-    public void OnClickedReStartButton()
+    public void OnClickedReStartButton()           //게임오버 재시작버튼클릭 시 씬 전환.
     {
         IsGameOver = false;
         IsGameClear = false;

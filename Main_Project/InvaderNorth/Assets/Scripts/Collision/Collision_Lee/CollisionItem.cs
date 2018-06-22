@@ -10,12 +10,12 @@ public class CollisionItem : CollisionForm
         {
             if (gameObject.name == "DarkResource")
             {
-                ObjectPool.ObjectPools.bombPool.PushToPool(gameObject);
+                ObjectPoolManager.ObjectPools.bombPool.PushToPool(gameObject);
             }
             else if(gameObject.name == "Shield")
             {
-                ObjectPool.ObjectPools.shieldPool.PushToPool(gameObject);
-                ObjectPool.ObjectPools.CreditPool.PushToPool(gameObject);
+                ObjectPoolManager.ObjectPools.shieldPool.PushToPool(gameObject);
+                ObjectPoolManager.ObjectPools.CreditPool.PushToPool(gameObject);
             }
         }
 

@@ -9,26 +9,26 @@ public class DestroyByBoundary : MonoBehaviour {
     {
         if (other.name == "PlayerBullet")
         {
-            ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
         }
         else if (other.name == "EnemyBullet")
         {
-            ObjectPool.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
         }
 
         else if(other.name == "Shield")
         {
-            ObjectPool.ObjectPools.shieldPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.shieldPool.PushToPool(other.gameObject);
         }
 
         else if (other.name == "Bomb")
         {
-            ObjectPool.ObjectPools.bombPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.bombPool.PushToPool(other.gameObject);
         }
         
         else
         {
-            ObjectPool.ObjectPools.EnemyPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(other.gameObject);
         }
     }
 }

@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class CreditMover : MonoBehaviour {
 
-    private float speed;
     private Rigidbody rigidbody;
     private GameObject player;
     private void Awake()
     {
-        speed = 1;
         player = GameObject.FindGameObjectWithTag("Player");
         rigidbody = GetComponent<Rigidbody>();
     }
