@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Collections.Generic;
 
-public class UpgradeController : MonoBehaviour
+public class UpgradeController : ShopStageView
 {
     private int gearType; //Inspector에서 연결된, LevelText의 번호를 가져와 어떤 종류인지 확인하는 Level
     private int playerGearLevel; //매니저에서 가져온 아이템이 어떤 종류인지 확인하고 넣어주는 아이템의 Level
@@ -15,9 +14,6 @@ public class UpgradeController : MonoBehaviour
     private Image upgradeButton; //Max 레벨 시 업그레이드 버튼 비활성화를 위함
 
     [Header("Credit Imformation")]
-    [SerializeField]
-    private int gearUpgradeMaxLevel; //아이템의 Max Level 정보
-
     [SerializeField]
     private Text gearLevelText; //화면에서의 각 아이템 Level Text -> 0,1,2로 구별함
 
@@ -31,50 +27,60 @@ public class UpgradeController : MonoBehaviour
     [SerializeField]
     private GameObject[] levelImages;
 
-    private int[] changedConst = new int[4];
+    private int[] changedConst = new int[4]; // gearLevel에 따른, 이미지
+
+    [SerializeField] //이거 데이터 매니저에서 가져와서 안쓸 수도 있음.
+    private int gearUpgradeMaxLevel; //아이템의 Max Level 정보
 
     //DataManager.datainstance 에 접근하면 사용 안함
     private struct UserInfo
     {
+        public const int maxHpLevel = 10;
+        public const int maxBulletLevel = 20;
+        public const int maxCritLevel = 20;
+
         public int hpLevel;
-        public int shotLevel;
-        public int criticalLevel;
-        public int PlayerCredit;
+        public int bulletLevel;
+        public int critLevel;
+        public int credit;
 
         public void UserLevelValue()
         {
             hpLevel = 6;
-            shotLevel = 0;
-            criticalLevel = 0;
-            PlayerCredit = 900000;
+            bulletLevel = 0;
+            critLevel = 0;
+            credit = 900000;
         }
     }
 
     private void Start()
     {
-        changedConst[0] = gearUpgradeMaxLevel - (gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5);
-        changedConst[1] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 2;
-        changedConst[2] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5;
-        changedConst[3] = gearUpgradeMaxLevel;
-
         UserInfo userInfo = new UserInfo();
         userInfo.UserLevelValue();
 
         gearType = Int32.Parse(gearLevelText.text);
-        HadCredit = userInfo.PlayerCredit;
+        HadCredit = userInfo.credit;
 
         if (gearType == 0)
         {
             playerGearLevel = userInfo.hpLevel;
+            gearUpgradeMaxLevel = UserInfo.maxHpLevel;
         }
         else if (gearType == 1)
         {
-            playerGearLevel = userInfo.shotLevel;
+            playerGearLevel = userInfo.bulletLevel;
+            gearUpgradeMaxLevel = UserInfo.maxBulletLevel;
         }
         else if (gearType == 2)
         {
-            playerGearLevel = userInfo.criticalLevel;
+            playerGearLevel = userInfo.critLevel;
+            gearUpgradeMaxLevel = UserInfo.maxCritLevel;
         }
+
+        changedConst[0] = gearUpgradeMaxLevel - (gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5);
+        changedConst[1] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 2;
+        changedConst[2] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5;
+        changedConst[3] = gearUpgradeMaxLevel;
 
         gearLevelText.text = playerGearLevel.ToString();
         playerCreditText.text = HadCredit.ToString();
@@ -84,7 +90,7 @@ public class UpgradeController : MonoBehaviour
         MaxLevel();
     }
 
-    public void ChangeGear()
+    public void OnChangeGear()
     {
         HadCredit = Int32.Parse(playerCreditText.text);
 
