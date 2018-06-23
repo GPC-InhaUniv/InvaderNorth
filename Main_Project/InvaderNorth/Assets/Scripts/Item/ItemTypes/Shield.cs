@@ -6,7 +6,7 @@ public class Shield : MonoBehaviour, IUseable
 {
     private void Awake()
     {
-
+       
     }
 
     public void ApplyTheEffect()

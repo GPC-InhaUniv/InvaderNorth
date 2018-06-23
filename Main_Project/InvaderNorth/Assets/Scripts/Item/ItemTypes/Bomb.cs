@@ -4,22 +4,34 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour, IUseable
 {
+    ItemExplosion itemExplosion;
+
     private void Awake()
     {
         
     }
-    
-    public void BeUsed()
+
+    private void Start()
     {
-        
+        itemExplosion = new ItemExplosion();
+        StartCoroutine(ExitItemEffect());
     }
 
-    
-    public void BeProducedIn()
+    private void FixedUpdate()
     {
-        
+        StartCoroutine(ExitItemEffect());
     }
 
+    IEnumerator ExitItemEffect()
+    {
+        itemExplosion.Explode();
+
+        yield return new WaitForSeconds(2);
+
+        //itemExplosion.explosionRange.SetActive(false);
+        //itemExplosion.bombExplosionFX.SetActive(false);
+
+    }
     public void ApplyTheEffect()
     {
     }
