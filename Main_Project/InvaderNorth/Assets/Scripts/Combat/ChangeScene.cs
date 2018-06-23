@@ -23,10 +23,10 @@ public class ChangeScene : MonoBehaviour {
 
         if (hasFirstStart == true)
         {
-             ao = SceneManager.LoadSceneAsync(4);
+             ao = SceneManager.LoadSceneAsync("TutorialScene");
         }else
         {
-             ao = SceneManager.LoadSceneAsync(5);
+             ao = SceneManager.LoadSceneAsync("CombatScene");
         }
         ao.allowSceneActivation = false;
         

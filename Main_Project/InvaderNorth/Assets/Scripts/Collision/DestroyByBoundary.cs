@@ -7,28 +7,53 @@ public class DestroyByBoundary : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.name == "PlayerBullet")
+        switch(other.name)
         {
-            ObjectPool.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+            case "Credit":
+                return;
+
+            case "PlayerBullet" :
+                ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+                break;
+
+            case "EnemyBullet" :
+                ObjectPoolManager.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
+                break;
+
+            case "Shield" :
+                ObjectPoolManager.ObjectPools.shieldPool.PushToPool(other.gameObject);
+                break;
+                
+            case "Bomb":
+                ObjectPoolManager.ObjectPools.bombPool.PushToPool(other.gameObject);
+                break;
+
+            default :
+                ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(other.gameObject);
+                break;
+        }
+        /*if (other.name == "PlayerBullet")
+        {
+            ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
         }
         else if (other.name == "EnemyBullet")
         {
-            ObjectPool.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
         }
 
         else if(other.name == "Shield")
         {
-            ObjectPool.ObjectPools.shieldPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.shieldPool.PushToPool(other.gameObject);
         }
 
         else if (other.name == "Bomb")
         {
-            ObjectPool.ObjectPools.bombPool.PushToPool(other.gameObject);
+            ObjectPoolManager.ObjectPools.bombPool.PushToPool(other.gameObject);
         }
         
         else
         {
-            ObjectPool.ObjectPools.EnemyPool.PushToPool(other.gameObject);
-        }
+            ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(other.gameObject);
+        }*/
     }
 }

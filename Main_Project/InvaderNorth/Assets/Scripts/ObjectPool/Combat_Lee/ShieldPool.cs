@@ -30,7 +30,7 @@ public class ShieldPool : MonoBehaviour
             itemPool.Enqueue(itemObject);
             item.transform.parent = Parent.transform;
         }
-        DontDestroyOnLoad(Parent);
+
     }
 
     public GameObject PopFromPool()

@@ -14,6 +14,8 @@ public class NamedEnemyCollision : MonoBehaviour
     [SerializeField]
     private int hp;
     [SerializeField]
+    private int creditAmount;
+    [SerializeField]
     private bool isBoss;
     private int maxHp;
 
@@ -51,9 +53,16 @@ public class NamedEnemyCollision : MonoBehaviour
 
         if (hp <= 0)
         {
-        StageController.SendScoreDelegate(scoreValue, isBoss);
-        gameObject.SetActive(false);
-        Instantiate(explosion, transform.position, transform.rotation);
+            GameObject temp;
+            for (int i = 0; i < creditAmount; i++)
+            {
+                temp = ObjectPoolManager.ObjectPools.CreditPool.PopFromPool();
+                temp.transform.position = transform.position;
+                temp.SetActive(true);
+            }
+            StageController.SendScoreDelegate(scoreValue, isBoss);
+            gameObject.SetActive(false);
+            Instantiate(explosion, transform.position, transform.rotation);
         }
     }
 }

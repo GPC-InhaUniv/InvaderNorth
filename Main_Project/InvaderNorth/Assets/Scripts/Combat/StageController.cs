@@ -50,7 +50,7 @@ public abstract class StageController : MonoBehaviour {
 
     void Start()
     {
-        playerLifePoint = 1;// DataManager.Datainstance.gameData.hpLevel;
+        playerLifePoint = 2;// DataManager.Datainstance.gameData.hpLevel;
         SendScoreDelegate = AddScore;
         SendCreditDelegate = AddCredit;
         DecreaseDelegate = HeartDecrease;
@@ -88,7 +88,7 @@ public abstract class StageController : MonoBehaviour {
         UpdateScore();
         if (isBoss)
         {
-            Clear();
+            Invoke("GameClear", 1f);
         }
     }
 
@@ -136,7 +136,7 @@ public abstract class StageController : MonoBehaviour {
         Debug.Log("GameOver");
     }
 
-    void Clear() //요부분이 클리어시 팝업 출력
+    void GameClear() //요부분이 클리어시 팝업 출력
     {
         gameClearPopup.SetActive(true);  
         gameClearPopup.transform.Find("Score Text").GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
@@ -151,7 +151,7 @@ public abstract class StageController : MonoBehaviour {
         Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
     }
 
-    public void OnClickedReStartButton()
+    public void OnClickedReStartButton()           //게임오버 재시작버튼클릭 시 씬 전환.
     {
         IsGameOver = false;
         IsGameClear = false;
