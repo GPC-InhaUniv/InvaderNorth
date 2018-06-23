@@ -41,6 +41,18 @@ public class StageManager : MonoBehaviour
             SceneManager.LoadSceneAsync((int)stageType);
             currentStage = stageType;
         }
+        else if (currentStage == StageType.ShopStage && stageType == StageType.LobbyStage ||
+                 currentStage == StageType.LobbyStage && stageType == StageType.ShopStage)
+        {
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync((int)stageType);
+            currentStage = stageType;
+
+            yield return loadOperation;
+
+            sceneChangedCallBack(stageType);
+
+        }
+
         else
         {
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);

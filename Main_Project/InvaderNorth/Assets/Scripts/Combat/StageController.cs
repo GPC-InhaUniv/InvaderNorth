@@ -81,6 +81,12 @@ public abstract class StageController : MonoBehaviour {
 
     protected abstract IEnumerator StagePrograss();
    
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <param name="ScoreNumber"></param>
+   /// <param name="isBoss"></param>
+
     void AddScore(int ScoreNumber, bool isBoss)
     {
         if(!IsGameClear && !IsGameOver)
