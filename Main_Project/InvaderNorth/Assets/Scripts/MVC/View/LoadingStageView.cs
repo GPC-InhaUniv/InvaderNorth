@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class LoadingStageView : MonoBehaviour {
+public class LoadingStageView : MonoBehaviour, IShowable {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [SerializeField]
+    private Slider slider;
+
+    public void ShowPopUp(PopUpType popUptype)
+    {
+
+    }
+
+    public void ShowInformation(GameData gameData)
+    {
+
+    }
 }

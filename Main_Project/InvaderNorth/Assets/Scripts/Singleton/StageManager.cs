@@ -12,7 +12,8 @@ public enum StageType
     ShopStage = 3,
     TutorialStage = 4,
     CombatStage = 5,
-    LoadingStage = 6
+    LoadingStage = 6,
+    CombatLoadingStage = 7
 }
 
 public class StageManager : MonoBehaviour
@@ -23,10 +24,7 @@ public class StageManager : MonoBehaviour
 
     public delegate void SceneChangedDelegate(StageType stageType);
     public SceneChangedDelegate sceneChangedCallBack;
-
-    public delegate void LoadStageDeleagate();
-
-
+    
     void Awake()
     {
         currentStage = StageType.IntroStage;
@@ -55,7 +53,15 @@ public class StageManager : MonoBehaviour
 
         else
         {
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);
+            AsyncOperation loadOperation;
+            if(stageType == StageType.LobbyStage)
+            {
+                loadOperation = SceneManager.LoadSceneAsync((int)StageType.LoadingStage);
+            }
+            else
+            {
+                loadOperation = SceneManager.LoadSceneAsync((int)StageType.CombatLoadingStage);
+            }
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)stageType);
             
             asyncOperation.allowSceneActivation = false;

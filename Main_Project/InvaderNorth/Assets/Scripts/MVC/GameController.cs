@@ -29,11 +29,11 @@ public class GameController : MonoBehaviour {
         }
         else if(stageType == StageType.TutorialStage)
         {
-            gameView = GameObject.Find("TutorialStageView").GetComponent<TutorialStageView>();
+            //gameView = GameObject.Find("TutorialStageView").GetComponent<TutorialStageView>();
         }
         else if(stageType == StageType.CombatStage)
         {
-            gameView = GameObject.Find("CombatStageView").GetComponent<CombatStageView>();
+            //gameView = GameObject.Find("CombatStageView").GetComponent<CombatStageView>();
         }
         else
         {
