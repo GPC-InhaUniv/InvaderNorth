@@ -46,7 +46,7 @@ public class UpgradeController : MonoBehaviour
 
         public void UserLevelValue()
         {
-            hpLevel = 6;
+            hpLevel = 0;
             bulletLevel = 0;
             critLevel = 0;
             credit = 900000;
