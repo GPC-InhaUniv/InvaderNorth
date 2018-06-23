@@ -88,13 +88,15 @@ public abstract class StageController : MonoBehaviour {
         UpdateScore();
         if (isBoss)
         {
-            Invoke("GameClear", 1f);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
+            Invoke("GameClear", 2f);
         }
     }
 
     void AddCredit()
     {
-        creditTotal++;
+        if (!IsGameClear)
+            creditTotal++;
         UpdateCredit();
     }
 
@@ -142,7 +144,6 @@ public abstract class StageController : MonoBehaviour {
         gameClearPopup.transform.Find("Score Text").GetComponent<Text>().text = "획득 점수 -> " + scoreTotal.ToString();
         gameClearPopup.transform.Find("Credit Text").GetComponent<Text>().text = "획득 자원-> " + creditTotal.ToString();
         IsGameClear = true;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
         Debug.Log("GameClear");
     }
 

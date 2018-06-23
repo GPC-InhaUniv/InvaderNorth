@@ -14,7 +14,6 @@ public class BaseAttack : IBaseAttackable
 
     public void Attack(GameObject enemy)
     {
-        
         bullet = ObjectPoolManager.ObjectPools.EnemyBulletPool.PopFromPool();
         bullet.transform.position = enemy.transform.position;
         bullet.SetActive(true);
