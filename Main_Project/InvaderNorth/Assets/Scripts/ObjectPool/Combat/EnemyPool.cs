@@ -8,6 +8,7 @@ public class EnemyPool : MonoBehaviour {
     private int numberOfCommonEnemyCreation;
     [SerializeField]
     private GameObject parent;
+    [SerializeField]
     private int stage;                           //스테이지 구분(임시)
     private List<Queue<GameObject>> enemyPoolList;
     private GameObject temp;                   //임시 담기용
@@ -30,7 +31,8 @@ public class EnemyPool : MonoBehaviour {
                 break;
 
             case 1:           // 첫번째 스테이지
-                enemyPoolList.Add(new Queue<GameObject>());
+                for (int i = 0; i < 3; i ++)
+                    enemyPoolList.Add(new Queue<GameObject>());
                 commonEnemy = Resources.Load("Prefabs/NormalEnemy") as GameObject;
                 for (int i = 0; i < numberOfCommonEnemyCreation; i++)
                 {
@@ -38,15 +40,21 @@ public class EnemyPool : MonoBehaviour {
                     temp.transform.parent = parent.transform;
                     enemyPoolList[0].Enqueue(temp);
                 }
-                /* 여기다가 다른 몬스터 추가 
-                enemyPoolList.Add(new Queue<GameObject>());
-                for (int i = 0; i < NumberOfCommonEnemyCreation; i++)
+                commonEnemy = Resources.Load("Prefabs/MultiShotEnemy") as GameObject;
+                for (int i = 0; i < numberOfCommonEnemyCreation; i++)
                 {
-                    Temp = Instantiate(commonEnemy);
-                    Temp.transform.parent = Parent.transform;
-                    enemyPoolList[1].Enqueue(Temp);
+                    temp = Instantiate(commonEnemy);
+                    temp.transform.parent = parent.transform;
+                    enemyPoolList[1].Enqueue(temp);
                 }
-                 */
+                commonEnemy = Resources.Load("Prefabs/HorizontalMovingEnemy") as GameObject;
+                for (int i = 0; i < numberOfCommonEnemyCreation; i++)
+                {
+                    temp = Instantiate(commonEnemy);
+                    temp.transform.parent = parent.transform;
+                    enemyPoolList[2].Enqueue(temp);
+                }
+
                 break;
         }
     }

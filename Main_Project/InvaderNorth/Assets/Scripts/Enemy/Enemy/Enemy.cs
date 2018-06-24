@@ -4,24 +4,26 @@ using UnityEngine;
 
 
 public class Enemy {
-    protected ISkillEnable skillEnable;
-    protected IBaseAttackable baseAttackable;
-    protected IMovable movable;
+    protected SkillUsing skill;
+    protected BaseAttack baseAttack;
+    protected Moving moving;
     protected float speed;
+    protected float bulletSpeed;
+    protected float skillBulletSpeed;
     
     public void Attack(GameObject enemy)
     {
-        baseAttackable.Attack(enemy);
+        baseAttack.Attack(enemy);
     }
 
     public void SkillUse(GameObject enemy)
     {
-        skillEnable.SkillUse(enemy);
+        skill.SkillUse(enemy);
     }
 
     public void Move(GameObject enemy)
     {
-        movable.Move(enemy);
+        moving.Move(enemy);
     }
 
 

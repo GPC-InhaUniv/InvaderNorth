@@ -11,13 +11,13 @@ public class TutorialController : StageController
     [SerializeField]
     private GameObject tutorialSprite;            // 초반부터 SetActive가 켜져있음.
 
-    protected override IEnumerator StagePrograss()
+    protected override IEnumerator StageProgress()
     {
         yield return new WaitForSeconds(3);
         Destroy(tutorialSprite);   // 요부분이 없애는 것.(한번밖에 안써서 아예 지워버리는 식으로 했습니다.)
         while (true)
         {
-            if (IsGameClear)
+            if (IsGameClear || IsGameOver)
                 break;
             if (scoreTotal >= 300 && hasBoss == false)
             {

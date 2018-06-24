@@ -26,7 +26,7 @@ public class ChangeScene : MonoBehaviour {
              ao = SceneManager.LoadSceneAsync("TutorialScene");
         }else
         {
-             ao = SceneManager.LoadSceneAsync("CombatScene");
+             ao = SceneManager.LoadSceneAsync("LevelOneScene");
         }
         ao.allowSceneActivation = false;
         

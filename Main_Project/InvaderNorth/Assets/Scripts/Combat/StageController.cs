@@ -76,10 +76,10 @@ public abstract class StageController : MonoBehaviour {
             }
         }
         UpdateScore();
-        StartCoroutine(StagePrograss());
+        StartCoroutine(StageProgress());
     }
 
-    protected abstract IEnumerator StagePrograss();
+    protected abstract IEnumerator StageProgress();
    
    /// <summary>
    /// 
@@ -168,6 +168,8 @@ public abstract class StageController : MonoBehaviour {
 
     public void OnClickedGameOverLobbyButton()     //게임오버 로비버튼클릭 시 씬 전환.
     {
+        IsGameOver = false;
+        IsGameClear = false;
         DestroyObjects();
         SceneManager.LoadScene("LobbyScene");
     }

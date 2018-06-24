@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageOneController : StageController
 {
-    protected override IEnumerator StagePrograss()
+    protected override IEnumerator StageProgress()
     {
         yield return null;
     }
