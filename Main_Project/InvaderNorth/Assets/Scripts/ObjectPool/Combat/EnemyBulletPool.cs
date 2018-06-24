@@ -32,7 +32,8 @@ public class EnemyBulletPool : MonoBehaviour {
     public void PushToPool(GameObject bullet)
     {
         bullet.SetActive(false);
-        bullet.transform.rotation = Quaternion.Euler(Vector3.zero);     
+        bullet.transform.rotation = Quaternion.Euler(Vector3.zero);
+        
         bulletPool.Enqueue(bullet);
     }
 

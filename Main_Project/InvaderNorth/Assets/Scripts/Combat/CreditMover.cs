@@ -10,6 +10,7 @@ public class CreditMover : MonoBehaviour {
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rigidbody = GetComponent<Rigidbody>();
+        
     }
 
     private void OnEnable()

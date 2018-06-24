@@ -12,21 +12,21 @@ public class NamedEnemyCollision : MonoBehaviour
     [SerializeField]
     private int scoreValue;
     [SerializeField]
-    private int hp;
+    private int healthPoint;
     [SerializeField]
     private int creditAmount;
     [SerializeField]
     private bool isBoss;
-    private int maxHp;
+    private int maxhealthPoint;
 
     void Awake()
     {
-        maxHp = hp;
+        maxhealthPoint = healthPoint;
     }
 
     void OnEnable()
     {
-        hp = maxHp;
+        healthPoint = maxhealthPoint;
     }
 
     void OnTriggerEnter(Collider other)
@@ -48,10 +48,10 @@ public class NamedEnemyCollision : MonoBehaviour
         else if(other.name == "PlayerBullet")
         {
             ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
-            hp--;
+            healthPoint--;
         }
 
-        if (hp <= 0)
+        if (healthPoint <= 0)
         {
             GameObject temp;
             for (int i = 0; i < creditAmount; i++)
@@ -70,9 +70,9 @@ public class NamedEnemyCollision : MonoBehaviour
         }
     }
 
-    public int GetHpPoint()
+    public int getHealthPoint()
     {
-        return hp;
+        return healthPoint;
     }
 }
 

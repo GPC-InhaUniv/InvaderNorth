@@ -41,4 +41,9 @@ public class FirstBoss
         bossState.Move(boss);
     }
 
+
+    public void SkillUse(GameObject boss)
+    {
+        bossState.SkillShot(boss);
+    }
 }

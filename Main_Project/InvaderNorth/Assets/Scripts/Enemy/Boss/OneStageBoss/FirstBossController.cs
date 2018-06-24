@@ -5,41 +5,71 @@ using UnityEngine;
 public class FirstBossController : MonoBehaviour {
     [SerializeField]
     private float attackCoolTime;
-    private float Timer;
+    private int maxBossHealthPoint;
+    private float stateHandleNum;
     private FirstBoss boss;
     private Rigidbody rigidbody;
     
 
     NamedEnemyCollision namedEnemyCollision;
-	void Start ()
-    {
+	private void Start ()
+    {       
         namedEnemyCollision = GetComponent<NamedEnemyCollision>();
+        maxBossHealthPoint = namedEnemyCollision.getHealthPoint();
         rigidbody = GetComponent<Rigidbody>();
         boss = new FirstBoss(new NormalState(rigidbody), rigidbody);
         StartCoroutine(Attack());
-	}
-	
+        StartCoroutine(Move());  
+
+    }
+
+    private void Update()
+    {
+        if (namedEnemyCollision.getHealthPoint() <= maxBossHealthPoint * 2/3 && stateHandleNum == 0)
+        {
+            boss.HandleState("AnnoyedState");
+            stateHandleNum++;
+            StartCoroutine(SkillOne());
+        }
+        else if(namedEnemyCollision.getHealthPoint() <= maxBossHealthPoint  / 3 && stateHandleNum == 1)
+        {
+            boss.HandleState("AngerState");
+            attackCoolTime -= 0.2f;
+            stateHandleNum++;
+        }
+
+    }
+
     IEnumerator Attack()
     {
-        Debug.Log("start");
+        yield return new WaitForSeconds(2);
         while(true)
         {
             boss.Attack(gameObject);
             yield return new WaitForSeconds(attackCoolTime);
-            if (transform.position.z <= 12)
-            {
-                Debug.Log("break");
-                break;
-            }
         }
-        yield return StartCoroutine(SkillOne());
+    }
+    
+    IEnumerator Move()
+    {
+        while (true)
+        {
+            boss.Move(gameObject);
+            yield return null;
+        }
     }
 
     IEnumerator SkillOne()
     {
-        Debug.Log("SkillOne");
         yield return new WaitForSeconds(1);
-        Debug.Log("SkillOneeee");
+        while(true)
+        {
+            boss.SkillUse(gameObject);
+            yield return new WaitForSeconds(1f);
+            if (namedEnemyCollision.getHealthPoint() <= maxBossHealthPoint / 3)
+                break;
+        }
+        yield return null;
     }
 
     IEnumerator PatternThree()
