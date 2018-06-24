@@ -2,37 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour, IUseable
+public class Bomb : Item
 {
-    ItemExplosion itemExplosion;
+    public ItemExplosion itemExplosion;
+    public GameObject Player;
 
-    private void Awake()
+    private void OnEnable()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    public void Start()
     {
         
     }
+    
+    
 
-    private void Start()
+    public void ExertAnEffect()
     {
-        itemExplosion = new ItemExplosion();
-        StartCoroutine(ExitItemEffect());
+        itemExplosion.ExertAnEffect(Player);
     }
 
-    private void FixedUpdate()
+    public void StopTheEffect()
     {
-        StartCoroutine(ExitItemEffect());
-    }
-
-    IEnumerator ExitItemEffect()
-    {
-        itemExplosion.Explode();
-
-        yield return new WaitForSeconds(2);
-
-        //itemExplosion.explosionRange.SetActive(false);
-        //itemExplosion.bombExplosionFX.SetActive(false);
-
-    }
-    public void ApplyTheEffect()
-    {
+        itemExplosion.StopTheEffect();
     }
 }
