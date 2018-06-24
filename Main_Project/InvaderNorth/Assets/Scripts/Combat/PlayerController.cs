@@ -164,4 +164,17 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(LastMove());
     }
 
+    //이신재 아이템충돌 테스트
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Item"))
+        {
+            if(other.name == "Bomb")
+            {
+
+                ItemController.SendItemDelegate(other.gameObject.name);
+            }
+        }
+    }
+
 }

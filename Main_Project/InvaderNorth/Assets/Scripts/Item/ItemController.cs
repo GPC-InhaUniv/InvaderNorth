@@ -2,8 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EffectType
+{
+    Explosion,
+    Barrier
+};
+
 public class ItemController : MonoBehaviour
 {
+    public EffectType ItemEffectType;
+
+    [Header("Item")]
+    public GameObject ItemObject;
+    public GameObject ItemObjectFX;
+    public GameObject Player;
+
     [Header("InventoryImage")]
     [SerializeField]
     private GameObject ShieldImage;
@@ -12,7 +25,7 @@ public class ItemController : MonoBehaviour
     [SerializeField]
     private GameObject ItemInventoryImage;
 
-    private Bomb bomb;
+    private Item item;
 
     private bool haveShieldInInventory;
     private bool haveBombInInventory;
@@ -29,16 +42,26 @@ public class ItemController : MonoBehaviour
     
     private void Awake()
     {
-        bomb = GetComponent<Bomb>();
-
         ShieldImage.SetActive(false);
         BombImage.SetActive(false);
         ItemInventoryImage.SetActive(true);
 
         SendItemDelegate += PushToInventory;
         SendUseItemDelegate += InputItemButton;
-        SendStartEffectDelegate += StartTheEffect; 
+        SendStartEffectDelegate += StartTheEffect;
 
+        GameObject Item = Instantiate(ItemObject);
+        GameObject ItemFX = Instantiate(ItemObjectFX);
+        Player = GetComponent<GameObject>();
+
+        switch(ItemEffectType)
+        {
+            case EffectType.Explosion:
+                item = new Bomb(Player, ItemFX, Item);
+                break;
+            case EffectType.Barrier:
+                break;
+        }
     }
 
     private void Update()
@@ -62,7 +85,7 @@ public class ItemController : MonoBehaviour
                     ItemInventoryImage.SetActive(false);
                     break;
 
-                case "Boomb":
+                case "Bomb":
                     BombImage.SetActive(true);
                     haveBombInInventory = true;
                     ItemInventoryImage.SetActive(false);
@@ -82,7 +105,8 @@ public class ItemController : MonoBehaviour
     {
         if (haveBombInInventory == true)
         {
-            bomb.LeaveBombFromPlayer();
+            
+            item.LeaveItemFromPlayer();
             BombImage.SetActive(false);
             haveBombInInventory = false;
             ItemInventoryImage.SetActive(true);
@@ -107,10 +131,10 @@ public class ItemController : MonoBehaviour
     //폭탄의 폭발효과 라이프사이클
     IEnumerator ItemEffectLifeCycle()
     {
-        bomb.StartTheEffect();
+        item.StartTheEffect();
 
         yield return new WaitForSeconds(3);
 
-        bomb.StopTheEffect();
+        item.StopTheEffect();
     }
 }

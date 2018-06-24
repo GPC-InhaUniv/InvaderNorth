@@ -19,7 +19,7 @@ public class NormalEnemyCollision : MonoBehaviour {
         {
             return;
         }
-        
+
         if (other.tag == "Player")
         {
             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
@@ -30,7 +30,14 @@ public class NormalEnemyCollision : MonoBehaviour {
             StageController.DecreaseDelegate(player);
         }
         else if (other.name == "PlayerBullet")
+        {
             ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+
+            GameObject Item;
+            Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
+            Item.transform.position = gameObject.transform.position;
+            Item.SetActive(true);
+        }
         else
             return;
 
@@ -44,6 +51,8 @@ public class NormalEnemyCollision : MonoBehaviour {
         StageController.SendScoreDelegate(scoreValue, false);
         ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
         Instantiate(explosion, transform.position, transform.rotation);
+
+
     }
 }
 

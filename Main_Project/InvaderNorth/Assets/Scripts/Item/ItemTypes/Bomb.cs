@@ -4,28 +4,10 @@ using UnityEngine;
 
 public class Bomb : Item
 {
-    public ItemExplosion itemExplosion;
-    public GameObject Player;
     
-    private void Start()
+    public Bomb(GameObject Player, GameObject BombObject, GameObject BombExplosionRange)
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
-        //gameObject.transform.parent = Player.transform;
-        itemExplosion = GetComponent<ItemExplosion>();
-    }
-
-    public void LeaveBombFromPlayer()
-    {
-        itemExplosion.LeaveBombFromPlayer(Player);
-    }
-
-    public void StartTheEffect()
-    {
-        itemExplosion.StartTheEffect(gameObject);
-    }
-
-    public void StopTheEffect()
-    {
-        itemExplosion.StopTheEffect();
+        itemType = new ItemExplosion(BombObject, BombExplosionRange);
+        
     }
 }

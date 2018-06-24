@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ItemType
+public abstract class ItemEffect
 {
-    void LeaveBombFromPlayer(GameObject gameObject);
+    protected GameObject Player;
+    protected GameObject BombObject;
+    protected GameObject BombExplosionRange;
 
-    void StartTheEffect(GameObject BombObject);
+    public abstract void LeaveItemFromPlayer(GameObject player, GameObject bombObject, GameObject bombExplosion);
 
-    void StopTheEffect();
+    public abstract void StartTheEffect(GameObject BombObject, GameObject bombExplosionRange);
+
+    public abstract void StopTheEffect(GameObject bombExplosionRange);
 }
