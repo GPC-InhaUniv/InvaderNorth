@@ -35,7 +35,7 @@ public class ItemController : MonoBehaviour
         SendItemDelegate += PushToInventory;
         SendUseItemDelegate += InputItemButton;
 
-        StartCoroutine(ItemEffectLifeCycle());
+        //StartCoroutine(ItemEffectLifeCycle());
 
     }
     
