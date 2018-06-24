@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     [SerializeField]
     private GameModel gameModel;
     private IShowable gameView;
+    private StageType targetStage;
 
     private void Start()
     {
@@ -97,5 +98,17 @@ public class GameController : MonoBehaviour {
     public void AccountNotCreadted()
     {
         gameView.ShowPopUp(PopUpType.SignUpExistingAccount);
+    }
+
+    public void CombatFinished(int credit, StageType stageType)
+    {
+        targetStage = stageType;
+        gameModel.renewDataCallBack = RenewDataFinished;
+        gameModel.RenewUserData(credit);
+    }
+
+    public void RenewDataFinished()
+    {
+        ChangeStage(targetStage);
     }
 }

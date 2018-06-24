@@ -19,6 +19,9 @@ public class GameModel : MonoBehaviour {
     public delegate void CreateFail();
     public CreateSuccess createFailCallBack;
 
+    public delegate void RenewData();
+    public RenewData renewDataCallBack;
+
     public void IsLoginDataExist(string id, string password)
     {
         DataManager.Datainstance.GetData(id, password);
@@ -52,5 +55,15 @@ public class GameModel : MonoBehaviour {
     public GameData GetGameData()
     {
         return DataManager.Datainstance.gameData;
+    }
+
+    public void RenewUserData(int credit)
+    {
+        DataManager.Datainstance.SetNewData(credit);
+    }
+
+    public void RenewSucceeded()
+    {
+        renewDataCallBack();
     }
 }

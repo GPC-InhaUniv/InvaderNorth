@@ -29,6 +29,13 @@ public class DataManager : MonoBehaviour
         gameDataLoader.MakeNewAccountInDB(id, password);
     }
 
+    public void SetNewData(int credit)
+    {
+        gameData.credit += credit;
+        gameDataLoader.renewDataCallback = RenewDataCallBack;
+        gameDataLoader.SetNewDataInDB(gameData.credit);
+    }
+
     public void DataCallback(GameData gameData, SignInProcessType loginProcessType)
     {
         if(gameData != null && loginProcessType == SignInProcessType.Success)
@@ -58,5 +65,10 @@ public class DataManager : MonoBehaviour
         {
             gameModel.CreateFailed();
         }
+    }
+
+    public void RenewDataCallBack()
+    {
+        gameModel.RenewSucceeded();
     }
 }

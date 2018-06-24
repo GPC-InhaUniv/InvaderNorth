@@ -24,8 +24,8 @@ public class StageManager : MonoBehaviour
 
     public delegate void SceneChangedDelegate(StageType stageType);
     public SceneChangedDelegate sceneChangedCallBack;
-    
-    void Awake()
+
+    private void Awake()
     {
         currentStage = StageType.IntroStage;
         stageInstance = this;
@@ -62,6 +62,7 @@ public class StageManager : MonoBehaviour
             {
                 loadOperation = SceneManager.LoadSceneAsync((int)StageType.CombatLoadingStage);
             }
+
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)stageType);
             
             asyncOperation.allowSceneActivation = false;

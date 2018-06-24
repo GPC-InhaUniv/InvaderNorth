@@ -40,6 +40,8 @@ public abstract class StageController : MonoBehaviour {
     private PlayerSpawnPosition playerSpawnPosition;
     [SerializeField]
     protected Vector3 spawnValues;
+    [SerializeField]
+    private GameController gameController;
 
     protected GameObject enemy;
     protected List<GameObject> playerLifeList;
@@ -52,7 +54,8 @@ public abstract class StageController : MonoBehaviour {
 
     void Start()
     {
-        playerLifePoint = 2;// DataManager.Datainstance.gameData.hpLevel;
+        playerLifePoint = DataManager.Datainstance.gameData.hpLevel + 2;
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
         SendScoreDelegate = AddScore;
         SendCreditDelegate = AddCredit;
         DecreaseDelegate = HeartDecrease;
@@ -160,23 +163,23 @@ public abstract class StageController : MonoBehaviour {
         Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
     }
 
-    public void OnClickedReStartButton()           //게임오버 재시작버튼클릭 시 씬 전환.
+    public void OnClickedReStartButton()
     {
         StopCoroutine(stageCoroutine);
         IsGameOver = false;
         IsGameClear = false;
         DestroyObjects();
-        StartCoroutine(StageManager.stageInstance.ChangeStageCoroutine(StageType.CombatStage));
+        gameController.CombatFinished(creditTotal, StageType.TutorialStage);
         Debug.Log("스테이지 전환  1");
     }
 
-    public void OnClickedGameOverLobbyButton()     //게임오버 로비버튼클릭 시 씬 전환.
+    public void OnClickedGameOverLobbyButton()
     {
         StopCoroutine(stageCoroutine);
         IsGameOver = false;
         IsGameClear = false;
         DestroyObjects();
-        StartCoroutine(StageManager.stageInstance.ChangeStageCoroutine(StageType.LobbyStage));
+        gameController.CombatFinished(creditTotal, StageType.LobbyStage);
         Debug.Log("스테이지 전환  2");
     }
 

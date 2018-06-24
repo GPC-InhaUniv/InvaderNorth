@@ -26,6 +26,9 @@ public class GameDataLoader : MonoBehaviour {
     public delegate void CreateAccountCallBack(bool IsCreated);
     public CreateAccountCallBack createAccountCallBack;
 
+    public delegate void RenewDataCallback();
+    public RenewDataCallback renewDataCallback;
+
     private void Start()
     {
         DontDestroyOnLoad(this);
@@ -137,7 +140,45 @@ public class GameDataLoader : MonoBehaviour {
                 return;
             }
         });
-        
+    }
+
+    public void SetNewDataInDB(int credit)
+    {
+        FirebaseDatabase.DefaultInstance.GetReference("users").GetValueAsync().ContinueWith(
+        searchtask =>
+        {
+            if (searchtask.IsFaulted)
+            {
+                Debug.Log("데이터베이스에 접근할 수 없습니다");
+                return;
+            }
+            else if (searchtask.IsCompleted)
+            {
+                string userId = DataManager.Datainstance.gameData.id;
+                DataSnapshot snapshot = searchtask.Result;
+                foreach(DataSnapshot datasnapshot in snapshot.Children)
+                {
+                    if (userId.Equals(datasnapshot.Key))
+                    {
+                        reference.Child("users").Child(userId).Child("credit").SetValueAsync(credit).ContinueWith(
+                        renewingTask =>
+                        {
+                            if (renewingTask.IsFaulted)
+                            {
+                                Debug.Log("데이터베이스에 접근할 수 없습니다");
+                                return;
+                            }
+                            else if (renewingTask.IsCompleted)
+                            {
+                                Debug.Log("데이터 갱신 성공");
+                                renewDataCallback();
+                                return;
+                            }
+                        });
+                    }
+                }
+            }
+        });
     }
 }
 
