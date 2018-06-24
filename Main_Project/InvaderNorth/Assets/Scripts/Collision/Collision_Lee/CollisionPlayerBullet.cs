@@ -8,9 +8,18 @@ public class CollisionPlayerBullet : CollisionForm
     {
         if (other.CompareTag("Enemy"))
         {
-            ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+            if (gameObject.name == "PlayerBullet")
+            {
+                ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+            }
+
+            else if (gameObject.name == "BombObject")
+            {
+                ItemController.SendStartEffectDelegate();
+            }
         }
-        else
+        
+        
             return;
     }
 }

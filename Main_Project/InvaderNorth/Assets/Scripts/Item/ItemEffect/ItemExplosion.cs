@@ -4,47 +4,42 @@ using UnityEngine;
 //폭발효과
 public class ItemExplosion : ItemType
 {
-    public GameObject explosionRange;
-    public GameObject bombExplosionFX;
+    public GameObject BombObject;
+    public GameObject BombExplosionRange;
 
-    //public delegate void SendPlayerPosition(GameObject player);
-    //public static SendPlayerPosition sendPosition;
-    //public delegate void SendStopEffect();
-    //public static SendStopEffect sendStopEffect;
-
+    //public delegate void SendStartEffectPosition(GameObject ParentObject);
+    //public static SendStartEffectPosition StartEffectPosition;
     
     public ItemExplosion()
     {
-        explosionRange = Resources.Load("Prefabs/BombExplosion") as GameObject;
-        explosionRange.SetActive(true);
+        BombObject = Resources.Load("Prefabs/BombObject") as GameObject;
+        BombObject.SetActive(true);
 
-        bombExplosionFX = Resources.Load("Prefabs/VFX/Explosions/BombExplosionFX") as GameObject;
-        bombExplosionFX.SetActive(true);
-        //sendPosition += ExertAnEffect;
-        //sendStopEffect += StopTheEffect;
+        BombExplosionRange = Resources.Load("Prefabs/VFX/Explosions/BombExplosionFX") as GameObject;
+        BombExplosionRange.SetActive(true);
+
+       //StartEffectPosition += StartTheEffect;
     }
     
-    
-    public void ExertAnEffect(GameObject player)
+    public void LeaveBombFromPlayer(GameObject player)
     {
         Vector3 position = player.transform.position;
-        explosionRange.transform.position = player.transform.position;
-        bombExplosionFX.transform.position = player.transform.position;
+        BombObject.transform.position = player.transform.position;
+        BombExplosionRange.transform.position = player.transform.position;
 
-        explosionRange.SetActive(true);
-        bombExplosionFX.SetActive(true);
-        
+        BombObject.SetActive(true);
+    }
+
+    public void StartTheEffect(GameObject BombObject)
+    {
+        BombExplosionRange.transform.parent = BombObject.transform;
+
+        BombObject.SetActive(false);
+        BombExplosionRange.SetActive(true);
     }
 
     public void StopTheEffect()
     {
-        explosionRange.SetActive(false);
-        bombExplosionFX.SetActive(false);
+        BombExplosionRange.SetActive(false);
     }
-
-    
-
-    
-
-
 }

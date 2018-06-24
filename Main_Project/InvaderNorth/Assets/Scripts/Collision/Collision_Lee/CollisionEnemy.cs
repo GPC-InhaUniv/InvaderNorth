@@ -23,7 +23,22 @@ public class CollisionEnemy : CollisionForm
 
         else if (other.CompareTag("PlayerBullet"))
         {
-            Hp--;
+            switch(other.gameObject.name)
+            {
+                case "PlayerBullet":
+                    Hp--;
+                    break;
+
+                case "BombObject":
+                    ItemController.SendStartEffectDelegate();
+                    Hp = Hp - 10;
+                    break;
+
+                case "BombExplosionFX":
+                    Hp = Hp - 5;
+                    break;
+            }
+            
         }
 
         if (Hp <= 0)
@@ -31,6 +46,9 @@ public class CollisionEnemy : CollisionForm
             StageController.SendScoreDelegate(ScoreValue, IsBoss);
             ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
             Instantiate(Explosion, transform.position, transform.rotation);
+
+            ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
+           
         }
 
         else

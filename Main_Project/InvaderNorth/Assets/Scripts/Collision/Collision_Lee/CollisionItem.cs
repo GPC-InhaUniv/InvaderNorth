@@ -6,7 +6,7 @@ public class CollisionItem : CollisionForm
 {
     protected override void OnTriggerEnter(Collider other)
     {
-        
+        //폭탄 충돌 시 폭발 구현
         if (other.CompareTag("Item"))
         {
             
@@ -25,6 +25,7 @@ public class CollisionItem : CollisionForm
                 case "Bomb":
                     ObjectPoolManager.ObjectPools.bombPool.PushToPool(other.gameObject);
                     ItemController.SendItemDelegate(other.gameObject.name);
+                    
 
                     break;
             } 

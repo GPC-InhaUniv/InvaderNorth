@@ -12,7 +12,7 @@ public class ItemController : MonoBehaviour
     [SerializeField]
     private GameObject ItemInventoryImage;
 
-    public Bomb bomb;
+    private Bomb bomb;
 
     private bool haveShieldInInventory;
     private bool haveBombInInventory;
@@ -23,7 +23,9 @@ public class ItemController : MonoBehaviour
 
     public delegate void SendUseItem();
     public static SendUseItem SendUseItemDelegate;
-    
+
+    public delegate void SendStartEffect();
+    public static SendStartEffect SendStartEffectDelegate;
     
     private void Awake()
     {
@@ -31,15 +33,23 @@ public class ItemController : MonoBehaviour
 
         ShieldImage.SetActive(false);
         BombImage.SetActive(false);
+        ItemInventoryImage.SetActive(true);
 
         SendItemDelegate += PushToInventory;
         SendUseItemDelegate += InputItemButton;
-
-        //StartCoroutine(ItemEffectLifeCycle());
+        SendStartEffectDelegate += StartTheEffect; 
 
     }
-    
-    
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            InputItemButton();
+        }
+    }
+
+
     public void PushToInventory(string ItemName)
     {
         if ((haveShieldInInventory == false) || (haveBombInInventory == false))
@@ -49,11 +59,13 @@ public class ItemController : MonoBehaviour
                 case "Shield":
                     ShieldImage.SetActive(true);
                     haveShieldInInventory = true;
+                    ItemInventoryImage.SetActive(false);
                     break;
 
                 case "Boomb":
                     BombImage.SetActive(true);
                     haveBombInInventory = true;
+                    ItemInventoryImage.SetActive(false);
                     break;
 
                 default:
@@ -70,29 +82,35 @@ public class ItemController : MonoBehaviour
     {
         if (haveBombInInventory == true)
         {
+            bomb.LeaveBombFromPlayer();
             BombImage.SetActive(false);
             haveBombInInventory = false;
+            ItemInventoryImage.SetActive(true);
         }
 
         else if (haveShieldInInventory == true)
         {
             ShieldImage.SetActive(false);
             haveShieldInInventory = false;
+            ItemInventoryImage.SetActive(true);
         }
 
         else
             Debug.Log("현재 소유중인 아이템이 없습니다.");
     }
-    
-    //IEnumerator ItemEffectLifeCycle()
-    //{
-    //    //*******************************
-    //    bomb.ExertAnEffect();
 
-    //    yield return new WaitForSeconds(2);
+    public void StartTheEffect()
+    {
+        StartCoroutine(ItemEffectLifeCycle());
+    }
 
-    //    bomb.StopTheEffect();
-    //}
-    
-    
+    //폭탄의 폭발효과 라이프사이클
+    IEnumerator ItemEffectLifeCycle()
+    {
+        bomb.StartTheEffect();
+
+        yield return new WaitForSeconds(3);
+
+        bomb.StopTheEffect();
+    }
 }

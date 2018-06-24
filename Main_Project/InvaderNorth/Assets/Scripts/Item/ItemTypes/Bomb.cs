@@ -6,22 +6,22 @@ public class Bomb : Item
 {
     public ItemExplosion itemExplosion;
     public GameObject Player;
-
-    private void OnEnable()
+    
+    private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        //gameObject.transform.parent = Player.transform;
+        itemExplosion = GetComponent<ItemExplosion>();
     }
 
-    public void Start()
+    public void LeaveBombFromPlayer()
     {
-        
+        itemExplosion.LeaveBombFromPlayer(Player);
     }
-    
-    
 
-    public void ExertAnEffect()
+    public void StartTheEffect()
     {
-        itemExplosion.ExertAnEffect(Player);
+        itemExplosion.StartTheEffect(gameObject);
     }
 
     public void StopTheEffect()

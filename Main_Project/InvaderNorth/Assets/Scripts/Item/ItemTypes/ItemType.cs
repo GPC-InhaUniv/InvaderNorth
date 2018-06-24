@@ -4,7 +4,9 @@ using UnityEngine;
 
 public interface ItemType
 {
-    void ExertAnEffect(GameObject gameObject);
+    void LeaveBombFromPlayer(GameObject gameObject);
+
+    void StartTheEffect(GameObject BombObject);
 
     void StopTheEffect();
 }
