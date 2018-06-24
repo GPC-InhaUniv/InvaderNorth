@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ShopStageView : MonoBehaviour, IShowable
 {
+
     [Header("01.PlayerLevelController")]
     [Header("UpgradeButton")]
     [SerializeField]
