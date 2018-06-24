@@ -65,5 +65,10 @@ public class NamedEnemyCollision : MonoBehaviour
             Instantiate(explosion, transform.position, transform.rotation);
         }
     }
+
+    public int GetHpPoint()
+    {
+        return hp;
+    }
 }
 

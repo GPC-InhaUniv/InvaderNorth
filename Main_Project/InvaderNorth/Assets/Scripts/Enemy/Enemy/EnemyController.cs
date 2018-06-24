@@ -9,6 +9,7 @@ public enum EnemyName     //몬스터를 구별하여 패턴을 지정하기 위
     HorizontalMovingEnemy,
     MultiShotEnemy,   
     FirstNamed,
+    SecondNamed,
 }
 
 public class EnemyController : MonoBehaviour {
@@ -48,40 +49,43 @@ public class EnemyController : MonoBehaviour {
                 enemy = new FirstNamed(GetComponent<Rigidbody>());
                 break;
 
-
-
+            case EnemyName.SecondNamed:
+                enemy = new SecondNamed(GetComponent<Rigidbody>());
+                break;
         }
-        StartCoroutine(Attack());
-        StartCoroutine(Move());
+        StartCoroutines();
     }
 
     void OnEnable()                  //활성화 시 호출되는 함수.
     {
 ;       if(enemy != null)           //처음에는 실행 안되게
         {
-            StartCoroutine(Attack());
-            StartCoroutine(Move());
+            StartCoroutines();
         }    
     }
 
     IEnumerator Attack()             //공격
     {
-        
         while (true)
         {
             enemy.Attack(gameObject);
-            shotAudio.Play();
-            yield return new WaitForSeconds(skillCoolTime);
-            if (skillCoolTime > 0)
-            {
-                enemy.SkillUse(gameObject);
-                shotAudio.Play();
-            }
+            shotAudio.Play();          
             yield return new WaitForSeconds(attackCoolTime);
         }
     }
 
-    
+    IEnumerator SkillUse()
+    {
+        yield return new WaitForSeconds(1);
+        while(true)
+        {
+            enemy.SkillUse(gameObject);
+            shotAudio.Play();
+            yield return new WaitForSeconds(skillCoolTime);
+        }
+        
+
+    }
 
     IEnumerator Move()             //이동
     {    
@@ -93,7 +97,14 @@ public class EnemyController : MonoBehaviour {
         
     }
 
-
+    public void StartCoroutines()
+    {
+        if (attackCoolTime != 0)
+            StartCoroutine(Attack());
+        if (skillCoolTime != 0)
+            StartCoroutine(SkillUse());
+        StartCoroutine(Move());
+    }
 
 
 

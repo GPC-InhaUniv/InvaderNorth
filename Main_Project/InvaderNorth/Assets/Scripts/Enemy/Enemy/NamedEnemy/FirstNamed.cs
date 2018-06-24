@@ -12,6 +12,6 @@ public class FirstNamed : Enemy
         skillBulletSpeed = 5;
         skill = new RoundShot(skillBulletSpeed);
         baseAttack = new NoBaseAttack();
-        moving = new NamedMoving(speed, EnemyRigidbody);
+        moving = new FirstNamedMoving(speed, EnemyRigidbody);
     }
 }

@@ -84,13 +84,34 @@ public class HorizontalMoving : Moving
     }
 }
 
+public class FirstNamedMoving : Moving
+{
+
+    public FirstNamedMoving(float speed, Rigidbody enemyRigidbody)
+    {
+        this.speed = speed;
+        this.enemyRigidbody = enemyRigidbody;
+    }
+
+    public override void Move(GameObject enemy)
+    {
+        if (enemy.transform.position.z > 11)
+        {
+            enemyRigidbody.velocity = enemy.transform.forward * speed;
+        }
+        else
+            enemyRigidbody.velocity = Vector3.zero;
+        //Debug.Log("Moving");
+    }
+}
 
 
-public class NamedMoving : Moving
+
+public class SecondNamedMoving : Moving
 {
     private bool isFrist = true;
 
-    public NamedMoving(float speed, Rigidbody enemyRigidbody)
+    public SecondNamedMoving(float speed, Rigidbody enemyRigidbody)
     {
         this.speed = speed;
         this.enemyRigidbody = enemyRigidbody;

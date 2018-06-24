@@ -55,7 +55,7 @@ public class RoundShot : SkillUsing
             {
                 bullet = ObjectPoolManager.ObjectPools.EnemyBulletPool.PopFromPool();
                 bullet.transform.position = spawnPosition;
-                bullet.transform.Rotate(new Vector3(0f, 360 * i / oneShoting - 45, 0f));
+                bullet.transform.Rotate(new Vector3(0f, 360 * i / oneShoting + 45 , 0f));
                 bullet.SetActive(true);
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * -bulletSpeed;
             }
@@ -66,4 +66,42 @@ public class RoundShot : SkillUsing
         //Debug.Log("MultiShot");
     }
 }
+
+public class GuidedShot : SkillUsing
+{
+    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    public GuidedShot(float bulletSpeed)
+    {
+        this.bulletSpeed = bulletSpeed;
+    }
+
+    public override void SkillUse(GameObject enemy)
+    {
+        Vector3 spawnPosition = new Vector3(enemy.transform.position.x, 0, enemy.transform.position.z);
+        for (int i = 0; i < 3; i++)
+        {
+            bullet = ObjectPoolManager.ObjectPools.EnemyBulletPool.PopFromPool();
+
+            if (i == 0)
+            {
+                bullet.transform.position = spawnPosition;
+            }
+            else if (i % 2 != 0)
+            {
+                spawnPosition.x += 1;
+                bullet.transform.position = spawnPosition;
+            }
+            else
+            {
+                spawnPosition.x -= 2;
+                bullet.transform.position = spawnPosition;
+            }
+            bullet.SetActive(true);
+            Vector3 direction = (player.transform.position - bullet.transform.position).normalized;
+            bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
+        }
+        
+    }
+}
+
 

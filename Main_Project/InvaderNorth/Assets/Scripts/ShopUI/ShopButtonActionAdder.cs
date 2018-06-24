@@ -15,6 +15,6 @@ public class ShopButtonActionAdder : MonoBehaviour {
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         buttonGotoLobby.onClick.AddListener(() => gameController.ChangeStage(StageType.LobbyStage));
-        buttonGotoCombat.onClick.AddListener(() => gameController.ChangeStage(StageType.TutorialStage));
+        buttonGotoCombat.onClick.AddListener(() => gameController.ChangeStage(StageType.CombatStage));
     }
 }

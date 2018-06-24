@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialBoss : Enemy
+public class SecondNamed : Enemy
 {
 
-    public TutorialBoss(Rigidbody EnemyRigidbody)
+    public SecondNamed(Rigidbody EnemyRigidbody)
     {
-        speed = 3;
+        speed = 5;
         bulletSpeed = 10;
         skillBulletSpeed = 20;
-        skill = new RoundShot(skillBulletSpeed);
-        baseAttack = new MultiAttack(bulletSpeed);
+        skill = new GuidedShot(skillBulletSpeed);
+        baseAttack = new MoreMultiAttack(bulletSpeed);
         moving = new SecondNamedMoving(speed, EnemyRigidbody);
     }
-
 }
