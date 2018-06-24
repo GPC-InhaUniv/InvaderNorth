@@ -35,7 +35,7 @@ public class ItemController : MonoBehaviour
     public static SendItemToInventory SendItemDelegate;
 
     public delegate void SendUseItem();
-    public static SendUseItem SendUseItemDelegate;
+    //public static SendUseItem SendUseItemDelegate;
 
     public delegate void SendStartEffect();
     public static SendStartEffect SendStartEffectDelegate;
@@ -47,7 +47,7 @@ public class ItemController : MonoBehaviour
         ItemInventoryImage.SetActive(true);
 
         SendItemDelegate += PushToInventory;
-        SendUseItemDelegate += InputItemButton;
+        //SendUseItemDelegate += InputItemButton;
         SendStartEffectDelegate += StartTheEffect;
 
         GameObject Item = Instantiate(ItemObject);
