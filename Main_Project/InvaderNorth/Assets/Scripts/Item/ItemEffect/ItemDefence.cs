@@ -2,24 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 //쉴드오브젝트
-public class ItemDefence : ItemEffectType
+public class ItemDefence
 {
-    private bool receiveDamage;
-    private float effectCountiuanceTime;
-    //private GameObject barrier;
-    //private GameObject barrierFX;
-    
-    private ItemDefence()
-    {
-        //barrier = Resources.Load("Prefab/Barrier") as GameObject;
-        //barrierFX = Resources.Load("Prefab/BarrierFX") as GameObject;
+    public GameObject Player;
 
-    }
-    public override void ApplyTheEffect()
+    public ItemDefence()
     {
-        base.ApplyTheEffect();
-        DontBeAttacked();
-    }
+    } 
+ 
     public void DontBeAttacked()
     {
         

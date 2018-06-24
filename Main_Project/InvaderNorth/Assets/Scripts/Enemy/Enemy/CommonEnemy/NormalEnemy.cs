@@ -7,9 +7,10 @@ public class NormalEnemy : Enemy
     public NormalEnemy(Rigidbody EnemyRigidbody)
     {
         speed = 5;
-        skillEnable = new NoSkill();
-        baseAttackable = new BaseAttack();
-        movable = new BaseMoving(speed, EnemyRigidbody);
+        bulletSpeed = 10;
+        skill = new NoSkill();
+        baseAttack = new Base(bulletSpeed);
+        moving = new BaseMoving(speed, EnemyRigidbody);
     }
 
 }

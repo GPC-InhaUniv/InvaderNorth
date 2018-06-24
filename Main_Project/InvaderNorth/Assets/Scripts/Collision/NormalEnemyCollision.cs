@@ -15,7 +15,11 @@ public class NormalEnemyCollision : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-
+        if (other.tag == "Boundary" || other.tag == "Enemy")
+        {
+            return;
+        }
+        
         if (other.tag == "Player")
         {
             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);

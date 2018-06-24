@@ -40,16 +40,13 @@ public abstract class StageController : MonoBehaviour {
     private PlayerSpawnPosition playerSpawnPosition;
     [SerializeField]
     protected Vector3 spawnValues;
-    [SerializeField]
-    protected GameObject enemy;
 
+    protected GameObject enemy;
     protected List<GameObject> playerLifeList;
     protected int scoreTotal;
     protected int playerLifePoint;
     protected int creditTotal;
     protected bool hasBoss;
-
-    private Coroutine stageCoroutine;
 
     void Start()
     {
@@ -79,10 +76,16 @@ public abstract class StageController : MonoBehaviour {
             }
         }
         UpdateScore();
-        stageCoroutine = StartCoroutine(StageProgress());
+        StartCoroutine(StageProgress());
     }
 
     protected abstract IEnumerator StageProgress();
+   
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <param name="ScoreNumber"></param>
+   /// <param name="isBoss"></param>
 
     void AddScore(int ScoreNumber, bool isBoss)
     {
@@ -157,19 +160,21 @@ public abstract class StageController : MonoBehaviour {
 
     public void OnClickedReStartButton()           //게임오버 재시작버튼클릭 시 씬 전환.
     {
-        StopCoroutine(stageCoroutine);
         IsGameOver = false;
         IsGameClear = false;
         DestroyObjects();
-        StageManager.stageInstance.ChangeStageCoroutine(StageType.TutorialStage);
+        SceneManager.LoadScene("CombatLoadingScene");
     }
 
     public void OnClickedGameOverLobbyButton()     //게임오버 로비버튼클릭 시 씬 전환.
     {
-        StopCoroutine(stageCoroutine);
         IsGameOver = false;
         IsGameClear = false;
         DestroyObjects();
-        StageManager.stageInstance.ChangeStageCoroutine(StageType.LobbyStage);
+        SceneManager.LoadScene("LobbyScene");
     }
+
+
+    
+
 }

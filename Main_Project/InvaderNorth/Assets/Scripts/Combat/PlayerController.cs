@@ -150,6 +150,8 @@ public class PlayerController : MonoBehaviour
 
             if (transform.position.z > 18)
             {
+                StageController.IsGameOver = false;
+                StageController.IsGameOver = false;
                 Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
                 SceneManager.LoadScene("LobbyScene");
             }

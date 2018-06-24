@@ -15,7 +15,7 @@ public class TutorialController : StageController
         Destroy(tutorialSprite);   // 요부분이 없애는 것.(한번밖에 안써서 아예 지워버리는 식으로 했습니다.)
         while (true)
         {
-            if (IsGameClear)
+            if (IsGameClear || IsGameOver)
                 break;
             if (scoreTotal >= 300 && hasBoss == false)
             {

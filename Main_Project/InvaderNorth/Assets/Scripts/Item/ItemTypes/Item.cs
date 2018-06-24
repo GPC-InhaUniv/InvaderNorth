@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface IUseable
+public class Item : MonoBehaviour
 {
-    void ApplyTheEffect();
+    public ItemType itemType;
+
+    
+    
 }
