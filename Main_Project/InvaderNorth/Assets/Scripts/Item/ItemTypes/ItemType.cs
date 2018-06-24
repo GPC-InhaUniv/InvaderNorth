@@ -4,13 +4,13 @@ using UnityEngine;
 
 public abstract class ItemEffect
 {
-    protected GameObject Player;
-    protected GameObject BombObject;
-    protected GameObject BombExplosionRange;
+    protected Transform player;
+    protected GameObject bombObject;
+    protected GameObject bombExplosionRange;
 
-    public abstract void LeaveItemFromPlayer(GameObject player, GameObject bombObject, GameObject bombExplosion);
+    public abstract void LeaveItemFromPlayer();
 
-    public abstract void StartTheEffect(GameObject BombObject, GameObject bombExplosionRange);
+    public abstract void StartTheEffect();
 
-    public abstract void StopTheEffect(GameObject bombExplosionRange);
+    public abstract void StopTheEffect();
 }

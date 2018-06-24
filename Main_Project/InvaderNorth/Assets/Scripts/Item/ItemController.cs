@@ -15,7 +15,7 @@ public class ItemController : MonoBehaviour
     [Header("Item")]
     public GameObject ItemObject;
     public GameObject ItemObjectFX;
-    public GameObject Player;
+    public Transform Player;
 
     [Header("InventoryImage")]
     [SerializeField]
@@ -52,12 +52,12 @@ public class ItemController : MonoBehaviour
 
         GameObject Item = Instantiate(ItemObject);
         GameObject ItemFX = Instantiate(ItemObjectFX);
-        Player = GetComponent<GameObject>();
+        Player = GetComponent<Transform>();
 
         switch(ItemEffectType)
         {
             case EffectType.Explosion:
-                item = new Bomb(Player, ItemFX, Item);
+                item = new Bomb(Player, Item, ItemFX);
                 break;
             case EffectType.Barrier:
                 break;
@@ -125,7 +125,7 @@ public class ItemController : MonoBehaviour
 
     public void StartTheEffect()
     {
-        StartCoroutine(ItemEffectLifeCycle());
+        StartCoroutine(ItemEffectLifeCycle());//스타트코루틴 부재
     }
 
     //폭탄의 폭발효과 라이프사이클

@@ -4,36 +4,41 @@ using UnityEngine;
 //폭발효과
 public class ItemExplosion :ItemEffect
 {
-    
-    public ItemExplosion(GameObject BombObject, GameObject BombExplosionRange)
+    public ItemExplosion(Transform Player, GameObject BombObject, GameObject BombExplosionRange)
     {
-        this.BombObject = BombObject;
-        this.BombObject.SetActive(false);
-
-        this.BombExplosionRange = BombExplosionRange;
-        this.BombExplosionRange.SetActive(false);
-        Debug.Log(BombObject.name);
+        this.bombObject = BombObject;
+        this.bombObject.SetActive(false);
+        this.player = Player;
+        this.bombExplosionRange = BombExplosionRange;
+        this.bombExplosionRange.SetActive(false);
     }
     
-    public override void LeaveItemFromPlayer(GameObject player, GameObject bombObject, GameObject bombExplosionRange)
+    public override void LeaveItemFromPlayer()
     {
+        
         //Vector3 position = player.transform.position;
-        bombObject.transform.position = player.transform.position;
+
+        bombObject.transform.parent = player.transform;
         bombExplosionRange.transform.position = player.transform.position;
 
         bombObject.SetActive(true);
+        Debug.Log("폭탄 발사");
     }
 
-    public override void StartTheEffect(GameObject BombObject, GameObject bombExplosionRange)
+    public override void StartTheEffect()
     {
-        bombExplosionRange.transform.parent = BombObject.transform;
+        
+        bombExplosionRange.transform.parent = bombObject.transform;
 
-        BombObject.SetActive(false);
+        bombObject.SetActive(false);
         bombExplosionRange.SetActive(true);
+        Debug.Log("폭발 실행");
+        
     }
 
-    public override void StopTheEffect(GameObject bombExplosionRange)
+    public override void StopTheEffect()
     {
         bombExplosionRange.SetActive(false);
+        Debug.Log("폭발 종료");
     }
 }

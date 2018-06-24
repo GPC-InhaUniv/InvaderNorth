@@ -12,16 +12,16 @@ public class Item
     
     public void LeaveItemFromPlayer()
     {
-        itemType.LeaveItemFromPlayer(Player, BombObject, BombExplosionRange);
+        itemType.LeaveItemFromPlayer();
     }
 
     public void StartTheEffect()
     {
-        itemType.StartTheEffect(BombObject, BombExplosionRange);
+        itemType.StartTheEffect();
     }
 
     public void StopTheEffect()
     {
-        itemType.StopTheEffect(BombExplosionRange);
+        itemType.StopTheEffect();
     }
 }
