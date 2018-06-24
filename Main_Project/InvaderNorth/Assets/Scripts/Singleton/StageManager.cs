@@ -39,6 +39,7 @@ public class StageManager : MonoBehaviour
             SceneManager.LoadSceneAsync((int)stageType);
             currentStage = stageType;
         }
+
         else if (currentStage == StageType.ShopStage && stageType == StageType.LobbyStage ||
                  currentStage == StageType.LobbyStage && stageType == StageType.ShopStage)
         {
@@ -48,7 +49,6 @@ public class StageManager : MonoBehaviour
             yield return loadOperation;
 
             sceneChangedCallBack(stageType);
-
         }
 
         else

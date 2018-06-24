@@ -48,6 +48,8 @@ public abstract class StageController : MonoBehaviour {
     protected int creditTotal;
     protected bool hasBoss;
 
+    private Coroutine stageCoroutine;
+
     void Start()
     {
         playerLifePoint = 2;// DataManager.Datainstance.gameData.hpLevel;
@@ -76,7 +78,7 @@ public abstract class StageController : MonoBehaviour {
             }
         }
         UpdateScore();
-        StartCoroutine(StageProgress());
+        stageCoroutine = StartCoroutine(StageProgress());
     }
 
     protected abstract IEnumerator StageProgress();
@@ -160,18 +162,22 @@ public abstract class StageController : MonoBehaviour {
 
     public void OnClickedReStartButton()           //게임오버 재시작버튼클릭 시 씬 전환.
     {
+        StopCoroutine(stageCoroutine);
         IsGameOver = false;
         IsGameClear = false;
         DestroyObjects();
-        SceneManager.LoadScene("CombatLoadingScene");
+        StartCoroutine(StageManager.stageInstance.ChangeStageCoroutine(StageType.CombatStage));
+        Debug.Log("스테이지 전환  1");
     }
 
     public void OnClickedGameOverLobbyButton()     //게임오버 로비버튼클릭 시 씬 전환.
     {
+        StopCoroutine(stageCoroutine);
         IsGameOver = false;
         IsGameClear = false;
         DestroyObjects();
-        SceneManager.LoadScene("LobbyScene");
+        StartCoroutine(StageManager.stageInstance.ChangeStageCoroutine(StageType.LobbyStage));
+        Debug.Log("스테이지 전환  2");
     }
 
 

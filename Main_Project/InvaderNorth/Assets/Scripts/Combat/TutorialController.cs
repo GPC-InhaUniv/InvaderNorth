@@ -34,6 +34,9 @@ public class TutorialController : StageController
             }
             yield return new WaitForSeconds(2);
         }
+
+        Debug.Log("코루틴 종료");
+
         yield return null;
     }
 
