@@ -53,12 +53,12 @@ public class MultiAttack : IBaseAttackable
 }
 
     public class NoBaseAttack : IBaseAttackable
-{
-    public void Attack(GameObject enemy)
     {
-        //Debug.Log("No BaseAttack");
+        public void Attack(GameObject enemy)
+        {
+            //Debug.Log("No BaseAttack");
+        }
     }
-}
 
 
 

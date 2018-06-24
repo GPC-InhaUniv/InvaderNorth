@@ -20,7 +20,6 @@ public class ChangeScene : MonoBehaviour {
 
     IEnumerator LoadMain()
     {
-
         if (hasFirstStart == true)
         {
              ao = SceneManager.LoadSceneAsync("TutorialScene");
