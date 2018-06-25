@@ -210,21 +210,10 @@ public class GameDataLoader : MonoBehaviour {
                 {
                     if (userId.Equals(datasnapshot.Key))
                     {
-                        reference.Child("users").Child(userId).UpdateChildrenAsync(purchasePartDictionary).ContinueWith(
-                        renewingTask =>
-                        {
-                            if (renewingTask.IsFaulted)
-                            {
-                                Debug.Log("데이터베이스에 접근할 수 없습니다");
-                                return;
-                            }
-                            else if (renewingTask.IsCompleted)
-                            {
-                                Debug.Log("데이터 갱신 성공");
-                                renewPurchaseDataCallback();
-                                return;
-                            }
-                        });
+                        reference.Child("users").Child(userId).UpdateChildrenAsync(purchasePartDictionary);
+                        Debug.Log("데이터 갱신 성공");
+                        renewPurchaseDataCallback();
+                        return;
                     }
                 }
             }
