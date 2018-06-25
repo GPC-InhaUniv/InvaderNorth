@@ -7,7 +7,6 @@ public class ItemExplosion :ItemEffect
     public ItemExplosion(Transform Player, GameObject BombObject, GameObject BombExplosionRange)
     {
         this.bombObject = BombObject;
-        this.bombObject.SetActive(false);
         this.player = Player;
         this.bombExplosionRange = BombExplosionRange;
         this.bombExplosionRange.SetActive(false);
@@ -16,17 +15,19 @@ public class ItemExplosion :ItemEffect
     public override void LeaveItemFromPlayer()
     {
         
-        //Vector3 position = player.transform.position;
-
+        bombObject = ObjectPoolManager.ObjectPools.bombObjects.PopFromPool();
+        
+        Vector3 position = this.player.transform.position;
+        
         bombObject.transform.parent = player.transform;
-        bombExplosionRange.transform.position = player.transform.position;
-
         bombObject.SetActive(true);
         Debug.Log("폭탄 발사");
     }
 
     public override void StartTheEffect()
     {
+        bombObject.SetActive(false);
+        ObjectPoolManager.ObjectPools.bombObjects.PushToPool(bombObject);
         
         bombExplosionRange.transform.parent = bombObject.transform;
 

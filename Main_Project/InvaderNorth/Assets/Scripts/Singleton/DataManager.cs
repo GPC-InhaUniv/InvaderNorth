@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,6 +37,11 @@ public class DataManager : MonoBehaviour
         gameDataLoader.SetNewDataInDB(gameData.credit);
     }
 
+    public void SetNewPurchaseData(int credit, UpgradeType upgradeType)
+    {
+        gameData.credit -= credit;
+    }
+
     public void DataCallback(GameData gameData, SignInProcessType loginProcessType)
     {
         if(gameData != null && loginProcessType == SignInProcessType.Success)
@@ -66,9 +72,11 @@ public class DataManager : MonoBehaviour
             gameModel.CreateFailed();
         }
     }
-
+    
     public void RenewDataCallBack()
     {
         gameModel.RenewSucceeded();
     }
+
+
 }

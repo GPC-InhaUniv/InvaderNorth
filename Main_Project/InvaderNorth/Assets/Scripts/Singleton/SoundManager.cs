@@ -15,6 +15,7 @@ public enum SoundType
     ButtonClick,
     ButtonStart,
     ButtonUpgrade,
+    PlayLoading,
 }
 
 public class SoundManager : MonoBehaviour
@@ -36,7 +37,7 @@ public class SoundManager : MonoBehaviour
     {
         myAudio = GetComponent<AudioSource>();
 
-        SoundConst = new AudioClip[11];
+        SoundConst = new AudioClip[12];
 
         SoundConst[0] = Resources.Load<AudioClip>("Audio/Main");
         SoundConst[1] = Resources.Load<AudioClip>("Audio/Stage1");
@@ -49,6 +50,7 @@ public class SoundManager : MonoBehaviour
         SoundConst[8] = Resources.Load<AudioClip>("Audio/ButtonClick");
         SoundConst[9] = Resources.Load<AudioClip>("Audio/ButtonStart");
         SoundConst[10] = Resources.Load<AudioClip>("Audio/ButtonUpgrade");
+        SoundConst[11] = Resources.Load<AudioClip>("Audio/Loading");
     }
 
     public void PlayBackground(AudioClip clip)
@@ -103,6 +105,10 @@ public class SoundManager : MonoBehaviour
 
             case SoundType.ButtonUpgrade:
                 myAudio.PlayOneShot(SoundConst[10]);
+                break;
+
+            case SoundType.PlayLoading:
+                myAudio.PlayOneShot(SoundConst[11]);
                 break;
         }
     }

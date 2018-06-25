@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item 
 {
-    protected ItemEffect itemType;
+    protected ItemEffect upgradeType;
     protected GameObject Player;
     protected GameObject BombObject;
     protected GameObject BombExplosionRange;
@@ -12,16 +12,16 @@ public class Item
     
     public void LeaveItemFromPlayer()
     {
-        itemType.LeaveItemFromPlayer();
+        upgradeType.LeaveItemFromPlayer();
     }
 
     public void StartTheEffect()
     {
-        itemType.StartTheEffect();
+        upgradeType.StartTheEffect();
     }
 
     public void StopTheEffect()
     {
-        itemType.StopTheEffect();
+        upgradeType.StopTheEffect();
     }
 }

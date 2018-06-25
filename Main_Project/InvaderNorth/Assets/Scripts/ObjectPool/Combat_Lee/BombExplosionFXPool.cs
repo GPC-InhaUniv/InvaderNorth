@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombPool : MonoBehaviour
-{
+public class BombExplosionFXPool : MonoBehaviour {
+
     [SerializeField]
     private GameObject itemObject;
     [SerializeField]
@@ -11,20 +11,20 @@ public class BombPool : MonoBehaviour
 
     Queue<GameObject> itemPool;
     public int MaxNumberOfBomb;
-    
+
     private void Start()
     {
-        
+        MaxNumberOfBomb = 2;
         itemPool = new Queue<GameObject>();
         CreatBombPool();
     }
 
     private void CreatBombPool()
     {
-        for (int i = 1; i <= MaxNumberOfBomb; i++ )
+        for (int i = 1; i <= MaxNumberOfBomb; i++)
         {
             GameObject item = Instantiate(itemObject);
-            item.name = "Bomb";
+            item.name = "BombExplosionFX";
             item.SetActive(false);
             itemPool.Enqueue(item);
             item.transform.parent = Parent.transform;
@@ -43,4 +43,3 @@ public class BombPool : MonoBehaviour
         itemPool.Enqueue(gameObject);
     }
 }
-   

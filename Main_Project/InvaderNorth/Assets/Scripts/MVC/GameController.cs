@@ -21,12 +21,12 @@ public class GameController : MonoBehaviour {
         if(stageType == StageType.ShopStage)
         {
             gameView = GameObject.Find("ShopStageView").GetComponent<ShopStageView>();
-            gameView.ShowInformation(gameModel.GetGameData());
+            RequestShowInformation();
         }
         else if(stageType == StageType.LobbyStage)
         {
             gameView = GameObject.Find("LobbyStageView").GetComponent<LobbyStageView>();
-            gameView.ShowInformation(gameModel.GetGameData());
+            RequestShowInformation();
         }
         else if(stageType == StageType.TutorialStage)
         {
@@ -40,6 +40,16 @@ public class GameController : MonoBehaviour {
         {
             return;
         }
+    }
+
+    public void RequestShowInformation()
+    {
+        gameView.ShowInformation(gameModel.GetGameData());
+    }
+
+    public void RequestShowPopUp(PopUpType popupType)
+    {
+        gameView.ShowPopUp(popupType);
     }
 
     public void VerifyAccountData(string id, string password)
@@ -111,4 +121,19 @@ public class GameController : MonoBehaviour {
     {
         ChangeStage(targetStage);
     }
+
+    public void PurchaseItem(int credit, UpgradeType upgradeType)
+    {
+        gameModel.renewPurchaseDataCallBack = PurchaseFinished;
+        gameModel.RenewUserPurchaseData(credit, upgradeType);
+    }
+
+    public void PurchaseFinished()
+    {
+        RequestShowInformation();
+    }
+
+    
+
+    
 }

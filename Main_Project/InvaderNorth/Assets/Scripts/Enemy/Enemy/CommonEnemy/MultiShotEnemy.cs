@@ -9,7 +9,7 @@ public class MultiShotEnemy : Enemy
         speed = 3;
         bulletSpeed = 10;
         skill = new NoSkill();
-        baseAttack = new MultiAttack(skillBulletSpeed);
+        baseAttack = new MultiAttack(bulletSpeed);
         moving = new Zigzag(speed, EnemyRigidbody);
     }
 

@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
             if(other.name == "Bomb")
             {
 
-                ItemController.SendItemDelegate(other.gameObject.name);
+                ItemController.SendItemToInventoryDelegate(other.gameObject.name);
             }
         }
     }
