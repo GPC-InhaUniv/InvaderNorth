@@ -15,9 +15,9 @@ public class ItemExplosion :ItemEffect
     
     public override void LeaveItemFromPlayer()
     {
-        
-        //Vector3 position = player.transform.position;
 
+        //Vector3 position = player.transform.position;
+        
         bombObject.transform.parent = player.transform;
         bombExplosionRange.transform.position = player.transform.position;
 
@@ -27,7 +27,7 @@ public class ItemExplosion :ItemEffect
 
     public override void StartTheEffect()
     {
-        
+        ObjectPoolManager.ObjectPools.bombObjects.PushToPool(bombObject);
         bombExplosionRange.transform.parent = bombObject.transform;
 
         bombObject.SetActive(false);

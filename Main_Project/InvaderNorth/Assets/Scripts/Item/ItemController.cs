@@ -49,7 +49,6 @@ public class ItemController : MonoBehaviour
 
         GameObject ItemObject = ObjectPoolManager.ObjectPools.bombObjects.PopFromPool();
         GameObject ItemFX = Instantiate(ItemObjectFX);
-        Player = GetComponent<Transform>();
 
         switch(ItemEffectType)
         {
