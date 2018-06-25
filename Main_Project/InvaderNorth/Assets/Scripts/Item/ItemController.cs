@@ -19,8 +19,6 @@ public class ItemController : MonoBehaviour
 
     [Header("InventoryImage")]
     [SerializeField]
-    private GameObject ShieldImage;
-    [SerializeField]
     private GameObject BombImage;
     [SerializeField]
     private GameObject ItemInventoryImage;
@@ -42,7 +40,7 @@ public class ItemController : MonoBehaviour
     
     private void Awake()
     {
-        ShieldImage.SetActive(false);
+        
         BombImage.SetActive(false);
         ItemInventoryImage.SetActive(true);
 
@@ -79,12 +77,6 @@ public class ItemController : MonoBehaviour
         {
             switch (ItemName)
             {
-                case "Shield":
-                    ShieldImage.SetActive(true);
-                    haveShieldInInventory = true;
-                    ItemInventoryImage.SetActive(false);
-                    break;
-
                 case "Bomb":
                     BombImage.SetActive(true);
                     haveBombInInventory = true;
@@ -111,14 +103,7 @@ public class ItemController : MonoBehaviour
             haveBombInInventory = false;
             ItemInventoryImage.SetActive(true);
         }
-
-        else if (haveShieldInInventory == true)
-        {
-            ShieldImage.SetActive(false);
-            haveShieldInInventory = false;
-            ItemInventoryImage.SetActive(true);
-        }
-
+        
         else
             Debug.Log("현재 소유중인 아이템이 없습니다.");
     }
