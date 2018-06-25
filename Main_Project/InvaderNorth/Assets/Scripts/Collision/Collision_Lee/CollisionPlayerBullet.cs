@@ -15,7 +15,7 @@ public class CollisionPlayerBullet : CollisionForm
 
             else if (gameObject.name == "BombObject")
             {
-                ItemController.SendStartEffectDelegate();
+                //ItemController.SendStartEffectDelegate();
             }
         }
         

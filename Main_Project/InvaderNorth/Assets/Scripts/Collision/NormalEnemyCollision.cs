@@ -12,6 +12,7 @@ public class NormalEnemyCollision : MonoBehaviour {
     private int scoreValue;
     [SerializeField]
     private int creditAmount;
+    
 
     void OnTriggerEnter(Collider other)
     {
@@ -40,13 +41,21 @@ public class NormalEnemyCollision : MonoBehaviour {
         }
         else if (other.name == "BombObject")
         {
-            ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
-            ItemController.SendStartEffectDelegate();
+            GameObject BombExplosionFX = ObjectPoolManager.ObjectPools.bombExplosionFXs.PopFromPool();
+            BombExplosionFX.SetActive(true);
+            ItemController.SendStartEffectDelegate(BombExplosionFX, other.gameObject);
+            //ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
+            //Instantiate(explosion, transform.position, transform.rotation);
+        }
 
-            GameObject Item;
-            Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
-            Item.transform.position = gameObject.transform.position;
-            Item.SetActive(true);
+        else if (other.name == "BombExplosionFX")
+        {
+            ///ItemController.SendStartEffectDelegate(other.gameObject);
+            ObjectPoolManager.ObjectPools.bombExplosionFXs.PushToPool(other.gameObject);
+            other.transform.position = gameObject.transform.position;
+            //   ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
+            //    Instantiate(explosion, transform.position, transform.rotation);
+           
         }
         else
             return;

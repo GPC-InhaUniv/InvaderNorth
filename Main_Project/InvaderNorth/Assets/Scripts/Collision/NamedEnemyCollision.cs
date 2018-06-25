@@ -50,6 +50,22 @@ public class NamedEnemyCollision : MonoBehaviour
             ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
             healthPoint--;
         }
+        else if(other.name == "BombObject")
+        {
+            ObjectPoolManager.ObjectPools.bombObjects.PushToPool(other.gameObject);
+            GameObject BombExplosionFX = ObjectPoolManager.ObjectPools.bombExplosionFXs.PopFromPool();
+            BombExplosionFX.transform.position = gameObject.transform.position;
+            BombExplosionFX.SetActive(true);
+
+            healthPoint = healthPoint - 10;
+        }
+        else if(other.name == "BombExplosionFX")
+        {
+            ObjectPoolManager.ObjectPools.bombExplosionFXs.PushToPool(other.gameObject);
+            other.transform.position = gameObject.transform.position;
+            healthPoint = healthPoint - 5;
+
+        }
 
         if (healthPoint <= 0)
         {
@@ -68,6 +84,7 @@ public class NamedEnemyCollision : MonoBehaviour
 
             GameObject Item;
             Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
+            Item.transform.position = gameObject.transform.position;
             Item.SetActive(true);
         }
     }
