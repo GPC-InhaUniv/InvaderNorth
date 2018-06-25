@@ -32,6 +32,16 @@ public class NormalEnemyCollision : MonoBehaviour {
         else if (other.name == "PlayerBullet")
         {
             ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+            
+            GameObject Item;
+            Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
+            Item.transform.position = gameObject.transform.position;
+            Item.SetActive(true);
+        }
+        else if (other.name == "BombObject")
+        {
+            ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
+            ItemController.SendStartEffectDelegate();
 
             GameObject Item;
             Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();

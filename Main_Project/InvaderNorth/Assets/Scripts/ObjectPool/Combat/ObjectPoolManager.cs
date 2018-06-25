@@ -11,6 +11,7 @@ public class ObjectPoolManager : MonoBehaviour {
     public BombPool bombPool;
     public ShieldPool shieldPool;
     public BombObjectPool bombObjects;
+    public BombExplosionFXPool bombExplosionFXs;
 
     private void Awake()
     {
@@ -40,6 +41,9 @@ public class ObjectPoolManager : MonoBehaviour {
 
         if (bombObjects == null)
             bombObjects = GetComponent<BombObjectPool>();
+
+        if (bombExplosionFXs == null)
+            bombExplosionFXs = GetComponent<BombExplosionFXPool>();
         
 
         DontDestroyOnLoad(gameObject);

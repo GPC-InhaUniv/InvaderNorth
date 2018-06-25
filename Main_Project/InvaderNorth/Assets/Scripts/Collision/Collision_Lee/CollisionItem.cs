@@ -19,12 +19,12 @@ public class CollisionItem : CollisionForm
 
                 case "Shield ":
                     ObjectPoolManager.ObjectPools.shieldPool.PushToPool(other.gameObject);
-                    ItemController.SendItemDelegate(other.gameObject.name);
+                    ItemController.SendItemToInventoryDelegate(other.gameObject.name);
                     break;
 
                 case "Bomb":
                     ObjectPoolManager.ObjectPools.bombPool.PushToPool(other.gameObject);
-                    ItemController.SendItemDelegate(other.gameObject.name);
+                    ItemController.SendItemToInventoryDelegate(other.gameObject.name);
 
                     break;
             } 

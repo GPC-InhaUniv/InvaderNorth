@@ -29,11 +29,8 @@ public class ItemController : MonoBehaviour
 
     
     public delegate void SendItemToInventory(string ItemName);
-    public static SendItemToInventory SendItemDelegate;
-
-    public delegate void SendUseItem();
-    //public static SendUseItem SendUseItemDelegate;
-
+    public static SendItemToInventory SendItemToInventoryDelegate;
+    
     public delegate void SendStartEffect();
     public static SendStartEffect SendStartEffectDelegate;
     
@@ -43,8 +40,8 @@ public class ItemController : MonoBehaviour
         BombImage.SetActive(false);
         ItemInventoryImage.SetActive(true);
 
-        SendItemDelegate += PushToInventory;
-        //SendUseItemDelegate += InputItemButton;
+        SendItemToInventoryDelegate += PushToInventory;
+        
         SendStartEffectDelegate += StartTheEffect;
 
         GameObject ItemObject = ObjectPoolManager.ObjectPools.bombObjects.PopFromPool();
@@ -93,9 +90,9 @@ public class ItemController : MonoBehaviour
         if (haveBombInInventory == true)
         {
             
-            item.LeaveItemFromPlayer();
             BombImage.SetActive(false);
             haveBombInInventory = false;
+            item.LeaveItemFromPlayer();
         }
         
         else
@@ -104,7 +101,7 @@ public class ItemController : MonoBehaviour
 
     public void StartTheEffect()
     {
-        StartCoroutine(ItemEffectLifeCycle());//스타트코루틴 부재
+        StartCoroutine(ItemEffectLifeCycle());
     }
 
     //폭탄의 폭발효과 라이프사이클
