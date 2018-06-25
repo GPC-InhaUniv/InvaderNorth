@@ -11,6 +11,7 @@ public class BGScrollerIntro : MonoBehaviour
 
     void Start()
     {
+        SoundManager.instance.PlaySoundType(SoundType.PlayLoading);
         startPosition = transform.position;
     }
 

@@ -22,7 +22,6 @@ public class UpgradeController : MonoBehaviour
     private int[] changedConst = new int[4];
 
     private GameController gameController;
-
     private GameData userData;
 
     private void Start()
@@ -38,7 +37,9 @@ public class UpgradeController : MonoBehaviour
 
     public void OnUpgradeButtonClick(UpgradeType upgradeType)
     {
-        switch(upgradeType)
+        SoundManager.instance.PlaySoundType(SoundType.ButtonUpgrade);
+
+        switch (upgradeType)
         {
             case UpgradeType.Heart:
             {
@@ -72,6 +73,7 @@ public class UpgradeController : MonoBehaviour
 
     public void ShowToolTip(PopUpType popupType)
     {
+        SoundManager.instance.PlaySoundType(SoundType.ButtonClick);
         gameController.RequestShowPopUp(popupType);
     }
 }

@@ -195,11 +195,11 @@ public class ShopStageView : MonoBehaviour, IShowable
         {
             bulletBox.GetComponent<Image>().sprite = bulletImage[0];
         }
-        else if (gameData.bulletLevel < 12)
+        else if (gameData.bulletLevel < 11)
         {
             bulletBox.GetComponent<Image>().sprite = bulletImage[1];
         }
-        else if (gameData.bulletLevel < 20)
+        else if (gameData.bulletLevel < 16)
         {
             bulletBox.GetComponent<Image>().sprite = bulletImage[2];
         }
@@ -212,11 +212,11 @@ public class ShopStageView : MonoBehaviour, IShowable
         {
             criticalShotBox.GetComponent<Image>().sprite = criticalShotImage[0];
         }
-        else if (gameData.critLevel < 12)
+        else if (gameData.critLevel < 11)
         {
             criticalShotBox.GetComponent<Image>().sprite = criticalShotImage[1];
         }
-        else if (gameData.critLevel < 20)
+        else if (gameData.critLevel < 16)
         {
             criticalShotBox.GetComponent<Image>().sprite = criticalShotImage[2];
         }

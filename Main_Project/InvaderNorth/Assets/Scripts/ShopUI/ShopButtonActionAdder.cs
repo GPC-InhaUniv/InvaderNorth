@@ -32,6 +32,7 @@ public class ShopButtonActionAdder : MonoBehaviour {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         upgradeController = GameObject.Find("UpgradeController").GetComponent<UpgradeController>();
 
+        SoundManager.instance.PlaySoundType(SoundType.ButtonClick);
         buttonGotoLobby.onClick.AddListener(() => gameController.ChangeStage(StageType.LobbyStage));
         buttonGotoLevel1.onClick.AddListener(() => gameController.ChangeStage(StageType.Level1Stage));
         buttonGotoTutorial.onClick.AddListener(() => gameController.ChangeStage(StageType.TutorialStage));
