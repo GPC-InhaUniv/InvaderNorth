@@ -77,7 +77,6 @@ public class ItemController : MonoBehaviour
                 case "Bomb":
                     BombImage.SetActive(true);
                     haveBombInInventory = true;
-                    ItemInventoryImage.SetActive(false);
                     break;
 
                 default:
@@ -98,7 +97,6 @@ public class ItemController : MonoBehaviour
             item.LeaveItemFromPlayer();
             BombImage.SetActive(false);
             haveBombInInventory = false;
-            ItemInventoryImage.SetActive(true);
         }
         
         else
