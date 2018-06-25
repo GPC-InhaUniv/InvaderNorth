@@ -18,7 +18,7 @@ public enum StageType
 
 public class StageManager : MonoBehaviour
 {
-    private StageType currentStage;
+    public StageType currentStage;
 
     public static StageManager stageInstance;
 

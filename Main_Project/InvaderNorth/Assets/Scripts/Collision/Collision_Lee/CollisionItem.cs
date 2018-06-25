@@ -25,8 +25,6 @@ public class CollisionItem : CollisionForm
                 case "Bomb":
                     ObjectPoolManager.ObjectPools.bombPool.PushToPool(other.gameObject);
                     ItemController.SendItemDelegate(other.gameObject.name);
-                    GameObject BombObject = Instantiate(Resources.Load("Prefabs/BombObject") as GameObject);
-
 
                     break;
             } 

@@ -40,8 +40,7 @@ public abstract class StageController : MonoBehaviour {
     private PlayerSpawnPosition playerSpawnPosition;
     [SerializeField]
     protected Vector3 spawnValues;
-    [SerializeField]
-    private GameController gameController;
+    protected GameController gameController;
 
     protected GameObject enemy;
     protected List<GameObject> playerLifeList;
@@ -50,7 +49,7 @@ public abstract class StageController : MonoBehaviour {
     protected int creditTotal;
     protected bool hasBoss;
 
-    private Coroutine stageCoroutine;
+    protected Coroutine stageCoroutine;
 
     void Start()
     {
@@ -85,12 +84,13 @@ public abstract class StageController : MonoBehaviour {
     }
 
     protected abstract IEnumerator StageProgress();
-   
-   /// <summary>
-   /// 
-   /// </summary>
-   /// <param name="ScoreNumber"></param>
-   /// <param name="isBoss"></param>
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="ScoreNumber"></param>
+    /// <param name="isBoss"></param>
 
     void AddScore(int ScoreNumber, bool isBoss)
     {
@@ -158,32 +158,28 @@ public abstract class StageController : MonoBehaviour {
         Debug.Log("GameClear");
     }
 
-    void DestroyObjects()
+    protected void DestroyObjects()
     {
         Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
     }
-
     public void OnClickedReStartButton()
     {
-        StopCoroutine(stageCoroutine);
+        StopAllCoroutines();
         IsGameOver = false;
         IsGameClear = false;
         DestroyObjects();
-        gameController.CombatFinished(creditTotal, StageType.TutorialStage);
+        gameController.CombatFinished(creditTotal, StageManager.stageInstance.currentStage);
         Debug.Log("스테이지 전환  1");
     }
 
+
     public void OnClickedGameOverLobbyButton()
     {
-        StopCoroutine(stageCoroutine);
+        StopAllCoroutines();
         IsGameOver = false;
         IsGameClear = false;
         DestroyObjects();
         gameController.CombatFinished(creditTotal, StageType.LobbyStage);
         Debug.Log("스테이지 전환  2");
     }
-
-
-    
-
 }

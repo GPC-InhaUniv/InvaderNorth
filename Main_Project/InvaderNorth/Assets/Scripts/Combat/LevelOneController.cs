@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageOneController : StageController
+public class LevelOneController : StageController
 {
+
     protected override IEnumerator StageProgress()
     {
-
-
         yield return null;
     }
+
+
+
 }

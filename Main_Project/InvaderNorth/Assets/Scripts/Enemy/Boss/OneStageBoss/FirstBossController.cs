@@ -13,13 +13,13 @@ public class FirstBossController : MonoBehaviour {
 
     NamedEnemyCollision namedEnemyCollision;
 	private void Start ()
-    {       
+    {
         namedEnemyCollision = GetComponent<NamedEnemyCollision>();
         maxBossHealthPoint = namedEnemyCollision.getHealthPoint();
         rigidbody = GetComponent<Rigidbody>();
         boss = new FirstBoss(new NormalState(rigidbody), rigidbody);
+        StartCoroutine(Move());
         StartCoroutine(Attack());
-        StartCoroutine(Move());  
 
     }
 
