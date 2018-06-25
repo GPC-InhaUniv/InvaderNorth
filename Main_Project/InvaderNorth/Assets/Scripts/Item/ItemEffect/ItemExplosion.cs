@@ -14,12 +14,11 @@ public class ItemExplosion :ItemEffect
         
     }
     
-    public override void LeaveItemFromPlayer(GameObject bombObject)
+    public override void LeaveItemFromPlayer(GameObject bombObject, Transform PlayerPosition)
     {
         Vector3 position = player.transform.position;
-        
-        bombObject.transform.parent = player.transform;
-        bombObject.transform.Find("Player");
+        position = PlayerPosition.transform.position;
+        bombObject.transform.position = position;
         
         bombObject.SetActive(true);
         Debug.Log("폭탄 발사");

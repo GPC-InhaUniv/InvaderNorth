@@ -16,7 +16,7 @@ public class ItemController : MonoBehaviour
     //public GameObject ItemObject;
     public GameObject ItemObjectFX;
     public Transform Player;
-
+    public Transform PlayerPosition;
     [Header("InventoryImage")]
     [SerializeField]
     private GameObject BombImage;
@@ -59,7 +59,9 @@ public class ItemController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.X))
         {
-            InputItemButton();
+            GameObject Position = GameObject.FindGameObjectWithTag("Player");
+            PlayerPosition = Position.transform;
+            InputItemButton(PlayerPosition);
         }
     }
 
@@ -85,14 +87,13 @@ public class ItemController : MonoBehaviour
             Debug.Log("이미 소유중인 아이템이 있습니다.");
     }
 
-    public void InputItemButton()
+    public void InputItemButton(Transform PlayerPosition)
     {
         if (haveBombInInventory == true)
         {
-            ItemObject = ObjectPoolManager.ObjectPools.bombObjects.PopFromPool();
             BombImage.SetActive(false);
             haveBombInInventory = false;
-            item.LeaveItemFromPlayer(ItemObject);
+            item.LeaveItemFromPlayer(ItemObject, PlayerPosition);
         }
         
         else

@@ -53,6 +53,7 @@ public class NamedEnemyCollision : MonoBehaviour
         }
         else if(other.name == "BombObject")
         {
+            ObjectPoolManager.ObjectPools.bombObjects.PushToPool(other.gameObject);
             GameObject BombExplosionFX = ObjectPoolManager.ObjectPools.bombExplosionFXs.PopFromPool();
             ItemController.SendStartEffectDelegate(BombExplosionFX, other.gameObject);
             
