@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
         {
             //gameView = GameObject.Find("TutorialStageView").GetComponent<TutorialStageView>();
         }
-        else if(stageType == StageType.CombatStage)
+        else if(stageType == StageType.Level1Stage)
         {
             //gameView = GameObject.Find("CombatStageView").GetComponent<CombatStageView>();
         }

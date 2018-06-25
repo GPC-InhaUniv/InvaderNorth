@@ -11,7 +11,7 @@ public enum StageType
     LobbyStage = 2,
     ShopStage = 3,
     TutorialStage = 4,
-    CombatStage = 5,
+    Level1Stage = 5,
     LoadingStage = 6,
     CombatLoadingStage = 7
 }
