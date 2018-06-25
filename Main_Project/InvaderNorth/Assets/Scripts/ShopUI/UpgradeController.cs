@@ -17,7 +17,7 @@ public class UpgradeController : MonoBehaviour
 
     private int heartCost;
     private int bulletCost;
-    private int CriticalShotCost;
+    private int criticalShotCost;
 
     private int[] changedConst = new int[4];
 
@@ -33,7 +33,7 @@ public class UpgradeController : MonoBehaviour
 
         heartCost = 100 + userData.hpLevel * 50;
         bulletCost = 100 + userData.bulletLevel * 50;
-        CriticalShotCost = 100 + userData.critLevel * 50;
+        criticalShotCost = 100 + userData.critLevel * 50;
     }
 
     public void OnUpgradeButtonClick(UpgradeType upgradeType)
@@ -45,6 +45,7 @@ public class UpgradeController : MonoBehaviour
                 if(heartCost <= userData.credit && userData.hpLevel < MAXHPLEVEL)
                 {
                     gameController.PurchaseItem(heartCost, upgradeType);
+                    heartCost += 50;
                 }
                 break;
             }
@@ -52,7 +53,8 @@ public class UpgradeController : MonoBehaviour
             {
                 if (bulletCost <= userData.credit && userData.bulletLevel < MAXBULLETLEVEL)
                 {
-                    gameController.PurchaseItem(heartCost, upgradeType);
+                    gameController.PurchaseItem(bulletCost, upgradeType);
+                    bulletCost += 50;
                 }
                 break;
             }
@@ -60,7 +62,8 @@ public class UpgradeController : MonoBehaviour
             {
                 if (bulletCost <= userData.credit && userData.critLevel < MAXCRITLEVEL)
                 {
-                    gameController.PurchaseItem(heartCost, upgradeType);
+                    gameController.PurchaseItem(criticalShotCost, upgradeType);
+                    criticalShotCost += 50;
                 }
                 break;
             }
