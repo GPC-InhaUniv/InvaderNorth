@@ -63,7 +63,7 @@ public class NormalState : FirstBossState
 
     public override void Move(GameObject boss)
     {
-        if (boss.transform.position.z > 11)
+        if (boss.transform.position.z > 10f)
         {
             rigidbody.velocity = boss.transform.forward * (moveSpeed + 3);
         }

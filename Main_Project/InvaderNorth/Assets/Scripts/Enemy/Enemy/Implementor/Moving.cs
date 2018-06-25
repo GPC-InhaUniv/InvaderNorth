@@ -95,7 +95,7 @@ public class FirstNamedMoving : Moving
 
     public override void Move(GameObject enemy)
     {
-        if (enemy.transform.position.z > 11)
+        if (enemy.transform.position.z > 10.5f)
         {
             enemyRigidbody.velocity = enemy.transform.forward * speed;
         }
@@ -120,11 +120,11 @@ public class SecondNamedMoving : Moving
 
     public override void Move(GameObject enemy)
     {
-        if (enemy.transform.position.z > 11)
+        if (enemy.transform.position.z > 10.5f)
         {
             enemyRigidbody.velocity = enemy.transform.forward * speed;
         }
-        else if(enemy.transform.position.z <= 11)
+        else if(enemy.transform.position.z <= 10.5f)
         {
             if (isFrist)
             {

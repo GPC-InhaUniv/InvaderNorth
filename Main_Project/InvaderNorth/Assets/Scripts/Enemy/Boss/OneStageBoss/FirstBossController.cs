@@ -47,6 +47,7 @@ public class FirstBossController : MonoBehaviour {
             if (StageController.IsGameClear || StageController.IsGameOver)
                 break;
             boss.Attack(gameObject);
+            SoundManager.instance.PlaySoundType(SoundType.EnmeyShot);
             yield return new WaitForSeconds(attackCoolTime);
         }
     }
@@ -68,6 +69,7 @@ public class FirstBossController : MonoBehaviour {
             if (StageController.IsGameClear || StageController.IsGameOver)
                 break;
             boss.SkillUse(gameObject);
+            SoundManager.instance.PlaySoundType(SoundType.EnmeyShot);
             yield return new WaitForSeconds(1f);
             if (namedEnemyCollision.getHealthPoint() <= maxBossHealthPoint / 3)
                 break;
