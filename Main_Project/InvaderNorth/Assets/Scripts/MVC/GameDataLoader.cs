@@ -29,6 +29,9 @@ public class GameDataLoader : MonoBehaviour {
     public delegate void RenewDataCallback();
     public RenewDataCallback renewDataCallback;
 
+    public delegate void RenewPurchaseDataCallback();
+    public RenewDataCallback renewPurchaseDataCallback;
+
     private void Start()
     {
         DontDestroyOnLoad(this);
@@ -172,6 +175,53 @@ public class GameDataLoader : MonoBehaviour {
                             {
                                 Debug.Log("데이터 갱신 성공");
                                 renewDataCallback();
+                                return;
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    public void SetPurchaseDataInDB(int credit, GameData gameData)
+    {
+        Dictionary<string, object> purchasePartDictionary = new Dictionary<string, object>
+        {
+            { "credit", 1000 },
+            { "hpLevel", gameData.hpLevel },
+            { "bulletLevel", gameData.bulletLevel },
+            { "critLevel", gameData.critLevel },
+        };
+
+        FirebaseDatabase.DefaultInstance.GetReference("users").GetValueAsync().ContinueWith(
+        searchtask =>
+        {
+            if (searchtask.IsFaulted)
+            {
+                Debug.Log("데이터베이스에 접근할 수 없습니다");
+                return;
+            }
+            else if (searchtask.IsCompleted)
+            {
+                string userId = DataManager.Datainstance.gameData.id;
+                DataSnapshot snapshot = searchtask.Result;
+                foreach (DataSnapshot datasnapshot in snapshot.Children)
+                {
+                    if (userId.Equals(datasnapshot.Key))
+                    {
+                        reference.Child("users").Child(userId).UpdateChildrenAsync(purchasePartDictionary).ContinueWith(
+                        renewingTask =>
+                        {
+                            if (renewingTask.IsFaulted)
+                            {
+                                Debug.Log("데이터베이스에 접근할 수 없습니다");
+                                return;
+                            }
+                            else if (renewingTask.IsCompleted)
+                            {
+                                Debug.Log("데이터 갱신 성공");
+                                renewPurchaseDataCallback();
                                 return;
                             }
                         });

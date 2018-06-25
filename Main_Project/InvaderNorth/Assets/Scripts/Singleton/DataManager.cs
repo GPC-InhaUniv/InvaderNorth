@@ -40,6 +40,7 @@ public class DataManager : MonoBehaviour
     public void SetNewPurchaseData(int credit, UpgradeType upgradeType)
     {
         gameData.credit -= credit;
+        gameDataLoader.renewPurchaseDataCallback = RenewPurchaseCallBack;
         switch(upgradeType)
         {
             case UpgradeType.Heart:
@@ -58,6 +59,7 @@ public class DataManager : MonoBehaviour
                 break;
             }
         }
+        gameDataLoader.SetPurchaseDataInDB(gameData.credit, gameData);
     }
 
     public void DataCallback(GameData gameData, SignInProcessType loginProcessType)
@@ -96,5 +98,8 @@ public class DataManager : MonoBehaviour
         gameModel.RenewSucceeded();
     }
 
-
+    public void RenewPurchaseCallBack()
+    {
+        gameModel.PurchaseSucceeded();
+    }
 }

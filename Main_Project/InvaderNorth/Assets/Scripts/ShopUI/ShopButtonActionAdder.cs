@@ -17,6 +17,12 @@ public class ShopButtonActionAdder : MonoBehaviour {
     private Button buttonBulletPopUp;
     [SerializeField]
     private Button buttonCriticalPopUp;
+    [SerializeField]
+    private Button buttonUpgradeHeart;
+    [SerializeField]
+    private Button buttonUpgradeBullet;
+    [SerializeField]
+    private Button buttonUpgradeCritical;
 
     private GameController gameController;
     private UpgradeController upgradeController;
@@ -33,5 +39,9 @@ public class ShopButtonActionAdder : MonoBehaviour {
         buttonHeartPopUp.onClick.AddListener(() => upgradeController.ShowToolTip(PopUpType.HeartToolTip));
         buttonBulletPopUp.onClick.AddListener(() => upgradeController.ShowToolTip(PopUpType.BulletToolTip));
         buttonCriticalPopUp.onClick.AddListener(() => upgradeController.ShowToolTip(PopUpType.CriticalToolTip));
+
+        buttonUpgradeHeart.onClick.AddListener(() => upgradeController.OnUpgradeButtonClick(UpgradeType.Heart));
+        buttonUpgradeBullet.onClick.AddListener(() => upgradeController.OnUpgradeButtonClick(UpgradeType.Bullet));
+        buttonUpgradeCritical.onClick.AddListener(() => upgradeController.OnUpgradeButtonClick(UpgradeType.CriticalShot));
     }
 }

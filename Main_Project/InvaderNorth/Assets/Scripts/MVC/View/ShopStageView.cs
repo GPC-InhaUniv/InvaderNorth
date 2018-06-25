@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class ShopStageView : MonoBehaviour, IShowable
 {
     private int gearSlot;
@@ -20,7 +21,7 @@ public class ShopStageView : MonoBehaviour, IShowable
 
     [Header("PlayerTotalLevel")]
     [SerializeField]
-    private Text PlayerLevelText;
+    private Text playerLevelText;
 
     [Header("ToolTip")]
     [SerializeField]
@@ -28,11 +29,19 @@ public class ShopStageView : MonoBehaviour, IShowable
 
     [Header("Gear Level")]
     [SerializeField]
-    private Text HeartLevelText;
+    private Text heartLevelText;
     [SerializeField]
-    private Text ShotLevelText;
+    private Text shotLevelText;
     [SerializeField]
-    private Text CriticalLevelText;
+    private Text criticalLevelText;
+
+    [Header("Upgrade Cost")]
+    [SerializeField]
+    private Text hpCostText;
+    [SerializeField]
+    private Text bulletCostText;
+    [SerializeField]
+    private Text criticalShotCostText;
 
     [Header("PlayerCredit")]
     [SerializeField]
@@ -40,20 +49,49 @@ public class ShopStageView : MonoBehaviour, IShowable
 
     [Header("GearImage")]
     [SerializeField]
-    private GameObject[] HeartImage;
-    private GameObject[] BulletImage;
-    private GameObject[] CriticalShotImage;
+    private GameObject[] heartImage;
+    private GameObject[] bulletImage;
+    private GameObject[] criticalShotImage;
 
     public void ShowInformation(GameData gameData)
     {
         int totalLevel = gameData.hpLevel + gameData.bulletLevel + gameData.critLevel;
 
-        HeartLevelText.text = gameData.hpLevel.ToString();
-        ShotLevelText.text = gameData.bulletLevel.ToString();
-        CriticalLevelText.text = gameData.critLevel.ToString();
-        PlayerLevelText.text = totalLevel.ToString();
+        heartLevelText.text = gameData.hpLevel.ToString();
+        shotLevelText.text = gameData.bulletLevel.ToString();
+        criticalLevelText.text = gameData.critLevel.ToString();
+        playerLevelText.text = totalLevel.ToString();
 
         playerCreditText.text = gameData.credit.ToString();
+
+        ChangeConstImage();
+
+        if(gameData.hpLevel >= MAXHPLEVEL)
+        {
+            ShowMaxLevel(UpgradeType.Heart);
+        }
+        else
+        {
+            hpCostText.text = (100 + gameData.hpLevel * 50).ToString();
+        }
+
+        if (gameData.bulletLevel >= MAXBULLETLEVEL)
+        {
+            ShowMaxLevel(UpgradeType.Bullet);
+        }
+        else
+        {
+            bulletCostText.text = (100 + gameData.bulletLevel * 50).ToString();
+        }
+
+        if (gameData.critLevel >= MAXCRITLEVEL)
+        {
+            ShowMaxLevel(UpgradeType.CriticalShot);
+        }
+        else
+        {
+            criticalShotCostText.text = (100 + gameData.critLevel * 50).ToString();
+        }
     }
 
     public void ShowPopUp(PopUpType popupType)
@@ -106,9 +144,27 @@ public class ShopStageView : MonoBehaviour, IShowable
 
     }
 
-    public void ShowMaxLevel()
+    public void ShowMaxLevel(UpgradeType upgradeType)
     {
+        switch (upgradeType)
+        {
+            case UpgradeType.Heart:
+                {
+                    hpCostText.text = "-";
+                    break;
+                }
 
+            case UpgradeType.Bullet:
+                {
+                    bulletCostText.text = "-";
+                    break;
+                }
+            case UpgradeType.CriticalShot:
+                {
+                    criticalShotCostText.text = "-";
+                    break;
+                }
+        }
     }
     
 }

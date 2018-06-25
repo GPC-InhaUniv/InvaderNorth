@@ -11,6 +11,10 @@ public enum UpgradeType
 
 public class UpgradeController : MonoBehaviour
 {
+    private const int MAXHPLEVEL = 10;
+    private const int MAXBULLETLEVEL = 20;
+    private const int MAXCRITLEVEL = 20;
+
     private int heartCost;
     private int bulletCost;
     private int CriticalShotCost;
@@ -26,6 +30,10 @@ public class UpgradeController : MonoBehaviour
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         gameController.RequestShowInformation();
         userData = DataManager.Datainstance.gameData;
+
+        heartCost = 100 + userData.hpLevel * 50;
+        bulletCost = 100 + userData.bulletLevel * 50;
+        CriticalShotCost = 100 + userData.critLevel * 50;
     }
 
     public void OnUpgradeButtonClick(UpgradeType upgradeType)
@@ -34,7 +42,7 @@ public class UpgradeController : MonoBehaviour
         {
             case UpgradeType.Heart:
             {
-                if(heartCost <= userData.credit)
+                if(heartCost <= userData.credit && userData.hpLevel < MAXHPLEVEL)
                 {
                     gameController.PurchaseItem(heartCost, upgradeType);
                 }
@@ -42,7 +50,7 @@ public class UpgradeController : MonoBehaviour
             }
             case UpgradeType.Bullet:
             {
-                if (bulletCost <= userData.credit)
+                if (bulletCost <= userData.credit && userData.bulletLevel < MAXBULLETLEVEL)
                 {
                     gameController.PurchaseItem(heartCost, upgradeType);
                 }
@@ -50,7 +58,7 @@ public class UpgradeController : MonoBehaviour
             }
             case UpgradeType.CriticalShot:
             {
-                if (bulletCost <= userData.credit)
+                if (bulletCost <= userData.credit && userData.critLevel < MAXCRITLEVEL)
                 {
                     gameController.PurchaseItem(heartCost, upgradeType);
                 }
