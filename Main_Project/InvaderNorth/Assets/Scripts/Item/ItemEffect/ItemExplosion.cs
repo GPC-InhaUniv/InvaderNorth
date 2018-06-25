@@ -19,6 +19,8 @@ public class ItemExplosion :ItemEffect
         Vector3 position = player.transform.position;
         
         bombObject.transform.parent = player.transform;
+        bombObject.transform.Find("Player");
+        
         bombObject.SetActive(true);
         Debug.Log("폭탄 발사");
     }
@@ -26,8 +28,8 @@ public class ItemExplosion :ItemEffect
     public override GameObject StartTheEffect(GameObject bombExplosionRange, GameObject ItemPosition)
     {
         bombExplosionRange.transform.position = ItemPosition.transform.position;
-        bombObject.SetActive(false);
-        ObjectPoolManager.ObjectPools.bombObjects.PushToPool(ItemPosition);
+        //bombObject.SetActive(false);
+        //ObjectPoolManager.ObjectPools.bombObjects.PushToPool(ItemPosition);
         
         bombExplosionRange.SetActive(true);
         Debug.Log("폭발 실행");

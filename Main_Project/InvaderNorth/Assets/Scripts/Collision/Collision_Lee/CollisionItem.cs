@@ -16,12 +16,7 @@ public class CollisionItem : CollisionForm
                     ObjectPoolManager.ObjectPools.CreditPool.PushToPool(other.gameObject);
                     StageController.SendCreditDelegate();
                     break;
-
-                case "Shield ":
-                    ObjectPoolManager.ObjectPools.shieldPool.PushToPool(other.gameObject);
-                    ItemController.SendItemToInventoryDelegate(other.gameObject.name);
-                    break;
-
+                    
                 case "Bomb":
                     ObjectPoolManager.ObjectPools.bombPool.PushToPool(other.gameObject);
                     ItemController.SendItemToInventoryDelegate(other.gameObject.name);

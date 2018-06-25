@@ -13,7 +13,7 @@ public class BombObjectPool : MonoBehaviour {
 
     private void Start()
     {
-        MaxNumberOfBomb = 2;
+        MaxNumberOfBomb = 15;
         itemPool = new Queue<GameObject>();
         CreatBombPool();
     }
