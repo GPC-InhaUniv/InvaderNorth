@@ -18,7 +18,7 @@ public enum StageType
 
 public class StageManager : MonoBehaviour
 {
-    private StageType currentStage;
+    public StageType currentStage;
 
     public static StageManager stageInstance;
 
@@ -67,7 +67,7 @@ public class StageManager : MonoBehaviour
             
             asyncOperation.allowSceneActivation = false;
 
-            int frameCount = 30;
+            int frameCount = 60;
             currentStage = stageType;
 
 

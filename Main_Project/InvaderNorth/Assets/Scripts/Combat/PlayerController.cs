@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public struct Boundary
@@ -20,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Transform shotSpawn;
     [SerializeField]
     private float fireRate;
+    private StageController stageController;
     private float nextFire;
     private AudioSource shotAudio;
     private GameObject bullet;
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        stageController = GameObject.Find("LevelController").GetComponent<StageController>();
         collider = GetComponent<MeshCollider>();
         rigidbody = GetComponent<Rigidbody>();
         shotAudio = GetComponent<AudioSource>();
@@ -151,10 +152,8 @@ public class PlayerController : MonoBehaviour
 
             if (transform.position.z > 18)
             {
-                StageController.IsGameOver = false;
-                StageController.IsGameOver = false;
-                Destroy(GameObject.FindGameObjectWithTag("ObjectPool"));
-                SceneManager.LoadScene("LobbyScene");
+                stageController.OnClickedGameOverLobbyButton();
+                break;
             }
             yield return null;
         }
