@@ -30,7 +30,7 @@ public class CollisionEnemy : CollisionForm
                     break;
 
                 case "BombObject":
-                    ItemController.SendStartEffectDelegate();
+                    //ItemController.SendStartEffectDelegate();
                     Hp = Hp - 10;
                     break;
 

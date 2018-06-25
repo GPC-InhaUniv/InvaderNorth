@@ -23,6 +23,7 @@ public class ItemController : MonoBehaviour
     [SerializeField]
     private GameObject ItemInventoryImage;
 
+    public GameObject ItemObject;
     private Item item;
     
     private bool haveBombInInventory;
@@ -31,7 +32,7 @@ public class ItemController : MonoBehaviour
     public delegate void SendItemToInventory(string ItemName);
     public static SendItemToInventory SendItemToInventoryDelegate;
     
-    public delegate void SendStartEffect();
+    public delegate void SendStartEffect(GameObject ExplosionRange, GameObject ItemPosition);
     public static SendStartEffect SendStartEffectDelegate;
     
     private void Awake()
@@ -41,10 +42,8 @@ public class ItemController : MonoBehaviour
         ItemInventoryImage.SetActive(true);
 
         SendItemToInventoryDelegate += PushToInventory;
-        
         SendStartEffectDelegate += StartTheEffect;
 
-        GameObject ItemObject = ObjectPoolManager.ObjectPools.bombObjects.PopFromPool();
         GameObject ItemFX = Instantiate(ItemObjectFX);
 
         switch(ItemEffectType)
@@ -89,28 +88,29 @@ public class ItemController : MonoBehaviour
     {
         if (haveBombInInventory == true)
         {
-            
+            ItemObject = ObjectPoolManager.ObjectPools.bombObjects.PopFromPool();
             BombImage.SetActive(false);
             haveBombInInventory = false;
-            item.LeaveItemFromPlayer();
+            item.LeaveItemFromPlayer(ItemObject);
         }
         
         else
             Debug.Log("현재 소유중인 아이템이 없습니다.");
     }
 
-    public void StartTheEffect()
+    public void StartTheEffect(GameObject ExplosionRange, GameObject ItemPosition)
     {
-        StartCoroutine(ItemEffectLifeCycle());
+        StartCoroutine(ItemEffectLifeCycle(ExplosionRange, ItemPosition));
     }
 
     //폭탄의 폭발효과 라이프사이클
-    IEnumerator ItemEffectLifeCycle()
+    IEnumerator ItemEffectLifeCycle(GameObject ExplosionRange,GameObject ItemPosition)
     {
-        item.StartTheEffect();
+        item.StartTheEffect(ExplosionRange, ItemPosition);
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
+        ///이펙트를 받아와서 반환해야하나
         item.StopTheEffect();
     }
 }
