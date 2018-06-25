@@ -11,8 +11,20 @@ public class NormalEnemyCollision : MonoBehaviour {
     [SerializeField]
     private int scoreValue;
     [SerializeField]
+    private int healthPoint;
+    [SerializeField]
     private int creditAmount;
-    
+    private int maxhealthPoint;
+
+    void Awake()
+    {
+        maxhealthPoint = healthPoint;
+    }
+
+    void OnEnable()
+    {
+        healthPoint = maxhealthPoint;
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -29,15 +41,12 @@ public class NormalEnemyCollision : MonoBehaviour {
             player.transform.rotation = Quaternion.Euler(Vector3.zero);
             other.gameObject.SetActive(false);
             StageController.DecreaseDelegate(player);
+            healthPoint--;
         }
         else if (other.name == "PlayerBullet")
         {
             ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
-            
-            GameObject Item;
-            Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
-            Item.transform.position = gameObject.transform.position;
-            Item.SetActive(true);
+            healthPoint--;
         }
         else if (other.name == "BombObject")
         {
@@ -57,19 +66,27 @@ public class NormalEnemyCollision : MonoBehaviour {
             //    Instantiate(explosion, transform.position, transform.rotation);
            
         }
-        else
-            return;
 
-        GameObject temp;
-        for (int i = 0; i < creditAmount; i++)
+        if (healthPoint <= 0)
         {
-            temp = ObjectPoolManager.ObjectPools.CreditPool.PopFromPool();
-            temp.transform.position = transform.position;
-            temp.SetActive(true);
+            GameObject temp;
+            for (int i = 0; i < creditAmount; i++)
+            {
+                temp = ObjectPoolManager.ObjectPools.CreditPool.PopFromPool();
+                temp.transform.position = transform.position;
+                temp.SetActive(true);
+            }
+            StageController.SendScoreDelegate(scoreValue, false);
+            ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
+            Instantiate(explosion, transform.position, transform.rotation);
+            
+            GameObject Item;    // PlayerBullet 충돌 조건에 있던걸 체력이 생겨서 위에꺼는 지웠습니다.
+            Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
+            Item.transform.position = gameObject.transform.position;
+            Item.SetActive(true);
         }
-        StageController.SendScoreDelegate(scoreValue, false);
-        ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
-        Instantiate(explosion, transform.position, transform.rotation);
+
+        
 
 
     }

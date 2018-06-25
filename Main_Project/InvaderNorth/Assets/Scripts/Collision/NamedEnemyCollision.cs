@@ -44,6 +44,7 @@ public class NamedEnemyCollision : MonoBehaviour
             player.transform.rotation = Quaternion.Euler(Vector3.zero);
             other.gameObject.SetActive(false);
             StageController.DecreaseDelegate(player);
+            healthPoint--;
         }
         else if(other.name == "PlayerBullet")
         {
