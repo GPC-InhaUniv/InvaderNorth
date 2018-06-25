@@ -72,7 +72,7 @@ public class MoreMultiAttack : BaseAttack
 
     public override void Attack(GameObject enemy)
     {
-        int angle = 8;
+        int angle = 10;
         Vector3 spawnPosition = new Vector3(enemy.transform.position.x, 0, enemy.transform.position.z);
         for (int i = 0; i < 7; i++)
         {

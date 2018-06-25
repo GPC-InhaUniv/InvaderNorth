@@ -5,14 +5,17 @@ using UnityEngine;
 public class LevelOneController : StageController
 {
     [SerializeField]
-    private Transform HorizontalMovingEnemySpawnPosition;
+    private Vector3 horizontalMovingEnemySpawnPosition;
     private float time;
+    private bool canSpawn = true;
     private int startCoroutineCount;
+    private int namedSequenceNum = 0;
     private float waitForSeconds = 2;
+
     private void Update()
     {
-        Debug.Log(time);
-        time += Time.deltaTime;
+        if(canSpawn)
+            time += Time.deltaTime;
         if(time > 10 && startCoroutineCount == 0)
         {
             StartCoroutine(MultiShotEnemySpawn());
@@ -23,58 +26,83 @@ public class LevelOneController : StageController
             StartCoroutine(HorizontalMovingEnemySpawn());
             startCoroutineCount++;
         }
-        
+
+        if (time > 20 && namedSequenceNum == 0)
+        {
+            namedEnemys[0].SetActive(true);
+            namedSequenceNum++;
+            canSpawn = false;
+        }
+        else if (time > 40 && namedSequenceNum == 1)
+        {
+            namedEnemys[1].SetActive(true);
+            namedSequenceNum++;
+            canSpawn = false;
+        }
+
+        if (namedEnemys[0].activeSelf == false && namedEnemys[1].activeSelf == false)
+            canSpawn = true;
     }
 
-
     protected override IEnumerator StageProgress()
-    {
+    {    
         yield return new WaitForSeconds(3);
         time -=3;
         while (true)
-        {
-            enemy = ObjectPoolManager.ObjectPools.EnemyPool.PopFromPool(0);
-            if (enemy != null)
+        {   
+            if(time > 60 && namedSequenceNum == 2)
             {
-                enemy.transform.position = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-                enemy.SetActive(true);
+                bossEnemy.SetActive(true);
+                canSpawn = false;
+            }
+            if (canSpawn)
+            {
+                enemy = ObjectPoolManager.ObjectPools.EnemyPool.PopFromPool(0);
+                if (enemy != null)
+                {
+                    enemy.transform.position = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+                    enemy.SetActive(true);
+                }
             }
             yield return new WaitForSeconds(waitForSeconds);
         }
-        yield return null;
     }
 
     IEnumerator MultiShotEnemySpawn()
     {
-        while(true)
+        while (true)
         {
-            enemy = ObjectPoolManager.ObjectPools.EnemyPool.PopFromPool(1);
-            if (enemy != null)
+            if (canSpawn)
             {
-                enemy.transform.position = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-                enemy.SetActive(true);
+                enemy = ObjectPoolManager.ObjectPools.EnemyPool.PopFromPool(1);
+                if (enemy != null)
+                {
+                    enemy.transform.position = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+                    enemy.SetActive(true);
+                }
             }
-            yield return new WaitForSeconds(waitForSeconds + 3 );
+            yield return new WaitForSeconds(waitForSeconds + 3);
         }
-        yield return null;
     }
 
     IEnumerator HorizontalMovingEnemySpawn()
     {
         while (true)
         {
-            enemy = ObjectPoolManager.ObjectPools.EnemyPool.PopFromPool(2);
-            if (enemy != null)
+            if (canSpawn)
             {
-                enemy.transform.position = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-                enemy.SetActive(true);
+                if (Random.Range(0, 2) == 0)
+                    horizontalMovingEnemySpawnPosition.x = -horizontalMovingEnemySpawnPosition.x;
+                enemy = ObjectPoolManager.ObjectPools.EnemyPool.PopFromPool(2);
+                if (enemy != null)
+                {
+                    enemy.transform.position = new Vector3(horizontalMovingEnemySpawnPosition.x, 0, Random.Range(horizontalMovingEnemySpawnPosition.z, 5f));
+                    enemy.SetActive(true);
+                }
             }
             yield return new WaitForSeconds(waitForSeconds + 1.5f);
         }
-        yield return null;
     }
-    
-
 
 
 }
