@@ -36,6 +36,7 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+
         myAudio = GetComponent<AudioSource>();
 
         SoundConst = new AudioClip[13];
@@ -55,6 +56,7 @@ public class SoundManager : MonoBehaviour
         SoundConst[12] = Resources.Load<AudioClip>("Audio/Tutorial");
 
         MainSound();
+
     }
 
     public void MainSound()
@@ -69,11 +71,11 @@ public class SoundManager : MonoBehaviour
         switch (soundType)
         {
             case SoundType.PlayMain:
-                myAudio.PlayOneShot(SoundConst[0]);
+                myAudio.PlayOneShot(SoundConst[0], 0.05f);
                 break;
 
             case SoundType.PlayStage1:
-                myAudio.PlayOneShot(SoundConst[1]);
+                myAudio.PlayOneShot(SoundConst[1], 0.05f);
                 break;
 
             case SoundType.EnemyDie:
@@ -89,11 +91,11 @@ public class SoundManager : MonoBehaviour
                 break;
 
             case SoundType.BossDie:
-                myAudio.PlayOneShot(SoundConst[5]);
+                myAudio.PlayOneShot(SoundConst[5], 0.05f);
                 break;
 
             case SoundType.PlayerDie:
-                myAudio.PlayOneShot(SoundConst[6]);
+                myAudio.PlayOneShot(SoundConst[6], 0.05f);
                 break;
 
             case SoundType.PlayerShot:
@@ -101,23 +103,23 @@ public class SoundManager : MonoBehaviour
                 break;
 
             case SoundType.ButtonClick:
-                myAudio.PlayOneShot(SoundConst[8]);
+                myAudio.PlayOneShot(SoundConst[8], 0.05f);
                 break;
 
             case SoundType.ButtonStart:
-                myAudio.PlayOneShot(SoundConst[9]);
+                myAudio.PlayOneShot(SoundConst[9], 0.05f);
                 break;
 
             case SoundType.ButtonUpgrade:
-                myAudio.PlayOneShot(SoundConst[10]);
+                myAudio.PlayOneShot(SoundConst[10], 0.05f);
                 break;
 
             case SoundType.PlayLoading:
-                myAudio.PlayOneShot(SoundConst[11]);
+                myAudio.PlayOneShot(SoundConst[11], 0.05f);
                 break;
 
             case SoundType.PlayTutorial:
-                myAudio.PlayOneShot(SoundConst[12]);
+                myAudio.PlayOneShot(SoundConst[12], 0.05f);
                 break;
         }
     }
