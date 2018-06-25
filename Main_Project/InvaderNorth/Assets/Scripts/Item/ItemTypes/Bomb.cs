@@ -7,6 +7,6 @@ public class Bomb : Item
     
     public Bomb(Transform Player, GameObject BombObject, GameObject BombExplosionRange)
     {
-        upgradeType = new ItemExplosion(Player, BombObject, BombExplosionRange);
+        itemType = new ItemExplosion(Player, BombObject, BombExplosionRange);
     }
 }
