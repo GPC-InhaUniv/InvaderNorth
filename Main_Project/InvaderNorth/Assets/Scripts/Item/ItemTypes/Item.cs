@@ -10,9 +10,9 @@ public class Item
     protected GameObject BombExplosionRange;
 
     
-    public void LeaveItemFromPlayer(GameObject itemObject, Transform PlayerPosition)
+    public void LeaveItemFromPlayer(Transform PlayerPosition)
     {
-        itemType.LeaveItemFromPlayer(itemObject, PlayerPosition);
+        itemType.LeaveItemFromPlayer( PlayerPosition);
     }
 
     public void StartTheEffect(GameObject ExplsionRange, GameObject ItemPosition)

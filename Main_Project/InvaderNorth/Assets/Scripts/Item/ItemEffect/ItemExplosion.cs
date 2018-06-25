@@ -5,16 +5,15 @@ using UnityEngine;
 public class ItemExplosion :ItemEffect
 {
     
-    public ItemExplosion(Transform Player, GameObject BombObject, GameObject BombExplosionRange)
+    public ItemExplosion(Transform Player, GameObject BombExplosionRange)
     {
-        this.bombObject = BombObject;
         this.player = Player;
         this.bombExplosionRange = BombExplosionRange;
         this.bombExplosionRange.SetActive(false);
         
     }
     
-    public override void LeaveItemFromPlayer(GameObject bombObject, Transform PlayerPosition)
+    public override void LeaveItemFromPlayer( Transform PlayerPosition)
     {
         Vector3 position = player.transform.position;
         position = PlayerPosition.transform.position;

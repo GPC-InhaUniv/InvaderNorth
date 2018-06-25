@@ -17,14 +17,15 @@ public class ItemController : MonoBehaviour
     public GameObject ItemObjectFX;
     public Transform Player;
     public Transform PlayerPosition;
+
     [Header("InventoryImage")]
     [SerializeField]
     private GameObject BombImage;
     [SerializeField]
     private GameObject ItemInventoryImage;
 
-    [HideInInspector]
-    public GameObject ItemObject;
+    //[HideInInspector]
+    //public GameObject ItemObject;
     private Item item;
     
     private bool haveBombInInventory;
@@ -50,16 +51,17 @@ public class ItemController : MonoBehaviour
         switch(ItemEffectType)
         {
             case EffectType.Explosion:
-                item = new Bomb(Player, ItemObject, ItemFX);
+                item = new Bomb(Player, ItemFX);
                 break;
         }
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.X))
+        GameObject Position = GameObject.FindGameObjectWithTag("Player");
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            GameObject Position = GameObject.FindGameObjectWithTag("Player");
+            
             PlayerPosition = Position.transform;
             InputItemButton(PlayerPosition);
         }
@@ -93,7 +95,7 @@ public class ItemController : MonoBehaviour
         {
             BombImage.SetActive(false);
             haveBombInInventory = false;
-            item.LeaveItemFromPlayer(ItemObject, PlayerPosition);
+            item.LeaveItemFromPlayer(PlayerPosition);
         }
         
         else
