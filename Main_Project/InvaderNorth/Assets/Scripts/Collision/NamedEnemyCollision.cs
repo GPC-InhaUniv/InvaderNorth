@@ -46,21 +46,28 @@ public class NamedEnemyCollision : MonoBehaviour
             StageController.DecreaseDelegate(player);
             healthPoint--;
         }
-        else if(other.name == "PlayerBullet")
+
+        else if (other.name == "PlayerBullet")
         {
             ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
             healthPoint--;
         }
-        else if(other.name == "BombObject")
+
+        else if (other.name == "BombObject")
         {
+            SoundManager.instance.PlaySoundType(SoundType.PlayerItemBomb);
+            other.gameObject.SetActive(false);
             ObjectPoolManager.ObjectPools.bombObjects.PushToPool(other.gameObject);
+
             GameObject BombExplosionFX = ObjectPoolManager.ObjectPools.bombExplosionFXs.PopFromPool();
             ItemController.SendStartEffectDelegate(BombExplosionFX, other.gameObject);
-            
+
             healthPoint = healthPoint - 10;
         }
-        else if(other.name == "BombExplosionFX")
+
+        else if (other.name == "BombExplosion")
         {
+            SoundManager.instance.PlaySoundType(SoundType.PlayerItemBomb);
             ObjectPoolManager.ObjectPools.bombExplosionFXs.PushToPool(other.gameObject);
             other.transform.position = gameObject.transform.position;
             healthPoint = healthPoint - 5;
@@ -69,7 +76,7 @@ public class NamedEnemyCollision : MonoBehaviour
 
         if (healthPoint <= 0)
         {
-            if(isBoss)
+            if (isBoss)
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
             GameObject temp;
             for (int i = 0; i < creditAmount; i++)

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item 
+public class Item
 {
     protected ItemEffect itemType;
     protected GameObject Player;
     protected GameObject BombObject;
     protected GameObject BombExplosionRange;
 
-    
-    public void LeaveItemFromPlayer(Transform PlayerPosition)
+
+    public void LeaveItemFromPlayer()
     {
-        itemType.LeaveItemFromPlayer( PlayerPosition);
+        itemType.LeaveItemFromPlayer();
     }
 
     public void StartTheEffect(GameObject ExplsionRange, GameObject ItemPosition)

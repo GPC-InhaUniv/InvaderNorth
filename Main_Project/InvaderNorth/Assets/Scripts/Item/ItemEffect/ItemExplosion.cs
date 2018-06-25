@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 //폭발효과
-public class ItemExplosion :ItemEffect
+public class ItemExplosion : ItemEffect
 {
-    
-    public ItemExplosion(Transform Player, GameObject BombExplosionRange)
+
+    public ItemExplosion(Transform Player, GameObject ItemObject, GameObject BombExplosionRange)
     {
+        this.bombObject = ItemObject;
         this.player = Player;
         this.bombExplosionRange = BombExplosionRange;
         this.bombExplosionRange.SetActive(false);
-        
+
     }
-    
-    public override void LeaveItemFromPlayer( Transform PlayerPosition)
+
+    public override void LeaveItemFromPlayer()
     {
-        Vector3 position = player.transform.position;
-        position = PlayerPosition.transform.position;
-        bombObject.transform.position = position;
-        
         bombObject.SetActive(true);
         Debug.Log("폭탄 발사");
     }
@@ -26,9 +23,9 @@ public class ItemExplosion :ItemEffect
     public override GameObject StartTheEffect(GameObject bombExplosionRange, GameObject ItemPosition)
     {
         bombExplosionRange.transform.position = ItemPosition.transform.position;
-        //bombObject.SetActive(false);
-        //ObjectPoolManager.ObjectPools.bombObjects.PushToPool(ItemPosition);
-        
+        ItemPosition.transform.position = Vector3.zero;
+        ObjectPoolManager.ObjectPools.bombObjects.PushToPool(ItemPosition);
+        bombObject.SetActive(false);
         bombExplosionRange.SetActive(true);
         Debug.Log("폭발 실행");
 

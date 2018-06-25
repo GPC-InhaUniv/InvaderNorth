@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Bomb : Item
 {
-    
-    public Bomb(Transform Player,GameObject BombExplosionRange)
+
+    public Bomb(Transform Player, GameObject ItemObject, GameObject BombExplosionRange)
     {
-        itemType = new ItemExplosion(Player, BombExplosionRange);
+        itemType = new ItemExplosion(Player, ItemObject, BombExplosionRange);
     }
 }

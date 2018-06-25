@@ -8,7 +8,7 @@ public abstract class ItemEffect
     protected GameObject bombObject;
     protected GameObject bombExplosionRange;
 
-    public abstract void LeaveItemFromPlayer( Transform PlayerPosition);
+    public abstract void LeaveItemFromPlayer();
 
     public abstract GameObject StartTheEffect(GameObject EffectRange, GameObject ItemPosition);
 

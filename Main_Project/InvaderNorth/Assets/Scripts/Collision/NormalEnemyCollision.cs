@@ -48,20 +48,25 @@ public class NormalEnemyCollision : MonoBehaviour {
             ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
             healthPoint--;
         }
+
         else if (other.name == "BombObject")
         {
-
+            SoundManager.instance.PlaySoundType(SoundType.PlayerItemBomb);
+            other.gameObject.SetActive(false);
+            ObjectPoolManager.ObjectPools.bombObjects.PushToPool(other.gameObject);
             GameObject BombExplosionFX = ObjectPoolManager.ObjectPools.bombExplosionFXs.PopFromPool();
             ItemController.SendStartEffectDelegate(BombExplosionFX, other.gameObject);
-            
+
             healthPoint = healthPoint - 10;
         }
 
-        else if (other.name == "BombExplosionFX")
+        else if (other.name == "BombExplosion")
         {
+            SoundManager.instance.PlaySoundType(SoundType.PlayerItemBomb);
+            healthPoint = healthPoint - 5;
             ObjectPoolManager.ObjectPools.bombExplosionFXs.PushToPool(other.gameObject);
             other.transform.position = gameObject.transform.position;
-            healthPoint = healthPoint - 5;
+
         }
 
         if (healthPoint <= 0)
@@ -77,7 +82,7 @@ public class NormalEnemyCollision : MonoBehaviour {
             ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
             Instantiate(explosion, transform.position, transform.rotation);
 
-            if (Random.Range(1,10) == 1)
+            if (Random.Range(1, 11) == 1)
             {
                 GameObject Item;    // PlayerBullet 충돌 조건에 있던걸 체력이 생겨서 위에꺼는 지웠습니다.
                 Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
@@ -86,7 +91,7 @@ public class NormalEnemyCollision : MonoBehaviour {
             }
         }
 
-        
+
 
 
     }
