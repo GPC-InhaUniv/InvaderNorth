@@ -29,8 +29,8 @@ public class DestroyByBoundary : MonoBehaviour {
                 ObjectPoolManager.ObjectPools.bombPool.PushToPool(other.gameObject);
                 break;
 
-            case "BombObject(Clone)":
-                other.gameObject.SetActive(false);
+            case "BombObject":
+                ObjectPoolManager.ObjectPools.bombObjects.PushToPool(other.gameObject);
                 break;
 
             default :

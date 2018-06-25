@@ -13,7 +13,7 @@ public class ItemController : MonoBehaviour
     public EffectType ItemEffectType;
 
     [Header("Item")]
-    public GameObject ItemObject;
+    //public GameObject ItemObject;
     public GameObject ItemObjectFX;
     public Transform Player;
 
@@ -24,8 +24,7 @@ public class ItemController : MonoBehaviour
     private GameObject ItemInventoryImage;
 
     private Item item;
-
-    private bool haveShieldInInventory;
+    
     private bool haveBombInInventory;
 
     
@@ -48,16 +47,14 @@ public class ItemController : MonoBehaviour
         //SendUseItemDelegate += InputItemButton;
         SendStartEffectDelegate += StartTheEffect;
 
-        GameObject Item = Instantiate(ItemObject);
+        GameObject ItemObject = ObjectPoolManager.ObjectPools.bombObjects.PopFromPool();
         GameObject ItemFX = Instantiate(ItemObjectFX);
         Player = GetComponent<Transform>();
 
         switch(ItemEffectType)
         {
             case EffectType.Explosion:
-                item = new Bomb(Player, Item, ItemFX);
-                break;
-            case EffectType.Barrier:
+                item = new Bomb(Player, ItemObject, ItemFX);
                 break;
         }
     }
@@ -73,7 +70,7 @@ public class ItemController : MonoBehaviour
 
     public void PushToInventory(string ItemName)
     {
-        if ((haveShieldInInventory == false) || (haveBombInInventory == false))
+        if (haveBombInInventory == false)
         {
             switch (ItemName)
             {
