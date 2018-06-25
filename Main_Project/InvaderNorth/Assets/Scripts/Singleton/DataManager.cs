@@ -40,6 +40,24 @@ public class DataManager : MonoBehaviour
     public void SetNewPurchaseData(int credit, UpgradeType upgradeType)
     {
         gameData.credit -= credit;
+        switch(upgradeType)
+        {
+            case UpgradeType.Heart:
+            {
+                gameData.hpLevel++;
+                break;
+            }
+            case UpgradeType.Bullet:
+            {
+                gameData.bulletLevel++;
+                break;
+            }
+            case UpgradeType.CriticalShot:
+            {
+                gameData.critLevel++;
+                break;
+            }
+        }
     }
 
     public void DataCallback(GameData gameData, SignInProcessType loginProcessType)
