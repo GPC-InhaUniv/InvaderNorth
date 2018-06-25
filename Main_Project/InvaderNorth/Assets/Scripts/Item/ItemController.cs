@@ -23,6 +23,7 @@ public class ItemController : MonoBehaviour
     [SerializeField]
     private GameObject ItemInventoryImage;
 
+    [HideInInspector]
     public GameObject ItemObject;
     private Item item;
     
