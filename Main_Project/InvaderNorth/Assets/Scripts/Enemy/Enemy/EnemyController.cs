@@ -68,6 +68,8 @@ public class EnemyController : MonoBehaviour {
     {
         while (true)
         {
+            if (StageController.IsGameClear || StageController.IsGameOver)
+                break;
             enemy.Attack(gameObject);
             shotAudio.Play();          
             yield return new WaitForSeconds(attackCoolTime);
@@ -79,6 +81,8 @@ public class EnemyController : MonoBehaviour {
         yield return new WaitForSeconds(1);
         while(true)
         {
+            if (StageController.IsGameClear || StageController.IsGameOver)
+                break;
             enemy.SkillUse(gameObject);
             shotAudio.Play();
             yield return new WaitForSeconds(skillCoolTime);

@@ -45,6 +45,8 @@ public class FirstBossController : MonoBehaviour {
         yield return new WaitForSeconds(2);
         while(true)
         {
+            if (StageController.IsGameClear || StageController.IsGameOver)
+                break;
             boss.Attack(gameObject);
             yield return new WaitForSeconds(attackCoolTime);
         }
@@ -64,6 +66,8 @@ public class FirstBossController : MonoBehaviour {
         yield return new WaitForSeconds(1);
         while(true)
         {
+            if (StageController.IsGameClear || StageController.IsGameOver)
+                break;
             boss.SkillUse(gameObject);
             yield return new WaitForSeconds(1f);
             if (namedEnemyCollision.getHealthPoint() <= maxBossHealthPoint / 3)

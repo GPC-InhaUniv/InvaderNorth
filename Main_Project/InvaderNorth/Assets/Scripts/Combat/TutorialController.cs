@@ -17,7 +17,7 @@ public class TutorialController : StageController
         {
             if (IsGameClear || IsGameOver)
                 break;
-            if (scoreTotal >= 300 && hasBoss == false)
+            if (scoreTotal >= 90 && hasBoss == false)
             {
                 bossEnemy.SetActive(true);
                 hasBoss = true;

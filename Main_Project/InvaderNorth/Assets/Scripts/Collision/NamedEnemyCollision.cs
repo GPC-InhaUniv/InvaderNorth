@@ -53,6 +53,8 @@ public class NamedEnemyCollision : MonoBehaviour
 
         if (healthPoint <= 0)
         {
+            if(isBoss)
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
             GameObject temp;
             for (int i = 0; i < creditAmount; i++)
             {

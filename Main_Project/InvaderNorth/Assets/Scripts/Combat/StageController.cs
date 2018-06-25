@@ -41,7 +41,6 @@ public abstract class StageController : MonoBehaviour {
     [SerializeField]
     protected Vector3 spawnValues;
     protected GameController gameController;
-
     protected GameObject enemy;
     protected List<GameObject> playerLifeList;
     protected int scoreTotal;
@@ -99,8 +98,8 @@ public abstract class StageController : MonoBehaviour {
         UpdateScore();
         if (isBoss)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
-            Invoke("GameClear", 2f);
+            if(!IsGameOver)
+                Invoke("GameClear", 2f);
         }
     }
 
@@ -130,7 +129,8 @@ public abstract class StageController : MonoBehaviour {
             PlayerRespawn(player);
         }
         else
-            GameOver();
+            if(!IsGameClear)
+                GameOver();
     }
 
     void PlayerRespawn(GameObject player)
