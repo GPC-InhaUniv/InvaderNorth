@@ -56,9 +56,9 @@ public class UpgradeController : MonoBehaviour
     private void Start()
     {
         changedConst[0] = gearUpgradeMaxLevel - (gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5);
-        changedConst[1] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 2;
-        changedConst[2] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5;
-        changedConst[3] = gearUpgradeMaxLevel;
+        changedConst[1] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 2 - 1;
+        changedConst[2] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5 - 1;
+        changedConst[3] = gearUpgradeMaxLevel + 1;
 
         UserInfo userInfo = new UserInfo();
         userInfo.UserLevelValue();

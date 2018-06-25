@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ShopStageView : MonoBehaviour, IShowable
 {
-
     [Header("01.PlayerLevelController")]
     [Header("UpgradeButton")]
     [SerializeField]
@@ -50,19 +49,26 @@ public class ShopStageView : MonoBehaviour, IShowable
     [SerializeField]
     private GameObject informationBox;
 
+    public enum InformationType
+    {
+        HeartTip,
+        BulletTip,
+        CriticalTip,
+    }
+
     public void ShowPopUp(PopUpType popUptype)
     {
     }
 
-    public void ShowImpormationPopUp() //i 버튼을 눌렀을 때, 팝업을 보여줌.
+    public void ShowImpormationToolTip(InformationType informationType) //i 버튼을 눌렀을 때, 팝업을 보여줌.
     {
-        if (informationBox.activeSelf == false)
+        if (informationType == InformationType.HeartTip)
         {
             informationBox.SetActive(true);
         }
-        else if (informationBox.activeSelf == true)
+        else
         {
-            informationBox.SetActive(false);
+            return;
         }
     }
 
