@@ -30,6 +30,8 @@ public abstract class StageController : MonoBehaviour {
     private GameObject gameOverPopup;
     [SerializeField]
     protected GameObject bossEnemy;
+    [SerializeField]
+    protected GameObject[] namedEnemys;
     [Header("Text")]
     [SerializeField]
     private Text scoreText;

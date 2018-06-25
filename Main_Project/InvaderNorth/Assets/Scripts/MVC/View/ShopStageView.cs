@@ -5,86 +5,78 @@ using UnityEngine.UI;
 
 public class ShopStageView : MonoBehaviour, IShowable
 {
-    [Header("01.PlayerLevelController")]
-    [Header("UpgradeButton")]
-    [SerializeField]
-    private Image upgradeButton; //Max 레벨 시 업그레이드 버튼 비활성화를 위함
-
-    [Header("Credit Imformation")]
-    [SerializeField]
-    private int gearUpgradeMaxLevel; //아이템의 Max Level 정보
-
-    [SerializeField]
-    private Text gearLevelText; //화면에서의 각 아이템 Level Text -> 0,1,2로 구별함
-
-    [SerializeField]
-    private Text upgradeCreditText; //화면에서의 ,업그레이드 비용 정보
-
-    [SerializeField]
-    private Text playerCreditText; //화면에서, 플레이어 레벨 리소스 Text 변경을 위함
-
-    [Header("Gear Image")]
-    [SerializeField]
-    private GameObject[] levelImages;
-
-    [Header("02.PlayerLevelController")]
-    [Header("PlyaerTotalLevel")]
+    [Header("PlayerTotalLevel")]
     [SerializeField]
     private Text PlayerLevelText;
+
+    [Header("ToolTip")]
+    [SerializeField]
+    private GameObject[] informationBox;
 
     [Header("Gear Level")]
     [SerializeField]
     private Text HeartLevelText;
-
     [SerializeField]
     private Text ShotLevelText;
-
     [SerializeField]
     private Text CriticalLevelText;
 
-    private int[] changedConst = new int[4];
-
-    [Header("03.InformationController")]
-    [Header("InformationBox")]
+    [Header("PlayerCredit")]
     [SerializeField]
-    private GameObject informationBox;
-
-    public enum InformationType
-    {
-        HeartTip,
-        BulletTip,
-        CriticalTip,
-    }
-
-    public void ShowPopUp(PopUpType popUptype)
-    {
-    }
-
-    public void ShowImpormationToolTip(InformationType informationType) //i 버튼을 눌렀을 때, 팝업을 보여줌.
-    {
-        if (informationType == InformationType.HeartTip)
-        {
-            informationBox.SetActive(true);
-        }
-        else
-        {
-            return;
-        }
-    }
+    private Text playerCreditText;
 
     public void ShowInformation(GameData gameData)
     {
+        int totalLevel = gameData.hpLevel + gameData.bulletLevel + gameData.critLevel;
+
+        playerCreditText.text = gameData.credit.ToString();
+
+        PlayerLevelText.text = totalLevel.ToString();
     }
 
-    public void setHpTextValue(int level)
+    public void ShowPopUp(PopUpType popupType)
     {
-    }
+        switch (popupType)
+        {
+            case PopUpType.HeartToolTip:
+            {
+                if (informationBox[0].activeSelf == false)
+                {
+                    informationBox[0].SetActive(true);
+                }
+                else
+                {
+                    informationBox[0].SetActive(false);
+                }
+                break;
+            }
 
-    public void setBulletTextValue(int level)
-    {
-    }
+            case PopUpType.BulletToolTip :
+            {
+                if (informationBox[1].activeSelf == false)
+                {
+                    informationBox[1].SetActive(true);
+                }
+                else
+                {
+                    informationBox[1].SetActive(false);
+                }
 
-    public void setCriTextValue(int level)
-    {
+                break;
+            }
+            case PopUpType.CriticalToolTip:
+            {
+                if (informationBox[2].activeSelf == false)
+                {
+                    informationBox[0].SetActive(true);
+                }
+                else
+                {
+                    informationBox[0].SetActive(false);
+                }
+                break;
+            }
+        }
     }
+    
 }

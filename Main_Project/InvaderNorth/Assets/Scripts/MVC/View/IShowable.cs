@@ -11,6 +11,11 @@ public enum PopUpType
     SignUpSuccess,
     SignInWrongPassword,
     SignInNoAccount,
+
+    [Header("Shop Stage UI")]
+    HeartToolTip,
+    BulletToolTip,
+    CriticalToolTip
 }
 
 public interface IShowable{

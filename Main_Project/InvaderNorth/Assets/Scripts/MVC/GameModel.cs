@@ -22,6 +22,9 @@ public class GameModel : MonoBehaviour {
     public delegate void RenewData();
     public RenewData renewDataCallBack;
 
+    public delegate void RenewPurchaseData();
+    public RenewPurchaseData renewPurchaseDataCallBack;
+
     public void IsLoginDataExist(string id, string password)
     {
         DataManager.Datainstance.GetData(id, password);
@@ -65,5 +68,15 @@ public class GameModel : MonoBehaviour {
     public void RenewSucceeded()
     {
         renewDataCallBack();
+    }
+
+    public void RenewUserPurchaseData(int credit, UpgradeType upgradeType)
+    {
+        DataManager.Datainstance.SetNewPurchaseData(credit, upgradeType);
+    }
+
+    public void PurchaseSucceeded()
+    {
+        renewPurchaseDataCallBack();
     }
 }

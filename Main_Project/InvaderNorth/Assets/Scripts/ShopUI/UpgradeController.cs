@@ -2,6 +2,13 @@
 using UnityEngine.UI;
 using System;
 
+public enum UpgradeType
+{
+    Heart,
+    Bullet,
+    CriticalShot
+}
+
 public class UpgradeController : MonoBehaviour
 {
     private int gearSlot; //Inspector에서 연결된, LevelText의 번호를 가져와 어떤 종류인지 확인하는 Level
@@ -32,6 +39,8 @@ public class UpgradeController : MonoBehaviour
 
     private int[] changedConst = new int[4];
 
+    private GameController gameController;
+
     //DataManager.datainstance 에 접근하면 사용 안함
     private struct UserInfo
     {
@@ -55,6 +64,8 @@ public class UpgradeController : MonoBehaviour
 
     private void Start()
     {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+
         changedConst[0] = gearUpgradeMaxLevel - (gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5);
         changedConst[1] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 2 - 1;
         changedConst[2] = gearUpgradeMaxLevel - gearUpgradeMaxLevel / 5 - 1;
@@ -85,7 +96,9 @@ public class UpgradeController : MonoBehaviour
         gearLevelText.text = playerGearLevel.ToString();
         playerCreditText.text = HadCredit.ToString();
 
-        upgradeCredit();
+        gameController.RequestShowInformation();
+
+        UpgradeCredit();
         ChangedConstImage();
         MaxLevel();
     }
@@ -107,7 +120,7 @@ public class UpgradeController : MonoBehaviour
                 playerCreditText.text = HadCredit.ToString();
 
                 ChangedConstImage();
-                upgradeCredit();
+                UpgradeCredit();
                 MaxLevel();
             }
         }
@@ -115,6 +128,7 @@ public class UpgradeController : MonoBehaviour
         {
             upgradeCreditText.text = "<color=#ff0000>" + gearLevelPrice + "</color>";
         }
+        gameController.PurchaseItem(gearLevelPrice, UpgradeType.Bullet);
     }
 
     public void ChangedConstImage()
@@ -149,9 +163,14 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
-    public void upgradeCredit()
+    public void UpgradeCredit()
     {
         gearLevelPrice = 100 + (500 * playerGearLevel);
         upgradeCreditText.text = gearLevelPrice.ToString();
+    }
+
+    public void ShowToolTip(PopUpType popupType)
+    {
+        gameController.RequestShowPopUp(popupType);
     }
 }
