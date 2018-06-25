@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
     private Collider collider;
     private int bulletCount;
 
-
     void OnEnable()                  //활성화 시 호출되는 함수.
     {
         if (rigidbody != null)           //처음에는 실행 안되게
@@ -61,7 +60,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 if (Input.GetButton("Fire1") && Time.time > nextFire)
-                { 
+                {
                     nextFire = Time.time + fireRate;
                     switch(bulletCount)
                     {
@@ -73,7 +72,7 @@ public class PlayerController : MonoBehaviour
                             break;
 
                         case 2:
-                            int distance = 1;
+                             float distance = 0.8f;
                             for (int i = 0; i < bulletCount; i++)
                             {
                                 bullet = ObjectPoolManager.ObjectPools.PlayerBulletPool.PopFromPool();
@@ -91,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
                                 if (i == 0)
                                 {
-                                    bullet.transform.position = shotSpawn.position; 
+                                    bullet.transform.position = new Vector3(shotSpawn.position.x , 0, shotSpawn.position.z + 0.3f);
                                 }
                                 else if (i % 2 != 0)
                                 {
@@ -106,10 +105,38 @@ public class PlayerController : MonoBehaviour
                             SoundManager.instance.PlaySoundType(SoundType.PlayerShot);
                             break;
                         case 4:
-
+                            distance = 0.5f;
+                            for (int i = 0; i < bulletCount; i++)
+                            {
+                                bullet = ObjectPoolManager.ObjectPools.PlayerBulletPool.PopFromPool();
+                                if(i < 2)
+                                    bullet.transform.position = new Vector3(shotSpawn.position.x + distance, 0, shotSpawn.position.z + 0.3f);
+                                else
+                                    bullet.transform.position = new Vector3(shotSpawn.position.x + distance, 0, shotSpawn.position.z );
+                                bullet.SetActive(true);
+                                distance = -distance;
+                                if (i == 1)
+                                    distance += 0.5f;
+                            }
+                            SoundManager.instance.PlaySoundType(SoundType.PlayerShot);
                             break;
                         case 5:
-
+                            distance = 0.5f;
+                            for (int i = 0; i < bulletCount; i++)
+                            {
+                                bullet = ObjectPoolManager.ObjectPools.PlayerBulletPool.PopFromPool();
+                                if(i == 0)
+                                    bullet.transform.position = new Vector3(shotSpawn.position.x , 0, shotSpawn.position.z + 0.5f);
+                                else if (i < 3)
+                                    bullet.transform.position = new Vector3(shotSpawn.position.x + distance, 0, shotSpawn.position.z + 0.3f);
+                                else
+                                    bullet.transform.position = new Vector3(shotSpawn.position.x + distance, 0, shotSpawn.position.z);
+                                bullet.SetActive(true);
+                                distance = -distance;
+                                if (i != 0 && i % 2 == 0 )
+                                    distance -= 0.5f;
+                            }
+                            SoundManager.instance.PlaySoundType(SoundType.PlayerShot);
                             break;
                     }
                 }

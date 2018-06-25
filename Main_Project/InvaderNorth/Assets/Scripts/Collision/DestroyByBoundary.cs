@@ -37,7 +37,6 @@ public class DestroyByBoundary : MonoBehaviour {
                 break;  
 
             default:
-                Debug.Log(other.name);
                 ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(other.gameObject);
                 break;
         }
