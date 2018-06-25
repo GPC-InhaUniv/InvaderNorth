@@ -11,8 +11,6 @@ public class LevelOneController : StageController
     private int startCoroutineCount;
     private int namedSequenceNum = 0;
     private float waitForSeconds = 2;
-    Coroutine mltiShotEnemySpawn;
-    Coroutine horizontalMovingEnemySpawn;
 
     private void Update()
     {
@@ -20,12 +18,12 @@ public class LevelOneController : StageController
             time += Time.deltaTime;
         if(time > 10 && startCoroutineCount == 0)
         {
-            mltiShotEnemySpawn =  StartCoroutine(MultiShotEnemySpawn());
+            StartCoroutine(MultiShotEnemySpawn());
             startCoroutineCount++;
         }
         else if(time > 20 && startCoroutineCount == 1)
         {
-            horizontalMovingEnemySpawn =  StartCoroutine(HorizontalMovingEnemySpawn());
+            StartCoroutine(HorizontalMovingEnemySpawn());
             startCoroutineCount++;
         }
 
@@ -55,8 +53,7 @@ public class LevelOneController : StageController
             if(time > 60 && namedSequenceNum == 2)
             {
                 bossEnemy.SetActive(true);
-                namedSequenceNum++;
-                break;
+                canSpawn = false;
             }
             if (canSpawn)
             {
@@ -69,15 +66,12 @@ public class LevelOneController : StageController
             }
             yield return new WaitForSeconds(waitForSeconds);
         }
-        yield return null;
     }
 
     IEnumerator MultiShotEnemySpawn()
     {
         while (true)
         {
-            if (namedSequenceNum == 3)
-                break;
             if (canSpawn)
             {
                 enemy = ObjectPoolManager.ObjectPools.EnemyPool.PopFromPool(1);
@@ -89,15 +83,12 @@ public class LevelOneController : StageController
             }
             yield return new WaitForSeconds(waitForSeconds + 3);
         }
-        yield return null;
     }
 
     IEnumerator HorizontalMovingEnemySpawn()
     {
         while (true)
-        { 
-            if (namedSequenceNum == 3)
-                break;
+        {
             if (canSpawn)
             {
                 if (Random.Range(0, 2) == 0)
@@ -109,10 +100,8 @@ public class LevelOneController : StageController
                     enemy.SetActive(true);
                 }
             }
-            yield return new WaitForSeconds(waitForSeconds + 1f);
+            yield return new WaitForSeconds(waitForSeconds + 1.5f);
         }
-        yield return null;
-
     }
 
 

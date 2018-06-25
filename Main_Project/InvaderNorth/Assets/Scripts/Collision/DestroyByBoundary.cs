@@ -13,14 +13,11 @@ public class DestroyByBoundary : MonoBehaviour {
             case "Credit":
                 return;
 
-            case "Player":
-                return;
-
             case "PlayerBullet" :
                 ObjectPoolManager.ObjectPools.PlayerBulletPool.PushToPool(other.gameObject);
                 break;
 
-            case "EnemyBullet":
+            case "EnemyBullet" :
                 ObjectPoolManager.ObjectPools.EnemyBulletPool.PushToPool(other.gameObject);
                 break;
 
@@ -34,10 +31,9 @@ public class DestroyByBoundary : MonoBehaviour {
 
             case "BombObject":
                 ObjectPoolManager.ObjectPools.bombObjects.PushToPool(other.gameObject);
-                break;  
+                break;
 
-            default:
-                Debug.Log(other.name);
+            default :
                 ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(other.gameObject);
                 break;
         }

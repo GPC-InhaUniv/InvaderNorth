@@ -20,6 +20,7 @@ public class FirstBossController : MonoBehaviour {
         boss = new FirstBoss(new NormalState(rigidbody), rigidbody);
         StartCoroutine(Move());
         StartCoroutine(Attack());
+
     }
 
     private void Update()
@@ -74,5 +75,12 @@ public class FirstBossController : MonoBehaviour {
         }
         yield return null;
     }
+
+    IEnumerator PatternThree()
+    {
+        yield return null;
+    }
+
+
 
 }
