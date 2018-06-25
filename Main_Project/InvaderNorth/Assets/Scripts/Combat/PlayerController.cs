@@ -63,7 +63,8 @@ public class PlayerController : MonoBehaviour
                     bullet = ObjectPoolManager.ObjectPools.PlayerBulletPool.PopFromPool();
                     bullet.transform.position = shotSpawn.position;
                     bullet.SetActive(true);
-                    shotAudio.Play();
+                    SoundManager.instance.PlaySoundType(SoundType.PlayerShot);
+                    //shotAudio.Play();
                 }
                 yield return null;
             }

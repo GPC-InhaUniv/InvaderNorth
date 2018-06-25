@@ -1,7 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum SoundType
+{
+    PlayMain,
+    PlayStage1,
+    EnemyDie,
+    EnmeyShot,
+    EnemyDamaged,
+    BossDie,
+    PlayerDie,
+    PlayerShot,
+    ButtonClick,
+    ButtonStart,
+    ButtonUpgrade,
+}
 public class SoundManager : MonoBehaviour {
 
     public static SoundManager instance;
@@ -10,20 +23,7 @@ public class SoundManager : MonoBehaviour {
     AudioClip[] SoundConst;
     
 
-    public enum SoundType
-    {
-        PlayMain,
-        PlayStage1,
-        EnemyDie,
-        EnmeyShot,
-        EnemyDamaged,
-        BossDie,
-        PlayerDie,
-        PlayerShot,
-        ButtonClick,
-        ButtonStart,
-        ButtonUpgrade,
-    }
+    
 
 
 	void Awake ()
@@ -38,8 +38,6 @@ public class SoundManager : MonoBehaviour {
 
     private void Start()
     {
-
-
         myAudio = GetComponent<AudioSource>();
 
 
@@ -53,6 +51,7 @@ public class SoundManager : MonoBehaviour {
         SoundConst[5] = Resources.Load<AudioClip>("Audio/BattleBossDie");
         SoundConst[6] = Resources.Load<AudioClip>("Audio/BattlePlayerDie");
         SoundConst[7] = Resources.Load<AudioClip>("Audio/BattlePlayerShot");
+        Debug.Log(SoundConst[7]);
         SoundConst[8] = Resources.Load<AudioClip>("Audio/ButtonClick");
         SoundConst[9] = Resources.Load<AudioClip>("Audio/ButtonStart");
         SoundConst[10] = Resources.Load<AudioClip>("Audio/ButtonUpgrade");
@@ -92,6 +91,7 @@ public class SoundManager : MonoBehaviour {
                 break;
             case SoundType.PlayerShot:
                 myAudio.PlayOneShot(SoundConst[7]);
+                Debug.Log(myAudio);
                 break;
             case SoundType.ButtonClick:
                 myAudio.PlayOneShot(SoundConst[8]);
