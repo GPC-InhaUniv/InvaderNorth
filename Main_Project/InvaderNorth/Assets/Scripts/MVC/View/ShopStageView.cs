@@ -47,11 +47,21 @@ public class ShopStageView : MonoBehaviour, IShowable
     [SerializeField]
     private Text playerCreditText;
 
+    [Header("GearBox")]
+    [SerializeField]
+    private GameObject heartBox;
+    [SerializeField]
+    private GameObject bulletBox;
+    [SerializeField]
+    private GameObject criticalShotBox;
+
     [Header("GearImage")]
     [SerializeField]
-    private GameObject[] heartImage;
-    private GameObject[] bulletImage;
-    private GameObject[] criticalShotImage;
+    private Sprite[] heartImage;
+    [SerializeField]
+    private Sprite[] bulletImage;
+    [SerializeField]
+    private Sprite[] criticalShotImage;
 
     public void ShowInformation(GameData gameData)
     {
@@ -63,8 +73,6 @@ public class ShopStageView : MonoBehaviour, IShowable
         playerLevelText.text = totalLevel.ToString();
 
         playerCreditText.text = gameData.credit.ToString();
-
-        ChangeConstImage();
 
         if(gameData.hpLevel >= MAXHPLEVEL)
         {
@@ -92,6 +100,8 @@ public class ShopStageView : MonoBehaviour, IShowable
         {
             criticalShotCostText.text = (100 + gameData.critLevel * 50).ToString();
         }
+
+        DrawGearBox(gameData);
     }
 
     public void ShowPopUp(PopUpType popupType)
@@ -139,11 +149,6 @@ public class ShopStageView : MonoBehaviour, IShowable
         }
     }
 
-    public void ChangeConstImage()
-    {
-
-    }
-
     public void ShowMaxLevel(UpgradeType upgradeType)
     {
         switch (upgradeType)
@@ -167,4 +172,57 @@ public class ShopStageView : MonoBehaviour, IShowable
         }
     }
     
+    private void DrawGearBox(GameData gameData)
+    {
+        if(gameData.hpLevel < 3)
+        {
+            heartBox.GetComponent<Image>().sprite = heartImage[0];
+        }
+        else if (gameData.hpLevel < 6)
+        {
+            heartBox.GetComponent<Image>().sprite = heartImage[1];
+        }
+        else if (gameData.hpLevel < 10)
+        {
+            heartBox.GetComponent<Image>().sprite = heartImage[2];
+        }
+        else
+        {
+            heartBox.GetComponent<Image>().sprite = heartImage[3];
+        }
+
+        if (gameData.bulletLevel < 6)
+        {
+            bulletBox.GetComponent<Image>().sprite = bulletImage[0];
+        }
+        else if (gameData.bulletLevel < 12)
+        {
+            bulletBox.GetComponent<Image>().sprite = bulletImage[1];
+        }
+        else if (gameData.bulletLevel < 20)
+        {
+            bulletBox.GetComponent<Image>().sprite = bulletImage[2];
+        }
+        else
+        {
+            bulletBox.GetComponent<Image>().sprite = bulletImage[3];
+        }
+
+        if (gameData.critLevel < 6)
+        {
+            criticalShotBox.GetComponent<Image>().sprite = criticalShotImage[0];
+        }
+        else if (gameData.critLevel < 12)
+        {
+            criticalShotBox.GetComponent<Image>().sprite = criticalShotImage[1];
+        }
+        else if (gameData.critLevel < 20)
+        {
+            criticalShotBox.GetComponent<Image>().sprite = criticalShotImage[2];
+        }
+        else
+        {
+            criticalShotBox.GetComponent<Image>().sprite = criticalShotImage[3];
+        }
+    }
 }

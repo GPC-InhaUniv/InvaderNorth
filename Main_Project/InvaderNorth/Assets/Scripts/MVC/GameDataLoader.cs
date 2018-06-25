@@ -188,7 +188,7 @@ public class GameDataLoader : MonoBehaviour {
     {
         Dictionary<string, object> purchasePartDictionary = new Dictionary<string, object>
         {
-            { "credit", 1000 },
+            { "credit", credit },
             { "hpLevel", gameData.hpLevel },
             { "bulletLevel", gameData.bulletLevel },
             { "critLevel", gameData.critLevel },
