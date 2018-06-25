@@ -50,21 +50,18 @@ public class NormalEnemyCollision : MonoBehaviour {
         }
         else if (other.name == "BombObject")
         {
+            ObjectPoolManager.ObjectPools.bombObjects.PushToPool(other.gameObject);
             GameObject BombExplosionFX = ObjectPoolManager.ObjectPools.bombExplosionFXs.PopFromPool();
+            BombExplosionFX.transform.position = gameObject.transform.position;
             BombExplosionFX.SetActive(true);
-            ItemController.SendStartEffectDelegate(BombExplosionFX, other.gameObject);
+
             healthPoint = healthPoint - 10;
-            //ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
-            //Instantiate(explosion, transform.position, transform.rotation);
         }
 
         else if (other.name == "BombExplosionFX")
         {
-            ///ItemController.SendStartEffectDelegate(other.gameObject);
             ObjectPoolManager.ObjectPools.bombExplosionFXs.PushToPool(other.gameObject);
             other.transform.position = gameObject.transform.position;
-            //   ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
-            //    Instantiate(explosion, transform.position, transform.rotation);
             healthPoint = healthPoint - 5;
         }
 
