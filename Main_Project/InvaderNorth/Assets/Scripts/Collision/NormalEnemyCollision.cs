@@ -53,6 +53,7 @@ public class NormalEnemyCollision : MonoBehaviour {
             GameObject BombExplosionFX = ObjectPoolManager.ObjectPools.bombExplosionFXs.PopFromPool();
             BombExplosionFX.SetActive(true);
             ItemController.SendStartEffectDelegate(BombExplosionFX, other.gameObject);
+            healthPoint = healthPoint - 10;
             //ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
             //Instantiate(explosion, transform.position, transform.rotation);
         }
@@ -64,7 +65,7 @@ public class NormalEnemyCollision : MonoBehaviour {
             other.transform.position = gameObject.transform.position;
             //   ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
             //    Instantiate(explosion, transform.position, transform.rotation);
-           
+            healthPoint = healthPoint - 5;
         }
 
         if (healthPoint <= 0)
