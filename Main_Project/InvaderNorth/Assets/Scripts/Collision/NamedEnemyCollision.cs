@@ -82,13 +82,11 @@ public class NamedEnemyCollision : MonoBehaviour
             StageController.SendScoreDelegate(scoreValue, isBoss);
             gameObject.SetActive(false);
             Instantiate(explosion, transform.position, transform.rotation);
-            if (!isBoss)
-            {
-                GameObject Item;
-                Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
-                Item.transform.position = gameObject.transform.position;
-                Item.SetActive(true);
-            }
+
+            GameObject Item;
+            Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
+            Item.transform.position = gameObject.transform.position;
+            Item.SetActive(true);
         }
     }
 

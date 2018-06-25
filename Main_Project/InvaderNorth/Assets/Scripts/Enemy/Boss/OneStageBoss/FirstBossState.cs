@@ -70,8 +70,11 @@ public class NormalState : FirstBossState
         else
             rigidbody.velocity = Vector3.zero;
     }
+
+
     public override void SkillShot(GameObject boss)
     {
+
     }
 }
 
@@ -113,6 +116,8 @@ public class AnnoyedState : FirstBossState
                 rigidbody.velocity = boss.transform.right * moveSpeed;
             }      
     }
+
+
 
     public override void SkillShot(GameObject boss)
     {
