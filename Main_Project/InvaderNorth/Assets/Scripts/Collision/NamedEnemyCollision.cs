@@ -77,7 +77,10 @@ public class NamedEnemyCollision : MonoBehaviour
         if (healthPoint <= 0)
         {
             if (isBoss)
+            {
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
+                SoundManager.instance.PlaySoundType(SoundType.BossDie);
+            }
             GameObject temp;
             for (int i = 0; i < creditAmount; i++)
             {
@@ -90,6 +93,7 @@ public class NamedEnemyCollision : MonoBehaviour
             Instantiate(explosion, transform.position, transform.rotation);
             if (!isBoss)
             {
+                SoundManager.instance.PlaySoundType(SoundType.EnemyDie);
                 GameObject Item;
                 Item = ObjectPoolManager.ObjectPools.bombPool.PopFromPool();
                 Item.transform.position = gameObject.transform.position;

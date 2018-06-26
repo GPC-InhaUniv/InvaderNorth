@@ -80,6 +80,7 @@ public class NormalEnemyCollision : MonoBehaviour {
             }
             StageController.SendScoreDelegate(scoreValue, false);
             ObjectPoolManager.ObjectPools.EnemyPool.PushToPool(gameObject);
+            SoundManager.instance.PlaySoundType(SoundType.EnemyDie);
             Instantiate(explosion, transform.position, transform.rotation);
 
             if (Random.Range(1, 11) == 1)

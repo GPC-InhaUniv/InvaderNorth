@@ -44,7 +44,7 @@ public class SoundManager : MonoBehaviour
 
         SoundConst[0] = Resources.Load<AudioClip>("Audio/Main");
         SoundConst[1] = Resources.Load<AudioClip>("Audio/Stage1");
-        SoundConst[2] = Resources.Load<AudioClip>("Audio/BattleDieEnemy");
+        SoundConst[2] = Resources.Load<AudioClip>("Audio/BattleEnemyDie");
         SoundConst[3] = Resources.Load<AudioClip>("Audio/BattleEnemyShot");
         SoundConst[4] = Resources.Load<AudioClip>("Audio/BattleEnemyDamaged");
         SoundConst[5] = Resources.Load<AudioClip>("Audio/BattleBossDie");
@@ -73,59 +73,59 @@ public class SoundManager : MonoBehaviour
         switch (soundType)
         {
             case SoundType.PlayMain:
-                myAudio.PlayOneShot(SoundConst[0], 0.05f);
+                myAudio.PlayOneShot(SoundConst[0], 0.2f);
                 break;
 
             case SoundType.PlayStage1:
-                myAudio.PlayOneShot(SoundConst[1], 0.05f);
+                myAudio.PlayOneShot(SoundConst[1], 0.2f);
                 break;
 
             case SoundType.EnemyDie:
-                myAudio.PlayOneShot(SoundConst[2], 0.05f);
+                myAudio.PlayOneShot(SoundConst[2], 0.8f);
                 break;
 
             case SoundType.EnmeyShot:
-                myAudio.PlayOneShot(SoundConst[3], 0.05f);
+                myAudio.PlayOneShot(SoundConst[3], 0.4f);
                 break;
 
             case SoundType.EnemyDamaged:
-                myAudio.PlayOneShot(SoundConst[4], 0.05f);
+                myAudio.PlayOneShot(SoundConst[4], 0.2f);
                 break;
 
             case SoundType.BossDie:
-                myAudio.PlayOneShot(SoundConst[5], 0.05f);
+                myAudio.PlayOneShot(SoundConst[5], 1f);
                 break;
 
             case SoundType.PlayerDie:
-                myAudio.PlayOneShot(SoundConst[6], 0.05f);
+                myAudio.PlayOneShot(SoundConst[6], 0.8f);
                 break;
 
             case SoundType.PlayerShot:
-                myAudio.PlayOneShot(SoundConst[7], 0.05f);
+                myAudio.PlayOneShot(SoundConst[7], 0.5f);
                 break;
 
             case SoundType.ButtonClick:
-                myAudio.PlayOneShot(SoundConst[8], 0.1f);
+                myAudio.PlayOneShot(SoundConst[8], 0.5f);
                 break;
 
             case SoundType.ButtonStart:
-                myAudio.PlayOneShot(SoundConst[9], 0.1f);
+                myAudio.PlayOneShot(SoundConst[9], 0.5f);
                 break;
 
             case SoundType.ButtonUpgrade:
-                myAudio.PlayOneShot(SoundConst[10], 0.1f);
+                myAudio.PlayOneShot(SoundConst[10], 0.5f);
                 break;
 
             case SoundType.PlayLoading:
-                myAudio.PlayOneShot(SoundConst[11], 0.2f);
+                myAudio.PlayOneShot(SoundConst[11], 0.5f);
                 break;
 
             case SoundType.PlayTutorial:
-                myAudio.PlayOneShot(SoundConst[12], 0.05f);
+                myAudio.PlayOneShot(SoundConst[12], 0.2f);
                 break;
 
             case SoundType.PlayerItemBomb:
-                myAudio.PlayOneShot(SoundConst[13], 0.05f);
+                myAudio.PlayOneShot(SoundConst[13], 0.5f);
                 break;
         }
     }
