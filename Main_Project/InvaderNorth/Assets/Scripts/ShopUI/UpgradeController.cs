@@ -61,7 +61,7 @@ public class UpgradeController : MonoBehaviour
             }
             case UpgradeType.CriticalShot:
             {
-                if (bulletCost <= userData.credit && userData.critLevel < MAXCRITLEVEL)
+                if (criticalShotCost <= userData.credit && userData.critLevel < MAXCRITLEVEL)
                 {
                     gameController.PurchaseItem(criticalShotCost, upgradeType);
                     criticalShotCost += 50;
