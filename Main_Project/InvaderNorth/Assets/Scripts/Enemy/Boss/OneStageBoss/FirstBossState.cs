@@ -101,6 +101,7 @@ public class AnnoyedState : FirstBossState
     {
             if (isFrist)
             {
+            Debug.Log("Move");
                 rigidbody.velocity = boss.transform.right * -moveSpeed;
                 isFrist = false;
             }
