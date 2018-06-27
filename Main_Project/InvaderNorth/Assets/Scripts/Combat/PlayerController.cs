@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         bulletCount = DataManager.Datainstance.gameData.bulletLevel / 5 +1;
         Debug.Log(bulletCount);
         stageController = GameObject.Find("LevelController").GetComponent<StageController>();
-        collider = GetComponent<MeshCollider>();
+        collider = GetComponent<CapsuleCollider>();
         rigidbody = GetComponent<Rigidbody>();
         shotAudio = GetComponent<AudioSource>();
         StartCoroutine(FirstMove());
