@@ -4,18 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public delegate void InputButtonCallBack(string id, string password, InputType inputType);
+public delegate void InputButtonCallBack();
 public delegate void InputKeyCallBack(KeyActionType keyAction);
 
 public enum KeyActionType
 {
-
-}
-
-public enum InputType
-{
-    signIn,
-    signUp,
+    Fire,
+    Item,
 
 }
 
@@ -29,16 +24,4 @@ public class InputManager : MonoBehaviour {
         inputInstance = this;
         DontDestroyOnLoad(gameObject);
 	}
-
-    /*
-    public void Register(InputButtonCallBack inputCallBack)
-    {
-        inputInstance.inputCallBack = inputCallBack; 
-    }
-
-    public void LogIn(string id, string password, InputType inputType)
-    {
-        StageManager.stageInstance.ChangeStage();
-    }
-    */
 }
