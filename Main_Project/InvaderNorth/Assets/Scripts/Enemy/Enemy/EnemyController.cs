@@ -21,11 +21,11 @@ public class EnemyController : MonoBehaviour {
     [SerializeField]
     private EnemyName enemyName ;
     private Enemy enemy;
-    private Animator anim;
+    private Animator animator;
 
     void Start ()
     {
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         switch (enemyName)             //구별하여 패턴을 지정.
         {
             case EnemyName.NormalEnemy:
@@ -70,6 +70,7 @@ public class EnemyController : MonoBehaviour {
             if (StageController.IsGameClear || StageController.IsGameOver)
                 break;
             enemy.Attack(gameObject);
+            animator.SetBool("Attack", true);
             SoundManager.instance.PlaySoundType(SoundType.EnmeyShot);
             yield return new WaitForSeconds(attackCoolTime);
         }
@@ -83,7 +84,7 @@ public class EnemyController : MonoBehaviour {
             if (StageController.IsGameClear || StageController.IsGameOver)
                 break;
             enemy.SkillUse(gameObject);
-            //anim.SetInteger("moving", 3);
+            animator.SetBool("Attack", true);
             SoundManager.instance.PlaySoundType(SoundType.EnmeyShot);
             yield return new WaitForSeconds(skillCoolTime);
         }

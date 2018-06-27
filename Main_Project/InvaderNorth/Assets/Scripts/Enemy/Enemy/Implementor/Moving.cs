@@ -98,6 +98,7 @@ public class FirstNamedMoving : Moving
         if (enemy.transform.position.z > 10.5f)
         {
             enemyRigidbody.velocity = enemy.transform.forward * speed;
+            
         }
         else
             enemyRigidbody.velocity = Vector3.zero;

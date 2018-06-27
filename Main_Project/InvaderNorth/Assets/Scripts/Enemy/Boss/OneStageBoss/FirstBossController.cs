@@ -9,11 +9,14 @@ public class FirstBossController : MonoBehaviour {
     private float stateHandleNum;
     private FirstBoss boss;
     private Rigidbody rigidbody;
+    private Animator animator;
     
 
     NamedEnemyCollision namedEnemyCollision;
 	private void Start ()
     {
+        animator = GetComponent<Animator>();
+        animator.SetBool("Run", true);
         namedEnemyCollision = GetComponent<NamedEnemyCollision>();
         maxBossHealthPoint = namedEnemyCollision.getHealthPoint();
         rigidbody = GetComponent<Rigidbody>();
@@ -33,6 +36,8 @@ public class FirstBossController : MonoBehaviour {
         else if(namedEnemyCollision.getHealthPoint() <= maxBossHealthPoint  / 3 && stateHandleNum == 1)
         {
             boss.HandleState("AngerState");
+            animator.SetBool("Attack", false);
+            animator.SetBool("Skill", true);
             attackCoolTime -= 0.2f;
             stateHandleNum++;
         }
@@ -42,10 +47,12 @@ public class FirstBossController : MonoBehaviour {
     IEnumerator Attack()
     {
         yield return new WaitForSeconds(2);
-        while(true)
+        animator.SetBool("Run", false);
+        animator.SetBool("Attack", true);
+        while (true)
         {
             if (StageController.IsGameClear || StageController.IsGameOver)
-                break;
+                break;     
             boss.Attack(gameObject);
             SoundManager.instance.PlaySoundType(SoundType.EnmeyShot);
             yield return new WaitForSeconds(attackCoolTime);
